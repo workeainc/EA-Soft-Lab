@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#ef4444" opacity="0.1"/>
+  
+  <!-- Medical cross -->
+  <rect x="28" y="16" width="8" height="32" rx="4" fill="#ef4444"/>
+  <rect x="16" y="28" width="32" height="8" rx="4" fill="#ef4444"/>
+  
+  <!-- Heart -->
+  <path d="M32 40 Q32 35 28 35 Q24 35 24 40 Q24 45 32 48 Q40 45 40 40 Q40 35 36 35 Q32 35 32 40" fill="#ef4444"/>
+  
+  <!-- Pulse line -->
+  <path d="M12 20 L16 20 L18 16 L22 24 L26 20 L30 20 L34 16 L38 24 L42 20 L46 20" stroke="#ef4444" stroke-width="2" fill="none"/>
+</svg> 

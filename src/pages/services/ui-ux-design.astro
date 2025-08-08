@@ -1,0 +1,273 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCompanyInfo, getService } from '../../lib/queries.js';
+import SanityImage from '../../components/SanityImage.astro';
+import RichText from '../../components/RichText.astro';
+
+// Fetch CMS data
+const companyInfo = await getCompanyInfo();
+const serviceData = await getService('ui-ux-design');
+
+// Fallback data if CMS is not available
+const fallbackService = {
+  title: "UI/UX Design Services",
+  description: "Professional UI/UX design services that create intuitive, engaging user experiences. User research, wireframing, prototyping, and visual design for web and mobile applications.",
+  shortDescription: "We create intuitive, engaging user experiences that delight users and drive business success through thoughtful design and user research.",
+  features: [
+    {
+      title: "User Research",
+      description: "Comprehensive user research to understand your target audience, their needs, and pain points."
+    },
+    {
+      title: "Wireframing & Prototyping",
+      description: "Create interactive wireframes and prototypes to test user flows and gather feedback early."
+    },
+    {
+      title: "Visual Design",
+      description: "Beautiful, consistent visual designs that enhance user experience and reflect your brand identity."
+    }
+  ],
+  technologies: ["Figma", "Adobe XD", "Sketch", "InVision", "Protopie", "Framer"],
+  pricing: {
+    startingPrice: "$3,000",
+    pricingModel: "Project-based",
+    pricingDetails: "Pricing varies based on project scope and design complexity"
+  },
+  seo: {
+    metaTitle: "UI/UX Design Services | EA Soft Lab - User Experience Design",
+    metaDescription: "Professional UI/UX design services that create intuitive, engaging user experiences. User research, wireframing, prototyping, and visual design for web and mobile applications."
+  }
+};
+
+// Use CMS data or fallback
+const service = serviceData || fallbackService;
+const company = companyInfo || { name: "EA Soft Lab" };
+
+// SEO metadata
+const title = service.seo?.metaTitle || 'UI/UX Design Services | EA Soft Lab - User Experience Design';
+const description = service.seo?.metaDescription || 'Professional UI/UX design services that create intuitive, engaging user experiences. User research, wireframing, prototyping, and visual design for web and mobile applications.';
+
+// Structured data for this service
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.title,
+  "description": service.description,
+  "url": "https://easoftlab.com/services/ui-ux-design",
+  "provider": {
+    "@type": "Organization",
+    "name": company.name,
+    "url": "https://easoftlab.com"
+  },
+  "areaServed": ["Worldwide"],
+  "serviceType": ["UI Design", "UX Design", "User Experience"],
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "price": service.pricing?.startingPrice,
+    "priceCurrency": "USD"
+  }
+};
+---
+
+<Layout 
+  title={title} 
+  description={description}
+  structuredData={{
+    type: 'service',
+    data: structuredData
+  }}
+>
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Professional 
+            <span class="text-primary-600">{service.title}</span>
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            {service.shortDescription || service.description}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
+              Get Started
+            </a>
+            <a href="/portfolio" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
+              View Projects
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          {service.icon ? (
+            <SanityImage image={service.icon} alt={service.title} class="w-full h-auto" />
+          ) : (
+            <div class="bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl p-8 shadow-2xl">
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <div class="flex items-center space-x-3 mb-4">
+                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div class="space-y-3">
+                  <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                  <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                  <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                  <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">What We Offer</h2>
+        <p class="text-lg text-gray-600">Comprehensive UI/UX design solutions for modern applications</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {service.features?.map((feature, index) => (
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              {feature.icon ? (
+                <SanityImage image={feature.icon} alt={feature.title} class="w-6 h-6 text-primary-600" />
+              ) : (
+                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                </svg>
+              )}
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+            <p class="text-gray-600">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Design Process -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Design Process</h2>
+        <p class="text-lg text-gray-600">A proven methodology for creating exceptional user experiences</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-primary-600">1</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Research</h3>
+          <p class="text-gray-600">Understanding users, business goals, and technical constraints</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-green-600">2</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Ideate</h3>
+          <p class="text-gray-600">Brainstorming solutions and creating initial concepts</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-purple-600">3</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Design</h3>
+          <p class="text-gray-600">Creating wireframes, prototypes, and visual designs</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span class="text-2xl font-bold text-orange-600">4</span>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Test</h3>
+          <p class="text-gray-600">User testing and iteration based on feedback</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologies Section -->
+  {service.technologies && (
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Design Tools We Use</h2>
+          <p class="text-lg text-gray-600">Industry-standard tools for professional design work</p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {service.technologies.map((tool) => (
+            <div class="bg-white p-4 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow duration-300">
+              <span class="text-sm font-medium text-gray-700">{tool}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Pricing Section -->
+  {service.pricing && (
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Pricing</h2>
+          <p class="text-lg text-gray-600">Transparent pricing for your design needs</p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Starting at {service.pricing.startingPrice}</h3>
+            <p class="text-gray-600">{service.pricing.pricingModel}</p>
+          </div>
+          
+          <div class="prose prose-lg mx-auto">
+            <p class="text-gray-600">{service.pricing.pricingDetails}</p>
+          </div>
+          
+          <div class="text-center mt-8">
+            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200">
+              Get Custom Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        Ready to Design Your User Experience?
+      </h2>
+      <p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
+        Let's create intuitive, engaging designs that delight your users and drive business success.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200"
+        >
+          Start Your Project
+        </a>
+        <a
+          href="/portfolio"
+          class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200"
+        >
+          View Our Work
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout> 

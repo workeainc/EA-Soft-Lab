@@ -1,0 +1,212 @@
+---
+export interface Props {
+  type: 'video' | 'podcast' | 'rich-media';
+  title: string;
+  description: string;
+  url: string;
+  duration?: string;
+  transcript?: string;
+  thumbnail?: string;
+  tags?: string[];
+  schema?: boolean;
+}
+
+const { 
+  type, 
+  title, 
+  description, 
+  url, 
+  duration, 
+  transcript, 
+  thumbnail, 
+  tags = [],
+  schema = true 
+} = Astro.props;
+---
+
+<div class="multimedia-content bg-white rounded-lg shadow-lg overflow-hidden">
+  <!-- Video/Podcast Player -->
+  <div class="aspect-w-16 aspect-h-9 bg-gray-100">
+    {type === 'video' && (
+      <iframe
+        src={url}
+        title={title}
+        class="w-full h-full"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
+    )}
+    
+    {type === 'podcast' && (
+      <audio controls class="w-full h-full">
+        <source src={url} type="audio/mpeg" />
+        <source src={url} type="audio/ogg" />
+        Your browser does not support the audio element.
+      </audio>
+    )}
+    
+    {type === 'rich-media' && thumbnail && (
+      <img 
+        src={thumbnail} 
+        alt={title}
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+    )}
+  </div>
+  
+  <!-- Content Information -->
+  <div class="p-6">
+    <h3 class="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
+    <p class="text-gray-600 mb-4">{description}</p>
+    
+    {duration && (
+      <div class="flex items-center text-sm text-gray-500 mb-4">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Duration: {duration}
+      </div>
+    )}
+    
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-4">
+        {tags.map(tag => (
+          <span class="bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-xs">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+    
+    <!-- Transcript Section -->
+    {transcript && (
+      <details class="mt-4">
+        <summary class="cursor-pointer text-primary-600 hover:text-primary-700 font-medium">
+          View Transcript
+        </summary>
+        <div class="mt-3 p-4 bg-gray-50 rounded-lg">
+          <p class="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
+            {transcript}
+          </p>
+        </div>
+      </details>
+    )}
+  </div>
+</div>
+
+{/* Schema.org Structured Data */}
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": type === 'video' ? 'VideoObject' : type === 'podcast' ? 'AudioObject' : 'MediaObject',
+    "name": title,
+    "description": description,
+    "url": url,
+    "thumbnailUrl": thumbnail,
+    "duration": duration,
+    "uploadDate": new Date().toISOString(),
+    "publisher": {
+      "@type": "Organization",
+      "name": "EA Soft Lab",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://easoftlab.com/logo.png"
+      }
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "EA Soft Lab"
+    },
+    "keywords": tags.join(', '),
+    "transcript": transcript,
+    "potentialAction": {
+      "@type": "WatchAction",
+      "target": url
+    }
+  })} />
+)}
+
+<script>
+  class MultimediaOptimizer {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      this.trackMultimediaEngagement();
+      this.optimizeForAccessibility();
+    }
+
+    trackMultimediaEngagement() {
+      // Track video/podcast interactions
+      document.addEventListener('click', (e) => {
+        const multimediaContent = e.target.closest('.multimedia-content');
+        if (multimediaContent) {
+          const title = multimediaContent.querySelector('h3')?.textContent || '';
+          const type = multimediaContent.querySelector('iframe') ? 'video' : 
+                      multimediaContent.querySelector('audio') ? 'podcast' : 'rich-media';
+          
+          this.reportMultimediaInteraction(type, title, 'click');
+        }
+      });
+
+      // Track play events
+      document.addEventListener('play', (e) => {
+        if (e.target.matches('audio, video')) {
+          const multimediaContent = e.target.closest('.multimedia-content');
+          if (multimediaContent) {
+            const title = multimediaContent.querySelector('h3')?.textContent || '';
+            this.reportMultimediaInteraction('audio', title, 'play');
+          }
+        }
+      });
+
+      // Track transcript views
+      document.addEventListener('toggle', (e) => {
+        if (e.target.matches('details')) {
+          const multimediaContent = e.target.closest('.multimedia-content');
+          if (multimediaContent) {
+            const title = multimediaContent.querySelector('h3')?.textContent || '';
+            this.reportMultimediaInteraction('transcript', title, 'view');
+          }
+        }
+      });
+    }
+
+    optimizeForAccessibility() {
+      // Add ARIA labels for better accessibility
+      const multimediaElements = document.querySelectorAll('.multimedia-content');
+      multimediaElements.forEach(element => {
+        const iframe = element.querySelector('iframe');
+        const audio = element.querySelector('audio');
+        
+        if (iframe) {
+          iframe.setAttribute('aria-label', 'Video player');
+        }
+        
+        if (audio) {
+          audio.setAttribute('aria-label', 'Audio player');
+        }
+      });
+    }
+
+    reportMultimediaInteraction(type, title, action) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'multimedia_interaction', {
+          event_category: 'Multimedia',
+          event_label: `${type} - ${title} - ${action}`,
+          custom_parameter_type: type,
+          custom_parameter_title: title,
+          custom_parameter_action: action
+        });
+      }
+    }
+  }
+
+  // Initialize multimedia optimization
+  document.addEventListener('DOMContentLoaded', () => {
+    window.multimediaOptimizer = new MultimediaOptimizer();
+  });
+</script> 

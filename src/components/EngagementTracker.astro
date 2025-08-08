@@ -1,0 +1,183 @@
+---
+// This component tracks user engagement metrics
+---
+
+<script>
+  class EngagementTracker {
+    constructor() {
+      this.startTime = Date.now();
+      this.isEngaged = false;
+      this.scrollDepth = 0;
+      this.timeOnPage = 0;
+      this.init();
+    }
+
+    init() {
+      // Track page load time
+      this.trackPageLoad();
+      
+      // Track scroll depth
+      this.trackScrollDepth();
+      
+      // Track time on page
+      this.trackTimeOnPage();
+      
+      // Track user interactions
+      this.trackInteractions();
+      
+      // Track exit intent
+      this.trackExitIntent();
+      
+      // Track beforeunload
+      this.trackBeforeUnload();
+    }
+
+    trackPageLoad() {
+      window.addEventListener('load', () => {
+        const loadTime = Date.now() - this.startTime;
+        this.reportMetric('page_load_time', loadTime);
+        
+        // Track if user is engaged (stays more than 10 seconds)
+        setTimeout(() => {
+          this.isEngaged = true;
+          this.reportMetric('user_engaged', 1);
+        }, 10000);
+      });
+    }
+
+    trackScrollDepth() {
+      let maxScroll = 0;
+      let ticking = false;
+
+      const updateScrollDepth = () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+        
+        if (scrollPercent > maxScroll) {
+          maxScroll = scrollPercent;
+          this.scrollDepth = maxScroll;
+          
+          // Report at key milestones
+          if ([25, 50, 75, 100].includes(maxScroll)) {
+            this.reportMetric('scroll_depth', maxScroll);
+          }
+        }
+        ticking = false;
+      };
+
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(updateScrollDepth);
+          ticking = true;
+        }
+      });
+    }
+
+    trackTimeOnPage() {
+      setInterval(() => {
+        this.timeOnPage += 1;
+        
+        // Report at key intervals
+        if ([10, 30, 60, 120, 300].includes(this.timeOnPage)) {
+          this.reportMetric('time_on_page', this.timeOnPage);
+        }
+      }, 1000);
+    }
+
+    trackInteractions() {
+      // Track clicks
+      document.addEventListener('click', (e) => {
+        const target = e.target.closest('a, button, [role="button"]');
+        if (target) {
+          const text = target.textContent?.trim() || '';
+          const href = target.href || '';
+          this.reportMetric('click_interaction', {
+            element: target.tagName.toLowerCase(),
+            text: text.substring(0, 50),
+            href: href.substring(0, 100)
+          });
+        }
+      });
+
+      // Track form interactions
+      document.addEventListener('submit', (e) => {
+        this.reportMetric('form_submission', {
+          form: e.target.id || e.target.className || 'unknown'
+        });
+      });
+
+      // Track focus events
+      document.addEventListener('focusin', (e) => {
+        if (e.target.matches('input, textarea, select')) {
+          this.reportMetric('form_interaction', {
+            type: e.target.type || 'text',
+            field: e.target.name || e.target.id || 'unknown'
+          });
+        }
+      });
+    }
+
+    trackExitIntent() {
+      document.addEventListener('mouseleave', (e) => {
+        if (e.clientY <= 0) {
+          this.reportMetric('exit_intent', {
+            timeOnPage: this.timeOnPage,
+            scrollDepth: this.scrollDepth,
+            isEngaged: this.isEngaged
+          });
+        }
+      });
+    }
+
+    trackBeforeUnload() {
+      window.addEventListener('beforeunload', () => {
+        this.reportMetric('page_exit', {
+          timeOnPage: this.timeOnPage,
+          scrollDepth: this.scrollDepth,
+          isEngaged: this.isEngaged
+        });
+      });
+    }
+
+    reportMetric(name, value) {
+      // Send to Google Analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', name, {
+          event_category: 'User Engagement',
+          event_label: typeof value === 'object' ? JSON.stringify(value) : value,
+          value: typeof value === 'number' ? value : undefined,
+          non_interaction: name === 'page_load_time' || name === 'scroll_depth'
+        });
+      }
+
+      // Log in development
+      if (import.meta.env.DEV) {
+        console.log(`Engagement: ${name}`, value);
+      }
+
+      // Store in localStorage for debugging
+      try {
+        const stored = JSON.parse(localStorage.getItem('engagement-metrics') || '{}');
+        stored[name] = value;
+        localStorage.setItem('engagement-metrics', JSON.stringify(stored));
+      } catch (e) {
+        // Ignore localStorage errors
+      }
+    }
+
+    // Get engagement summary
+    getEngagementSummary() {
+      return {
+        timeOnPage: this.timeOnPage,
+        scrollDepth: this.scrollDepth,
+        isEngaged: this.isEngaged
+      };
+    }
+  }
+
+  // Initialize engagement tracking
+  document.addEventListener('DOMContentLoaded', () => {
+    window.engagementTracker = new EngagementTracker();
+  });
+</script> 

@@ -1,0 +1,32 @@
+---
+export interface Props {
+  name?: string;
+  url?: string;
+  description?: string;
+  potentialAction?: {
+    "@type": string;
+    target: string;
+    "query-input": string;
+  };
+}
+
+const {
+  name = "EA Soft Lab",
+  url = "https://easoftlab.com",
+  description = "Innovative software solutions for modern businesses",
+  potentialAction = {
+    "@type": "SearchAction",
+    "target": "https://easoftlab.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+} = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": name,
+  "url": url,
+  "description": description,
+  "potentialAction": potentialAction
+})} /> 

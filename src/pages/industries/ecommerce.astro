@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import ServicesOverview from '../../components/ServicesOverview.astro';
+import Technologies from '../../components/Technologies.astro';
+import Process from '../../components/Process.astro';
+import CTA from '../../components/CTA.astro';
+
+const title = "E-commerce Software Development Services | EA Soft Lab";
+const description = "Transform your online business with our comprehensive e-commerce development services. From custom platforms to marketplace solutions, we help businesses scale their digital commerce operations.";
+const structuredData = {
+  type: 'service',
+  data: {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "E-commerce Software Development",
+    "description": "Comprehensive e-commerce development services including custom platforms, marketplace solutions, and digital commerce optimization",
+    "url": "https://easoftlab.com/industries/ecommerce",
+    "provider": {
+      "@type": "Organization",
+      "name": "EA Soft Lab"
+    },
+    "areaServed": "Worldwide",
+    "serviceType": "E-commerce Development",
+    "offers": {
+      "@type": "Offer",
+      "description": "Custom e-commerce platform development, marketplace solutions, and digital commerce optimization"
+    }
+  }
+};
+---
+
+<Layout title={title} description={description} structuredData={structuredData}>
+  <Hero
+    title="E-commerce Software Development"
+    subtitle="Transform your online business with cutting-edge e-commerce solutions"
+    description="From custom platforms to marketplace solutions, we help businesses scale their digital commerce operations with innovative technology and strategic insights."
+    ctaText="Start Your E-commerce Project"
+    ctaLink="/contact"
+    image="/images/industries/ecommerce-hero.jpg"
+  />
+
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">E-commerce Solutions That Drive Growth</h2>
+        <p class="text-lg text-gray-600">
+          We specialize in creating powerful e-commerce platforms that convert visitors into customers and drive sustainable business growth.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Custom E-commerce Platforms</h3>
+          <p class="text-gray-600">Tailored solutions designed specifically for your business model, products, and target audience.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Marketplace Solutions</h3>
+          <p class="text-gray-600">Multi-vendor platforms that enable businesses to create thriving online marketplaces.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Analytics & Optimization</h3>
+          <p class="text-gray-600">Advanced analytics and A/B testing to optimize conversion rates and user experience.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Payment Integration</h3>
+          <p class="text-gray-600">Secure payment gateways and multiple payment options to maximize sales opportunities.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Inventory Management</h3>
+          <p class="text-gray-600">Comprehensive inventory tracking and management systems for efficient operations.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Customer Experience</h3>
+          <p class="text-gray-600">Personalized shopping experiences with AI-powered recommendations and smart search.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Technologies
+    title="E-commerce Technologies We Use"
+    technologies={[
+      { name: "React/Next.js", description: "Modern frontend frameworks for dynamic user interfaces" },
+      { name: "Node.js/Express", description: "Scalable backend solutions for e-commerce platforms" },
+      { name: "MongoDB/PostgreSQL", description: "Robust database solutions for product and user data" },
+      { name: "Stripe/PayPal", description: "Secure payment processing and gateway integration" },
+      { name: "AWS/Azure", description: "Cloud infrastructure for scalable e-commerce solutions" },
+      { name: "Redis", description: "High-performance caching for improved user experience" }
+    ]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Our E-commerce Development Process</h2>
+        
+        <div class="space-y-8">
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Discovery & Strategy</h3>
+              <p class="text-gray-600">We analyze your business model, target audience, and competitive landscape to create a comprehensive e-commerce strategy.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Design & UX</h3>
+              <p class="text-gray-600">Creating intuitive user experiences that guide customers through the purchase journey with minimal friction.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Development</h3>
+              <p class="text-gray-600">Building robust, scalable e-commerce platforms with modern technologies and best practices.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Testing & Optimization</h3>
+              <p class="text-gray-600">Comprehensive testing and performance optimization to ensure seamless user experience.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Launch & Support</h3>
+              <p class="text-gray-600">Smooth deployment and ongoing support to ensure your e-commerce platform continues to perform optimally.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Ready to Build Your E-commerce Platform?"
+    description="Let's discuss how we can help you create a powerful online presence that drives sales and growth."
+    ctaText="Start Your Project"
+    ctaLink="/contact"
+  />
+</Layout> 

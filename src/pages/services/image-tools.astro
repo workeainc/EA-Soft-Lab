@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCompanyInfo } from '../../lib/queries.js';
+import SanityImage from '../../components/SanityImage.astro';
+
+// Fetch company info for dynamic content
+const companyInfo = await getCompanyInfo();
+
+// SEO metadata
+const title = 'Image Post-Production Tools | EA Soft Lab - Image Processing Software';
+const description = 'Professional image post-production tools and software development. We create custom image processing applications for photographers, designers, and creative professionals.';
+
+// Structured data for this service
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Image Post-Production Tools",
+  "description": "Professional image post-production tools and software development. We create custom image processing applications for photographers, designers, and creative professionals.",
+  "url": "https://easoftlab.com/services/image-tools",
+  "provider": {
+    "@type": "Organization",
+    "name": "EA Soft Lab",
+    "url": "https://easoftlab.com"
+  },
+  "areaServed": ["Worldwide"],
+  "serviceType": ["Image Processing", "Software Development"],
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock"
+  }
+};
+---
+
+<Layout 
+  title={title} 
+  description={description}
+  structuredData={{
+    type: 'service',
+    data: structuredData
+  }}
+>
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Professional 
+            <span class="text-primary-600">Image Post-Production</span>
+            Tools
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            We develop custom image processing applications and post-production tools that enhance creative workflows for photographers, designers, and creative professionals.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
+              Get Started
+            </a>
+            <a href="/portfolio" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
+              View Projects
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="bg-gradient-to-br from-pink-500 to-orange-600 rounded-2xl p-8 shadow-2xl">
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <div class="flex items-center space-x-3 mb-4">
+                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <div class="space-y-3">
+                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">What We Offer</h2>
+        <p class="text-lg text-gray-600">Comprehensive image processing and post-production solutions</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Image Processing Applications -->
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Image Processing Applications</h3>
+          <p class="text-gray-600 mb-4">Custom image processing applications with advanced algorithms for editing, enhancement, and manipulation.</p>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li>• Batch Processing</li>
+            <li>• Filter Applications</li>
+            <li>• Color Correction</li>
+            <li>• Image Enhancement</li>
+          </ul>
+        </div>
+
+        <!-- Workflow Automation -->
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Workflow Automation</h3>
+          <p class="text-gray-600 mb-4">Automated workflows that streamline post-production processes and improve efficiency for creative professionals.</p>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li>• Automated Editing</li>
+            <li>• Preset Management</li>
+            <li>• Batch Operations</li>
+            <li>• Quality Control</li>
+          </ul>
+        </div>
+
+        <!-- Creative Tools -->
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Creative Tools</h3>
+          <p class="text-gray-600 mb-4">Specialized creative tools and plugins that enhance artistic capabilities and streamline creative workflows.</p>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li>• Custom Plugins</li>
+            <li>• Artistic Filters</li>
+            <li>• Creative Effects</li>
+            <li>• Style Transfer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">Ready to Enhance Your Creative Workflow?</h2>
+      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+        Let's create custom image processing tools that streamline your post-production workflow and enhance your creative capabilities
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200">
+          Get a Quote
+        </a>
+        <a href="/portfolio" class="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-primary-600 transition-colors duration-200">
+          View Our Work
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout> 

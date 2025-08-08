@@ -1,0 +1,38 @@
+<svg width="400" height="250" viewBox="0 0 400 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="250" fill="#f3f4f6"/>
+  
+  <!-- Server Stack -->
+  <g transform="translate(100, 50)">
+    <rect x="0" y="0" width="200" height="20" rx="4" fill="#2563eb"/>
+    <rect x="10" y="5" width="180" height="10" rx="2" fill="white"/>
+    <rect x="0" y="25" width="200" height="20" rx="4" fill="#10b981"/>
+    <rect x="10" y="30" width="180" height="10" rx="2" fill="white"/>
+    <rect x="0" y="50" width="200" height="20" rx="4" fill="#f59e0b"/>
+    <rect x="10" y="55" width="180" height="10" rx="2" fill="white"/>
+  </g>
+  
+  <!-- Scaling Arrows -->
+  <g transform="translate(320, 100)">
+    <path d="M0 0 L10 -10 L20 0 L10 10 Z" fill="#2563eb"/>
+    <path d="M0 20 L10 10 L20 20 L10 30 Z" fill="#10b981"/>
+    <path d="M0 40 L10 30 L20 40 L10 50 Z" fill="#f59e0b"/>
+  </g>
+  
+  <!-- Performance Graph -->
+  <g transform="translate(50, 150)">
+    <rect x="0" y="0" width="300" height="60" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+    <path d="M0 50 L50 30 L100 20 L150 15 L200 10 L250 5 L300 0" stroke="#2563eb" stroke-width="3" fill="none"/>
+    <circle cx="50" cy="30" r="3" fill="#2563eb"/>
+    <circle cx="100" cy="20" r="3" fill="#2563eb"/>
+    <circle cx="150" cy="15" r="3" fill="#2563eb"/>
+    <circle cx="200" cy="10" r="3" fill="#2563eb"/>
+    <circle cx="250" cy="5" r="3" fill="#2563eb"/>
+    <circle cx="300" cy="0" r="3" fill="#2563eb"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="200" y="220" font-family="Inter, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#374151">
+    Scalable Web Applications
+  </text>
+</svg> 

@@ -1,0 +1,229 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCompanyInfo, getService } from '../../lib/queries.js';
+import SanityImage from '../../components/SanityImage.astro';
+import RichText from '../../components/RichText.astro';
+
+// Fetch CMS data
+const companyInfo = await getCompanyInfo();
+const serviceData = await getService('web-development');
+
+// Fallback data if CMS is not available
+const fallbackService = {
+  title: "Web Development Services",
+  description: "Professional web development services including custom web applications, e-commerce sites, and responsive websites. Modern technologies and best practices.",
+  shortDescription: "We create modern, responsive web applications that drive business growth and deliver exceptional user experiences.",
+  features: [
+    {
+      title: "Custom Web Applications",
+      description: "Tailored web applications designed to meet your specific business requirements and workflows."
+    },
+    {
+      title: "E-commerce Solutions",
+      description: "Complete e-commerce platforms with secure payment processing and inventory management."
+    },
+    {
+      title: "Responsive Design",
+      description: "Mobile-first responsive designs that work seamlessly across all devices and screen sizes."
+    }
+  ],
+  technologies: ["React", "Vue.js", "Node.js", "Python", "PHP", "WordPress"],
+  pricing: {
+    startingPrice: "$5,000",
+    pricingModel: "Project-based",
+    pricingDetails: "Custom pricing based on project scope and requirements"
+  },
+  seo: {
+    metaTitle: "Web Development Services | EA Soft Lab - Custom Web Applications",
+    metaDescription: "Professional web development services including custom web applications, e-commerce sites, and responsive websites. Modern technologies and best practices."
+  }
+};
+
+// Use CMS data or fallback
+const service = serviceData || fallbackService;
+const company = companyInfo || { name: "EA Soft Lab" };
+
+// SEO metadata
+const title = service.seo?.metaTitle || 'Web Development Services | EA Soft Lab - Custom Web Applications';
+const description = service.seo?.metaDescription || 'Professional web development services including custom web applications, e-commerce sites, and responsive websites. Modern technologies and best practices.';
+
+// Structured data for this service
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.title,
+  "description": service.description,
+  "url": "https://easoftlab.com/services/web-development",
+  "provider": {
+    "@type": "Organization",
+    "name": company.name,
+    "url": "https://easoftlab.com"
+  },
+  "areaServed": ["Worldwide"],
+  "serviceType": ["Web Development", "Custom Software"],
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "price": service.pricing?.startingPrice,
+    "priceCurrency": "USD"
+  }
+};
+---
+
+<Layout 
+  title={title} 
+  description={description}
+  structuredData={{
+    type: 'service',
+    data: structuredData
+  }}
+>
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Professional 
+            <span class="text-primary-600">{service.title}</span>
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            {service.shortDescription || service.description}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
+              Get Started
+            </a>
+            <a href="/portfolio" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
+              View Projects
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          {service.icon ? (
+            <SanityImage image={service.icon} alt={service.title} class="w-full h-auto" />
+          ) : (
+            <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 shadow-2xl">
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <div class="flex items-center space-x-3 mb-4">
+                  <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                  <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+                <div class="space-y-3">
+                  <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                  <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                  <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                  <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">What We Offer</h2>
+        <p class="text-lg text-gray-600">Comprehensive web development solutions for modern businesses</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {service.features?.map((feature, index) => (
+          <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+              {feature.icon ? (
+                <SanityImage image={feature.icon} alt={feature.title} class="w-6 h-6 text-primary-600" />
+              ) : (
+                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              )}
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+            <p class="text-gray-600">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologies Section -->
+  {service.technologies && (
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Technologies We Use</h2>
+          <p class="text-lg text-gray-600">Modern tech stack for optimal performance and scalability</p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {service.technologies.map((tech) => (
+            <div class="bg-white p-4 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow duration-300">
+              <span class="text-sm font-medium text-gray-700">{tech}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Pricing Section -->
+  {service.pricing && (
+    <section class="py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Pricing</h2>
+          <p class="text-lg text-gray-600">Transparent pricing for your web development needs</p>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Starting at {service.pricing.startingPrice}</h3>
+            <p class="text-gray-600">{service.pricing.pricingModel}</p>
+          </div>
+          
+          <div class="prose prose-lg mx-auto">
+            <p class="text-gray-600">{service.pricing.pricingDetails}</p>
+          </div>
+          
+          <div class="text-center mt-8">
+            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200">
+              Get Custom Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        Ready to Build Your Web Application?
+      </h2>
+      <p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
+        Let's discuss your project requirements and create a custom web solution that drives your business forward.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200"
+        >
+          Start Your Project
+        </a>
+        <a
+          href="/portfolio"
+          class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200"
+        >
+          View Our Work
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout> 

@@ -1,0 +1,25 @@
+---
+export interface Props {
+  mainEntity: Array<{
+    name: string;
+    acceptedAnswer: {
+      text: string;
+    };
+  }>;
+}
+
+const { mainEntity } = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": mainEntity.map(item => ({
+    "@type": "Question",
+    "name": item.name,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.acceptedAnswer.text
+    }
+  }))
+})} /> 

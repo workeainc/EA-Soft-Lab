@@ -1,0 +1,40 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  technologies?: Array<{
+    name: string;
+    description: string;
+    icon?: string;
+  }>;
+}
+
+const {
+  title = "Technologies We Use",
+  description = "Modern, reliable technologies for building robust applications",
+  technologies = []
+} = Astro.props;
+---
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6">{title}</h2>
+      <p class="text-lg text-gray-600">{description}</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {technologies.map((tech) => (
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          {tech.icon && (
+            <div class="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center">
+              <span class="text-primary-600 text-2xl">{tech.icon}</span>
+            </div>
+          )}
+          <h3 class="text-lg font-semibold mb-2">{tech.name}</h3>
+          <p class="text-gray-600 text-sm">{tech.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

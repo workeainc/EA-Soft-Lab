@@ -1,0 +1,30 @@
+---
+export interface Props {
+  contactType?: string;
+  telephone?: string;
+  email?: string;
+  url?: string;
+  areaServed?: string[];
+  availableLanguage?: string[];
+}
+
+const {
+  contactType = "customer service",
+  telephone,
+  email = "contact@easoftlab.com",
+  url = "https://easoftlab.com/contact",
+  areaServed = ["Worldwide"],
+  availableLanguage = ["English"]
+} = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ContactPoint",
+  "contactType": contactType,
+  "email": email,
+  "url": url,
+  "areaServed": areaServed,
+  "availableLanguage": availableLanguage,
+  ...(telephone && { "telephone": telephone })
+})} /> 

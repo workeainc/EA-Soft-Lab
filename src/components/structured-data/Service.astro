@@ -1,0 +1,49 @@
+---
+export interface Props {
+  name: string;
+  description: string;
+  url: string;
+  provider?: {
+    "@type": string;
+    name: string;
+    url: string;
+  };
+  areaServed?: string[];
+  serviceType?: string[];
+  offers?: {
+    "@type": string;
+    price?: string;
+    priceCurrency?: string;
+    availability?: string;
+  };
+}
+
+const {
+  name,
+  description,
+  url,
+  provider = {
+    "@type": "Organization",
+    "name": "EA Soft Lab",
+    "url": "https://easoftlab.com"
+  },
+  areaServed = ["Worldwide"],
+  serviceType = ["Software Development"],
+  offers = {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock"
+  }
+} = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": name,
+  "description": description,
+  "url": url,
+  "provider": provider,
+  "areaServed": areaServed,
+  "serviceType": serviceType,
+  "offers": offers
+})} /> 

@@ -1,0 +1,172 @@
+---
+export interface Props {
+  expertName: string;
+  expertTitle: string;
+  expertCompany: string;
+  expertAvatar?: string;
+  reviewDate: string;
+  reviewType?: 'Technical Review' | 'Content Review' | 'Fact Check' | 'Expert Opinion';
+  reviewSummary?: string;
+  expertCredentials?: {
+    degree?: string;
+    certifications?: string[];
+    experience?: string;
+    expertise?: string[];
+  };
+  expertSocial?: {
+    linkedin?: string;
+    github?: string;
+    twitter?: string;
+  };
+  verified?: boolean;
+}
+
+const {
+  expertName,
+  expertTitle,
+  expertCompany,
+  expertAvatar,
+  reviewDate,
+  reviewType = 'Expert Opinion',
+  reviewSummary,
+  expertCredentials = {},
+  expertSocial = {},
+  verified = false
+} = Astro.props;
+
+// Generate Review schema for E-E-A-T
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "reviewBody": reviewSummary || `This content has been reviewed by ${expertName}`,
+  "datePublished": reviewDate,
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": 5,
+    "bestRating": 5
+  },
+  "author": {
+    "@type": "Person",
+    "name": expertName,
+    "jobTitle": expertTitle,
+    "worksFor": {
+      "@type": "Organization",
+      "name": expertCompany
+    },
+    "knowsAbout": expertCredentials.expertise || [],
+    "hasCredential": expertCredentials.certifications?.map(cert => ({
+      "@type": "EducationalOccupationalCredential",
+      "name": cert
+    })) || [],
+    "sameAs": Object.values(expertSocial).filter(Boolean)
+  },
+  "reviewAspect": reviewType
+};
+---
+
+<div class="expert-review bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg my-8">
+  <div class="flex items-start">
+    {expertAvatar ? (
+      <img 
+        src={expertAvatar} 
+        alt={`${expertName} - ${expertTitle}`}
+        class="w-12 h-12 rounded-full mr-4"
+      />
+    ) : (
+      <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
+        {expertName.charAt(0)}
+      </div>
+    )}
+    
+    <div class="flex-1">
+      <div class="flex items-center mb-2">
+        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-medium mr-2">
+          {reviewType}
+        </span>
+        {verified && (
+          <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+        )}
+      </div>
+      
+      <div class="mb-3">
+        <p class="text-sm text-gray-600 mb-1">
+          <strong>Reviewed by:</strong> {expertName}
+        </p>
+        <p class="text-sm text-gray-600 mb-1">
+          <strong>Title:</strong> {expertTitle} at {expertCompany}
+        </p>
+        <p class="text-sm text-gray-600">
+          <strong>Date:</strong> {new Date(reviewDate).toLocaleDateString()}
+        </p>
+      </div>
+      
+      {reviewSummary && (
+        <div class="mb-4">
+          <p class="text-gray-700 text-sm leading-relaxed">
+            <strong>Review Summary:</strong> {reviewSummary}
+          </p>
+        </div>
+      )}
+      
+      {/* Expert Credentials */}
+      {(expertCredentials.degree || expertCredentials.certifications?.length || expertCredentials.expertise?.length) && (
+        <div class="mb-4">
+          <h4 class="text-sm font-semibold text-gray-900 mb-2">Expert Credentials:</h4>
+          <div class="space-y-1">
+            {expertCredentials.degree && (
+              <p class="text-xs text-gray-600">
+                <span class="font-medium">Education:</span> {expertCredentials.degree}
+              </p>
+            )}
+            
+            {expertCredentials.certifications?.map(cert => (
+              <p class="text-xs text-gray-600">
+                <span class="font-medium">Certification:</span> {cert}
+              </p>
+            ))}
+            
+            {expertCredentials.expertise?.map(skill => (
+              <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs mr-1 mb-1">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Expert Social Links */}
+      {Object.keys(expertSocial).length > 0 && (
+        <div class="flex space-x-2">
+          {expertSocial.linkedin && (
+            <a href={expertSocial.linkedin} class="text-blue-600 hover:text-blue-700" target="_blank" rel="noopener noreferrer">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          )}
+          
+          {expertSocial.github && (
+            <a href={expertSocial.github} class="text-gray-600 hover:text-gray-700" target="_blank" rel="noopener noreferrer">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
+          )}
+          
+          {expertSocial.twitter && (
+            <a href={expertSocial.twitter} class="text-blue-400 hover:text-blue-500" target="_blank" rel="noopener noreferrer">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
+<!-- Review Schema for E-E-A-T -->
+<script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} /> 

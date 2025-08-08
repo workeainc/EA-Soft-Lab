@@ -1,0 +1,71 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "astro",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev",
+  "regions": ["iad1"],
+  "functions": {
+    "src/pages/api/**/*.js": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/studio",
+      "destination": "/studio/index.html"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    }
+  ],
+  "env": {
+    "SANITY_PROJECT_ID": "@sanity-project-id",
+    "SANITY_DATASET": "@sanity-dataset",
+    "SANITY_API_VERSION": "@sanity-api-version"
+  }
+} 

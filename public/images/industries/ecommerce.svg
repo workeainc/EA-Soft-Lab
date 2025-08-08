@@ -1,0 +1,23 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#f59e0b" opacity="0.1"/>
+  
+  <!-- Shopping cart -->
+  <rect x="8" y="20" width="48" height="32" rx="4" fill="white" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="12" y="24" width="40" height="4" rx="2" fill="#f59e0b"/>
+  <rect x="12" y="30" width="32" height="4" rx="2" fill="#f59e0b"/>
+  <rect x="12" y="36" width="36" height="4" rx="2" fill="#f59e0b"/>
+  <rect x="12" y="42" width="28" height="4" rx="2" fill="#f59e0b"/>
+  
+  <!-- Cart wheels -->
+  <circle cx="16" cy="48" r="4" fill="#f59e0b"/>
+  <circle cx="44" cy="48" r="4" fill="#f59e0b"/>
+  
+  <!-- Handle -->
+  <path d="M8 20 L4 16 L8 12" stroke="#f59e0b" stroke-width="2" fill="none"/>
+  
+  <!-- Products -->
+  <rect x="20" y="8" width="8" height="8" rx="2" fill="#f59e0b"/>
+  <rect x="32" y="8" width="8" height="8" rx="2" fill="#f59e0b"/>
+  <rect x="44" y="8" width="8" height="8" rx="2" fill="#f59e0b"/>
+</svg> 

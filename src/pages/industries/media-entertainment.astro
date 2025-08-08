@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import ServicesOverview from '../../components/ServicesOverview.astro';
+import Technologies from '../../components/Technologies.astro';
+import Process from '../../components/Process.astro';
+import CTA from '../../components/CTA.astro';
+
+const title = "Media & Entertainment Software Development Services | EA Soft Lab";
+const description = "Transform your media and entertainment business with our comprehensive software solutions. From streaming platforms to content management systems, we help media companies deliver engaging digital experiences.";
+const structuredData = {
+  type: 'service',
+  data: {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Media & Entertainment Software Development",
+    "description": "Comprehensive media and entertainment software solutions including streaming platforms, content management systems, and digital media tools",
+    "url": "https://easoftlab.com/industries/media-entertainment",
+    "provider": {
+      "@type": "Organization",
+      "name": "EA Soft Lab"
+    },
+    "areaServed": "Worldwide",
+    "serviceType": "Media & Entertainment Development",
+    "offers": {
+      "@type": "Offer",
+      "description": "Streaming platforms, content management systems, digital media tools, and entertainment applications"
+    }
+  }
+};
+---
+
+<Layout title={title} description={description} structuredData={structuredData}>
+  <Hero
+    title="Media & Entertainment Software Development"
+    subtitle="Transform your media business with innovative technology solutions"
+    description="From streaming platforms to content management systems, we help media companies deliver engaging digital experiences with cutting-edge software solutions."
+    ctaText="Start Your Media Project"
+    ctaLink="/contact"
+    image="/images/industries/media-entertainment-hero.jpg"
+  />
+
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Media & Entertainment Solutions That Engage Audiences</h2>
+        <p class="text-lg text-gray-600">
+          We specialize in creating powerful media software that helps companies deliver compelling content and engaging user experiences.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Streaming Platforms</h3>
+          <p class="text-gray-600">High-performance streaming platforms with adaptive bitrate and multi-device support.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Content Management Systems</h3>
+          <p class="text-gray-600">Advanced CMS platforms for managing digital content, metadata, and publishing workflows.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">User Engagement Tools</h3>
+          <p class="text-gray-600">Interactive features, social sharing, and community building tools to increase user engagement.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Analytics & Insights</h3>
+          <p class="text-gray-600">Comprehensive analytics and reporting tools for content performance and audience insights.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Monetization Platforms</h3>
+          <p class="text-gray-600">Subscription management, payment processing, and advertising integration for revenue generation.</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-3">Personalization Engine</h3>
+          <p class="text-gray-600">AI-powered recommendation systems and personalized content delivery for enhanced user experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Technologies
+    title="Media & Entertainment Technologies We Use"
+    technologies={[
+      { name: "React/Next.js", description: "Modern frontend frameworks for media interfaces" },
+      { name: "Node.js/Express", description: "Scalable backend solutions for media platforms" },
+      { name: "PostgreSQL/MongoDB", description: "Robust database solutions for content and user data" },
+      { name: "FFmpeg/WebRTC", description: "Video processing and real-time streaming technologies" },
+      { name: "AWS/Azure", description: "Cloud infrastructure for scalable media solutions" },
+      { name: "Machine Learning", description: "AI-powered content recommendations and personalization" }
+    ]}
+  />
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Our Media & Entertainment Development Process</h2>
+        
+        <div class="space-y-8">
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Content Strategy Analysis</h3>
+              <p class="text-gray-600">We analyze your content strategy, target audience, and business goals to create tailored media solutions.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">User Experience Design</h3>
+              <p class="text-gray-600">Creating intuitive, engaging user experiences that maximize content consumption and user retention.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Development & Integration</h3>
+              <p class="text-gray-600">Building robust media platforms with seamless integration to content delivery networks and third-party services.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Performance Optimization</h3>
+              <p class="text-gray-600">Comprehensive testing and optimization to ensure smooth content delivery and excellent user experience.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
+            <div>
+              <h3 class="text-xl font-semibold mb-2">Launch & Analytics</h3>
+              <p class="text-gray-600">Smooth deployment and comprehensive analytics to track performance and optimize content delivery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Ready to Transform Your Media Business?"
+    description="Let's discuss how we can help you create engaging digital experiences, optimize content delivery, and maximize audience engagement with innovative software solutions."
+    ctaText="Start Your Project"
+    ctaLink="/contact"
+  />
+</Layout> 

@@ -1,0 +1,132 @@
+---
+export interface Props {
+  caseStudies: {
+    title: string;
+    client: string;
+    description: string;
+    challenge: string;
+    solution: string;
+    results: {
+      metric: string;
+      value: string;
+      description: string;
+    }[];
+    technologies: string[];
+    image?: string;
+    url?: string;
+  }[];
+  title?: string;
+  subtitle?: string;
+}
+
+const { 
+  caseStudies, 
+  title = "Success Stories", 
+  subtitle = "Real projects that delivered exceptional results" 
+} = Astro.props;
+---
+
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">{title}</h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">{subtitle}</p>
+    </div>
+    
+    <div class="space-y-12">
+      {caseStudies.map((study, index) => (
+        <div class={`grid grid-cols-1 lg:grid-cols-2 gap-8 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+          <div class={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+            <div class="bg-gray-100 rounded-lg p-6">
+              {study.image && (
+                <img 
+                  src={study.image} 
+                  alt={study.title}
+                  class="w-full h-64 object-cover rounded-lg mb-6"
+                />
+              )}
+              
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">{study.title}</h3>
+              <p class="text-primary-600 font-medium mb-4">{study.client}</p>
+              <p class="text-gray-600 mb-6">{study.description}</p>
+              
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Challenge</h4>
+                  <p class="text-gray-600">{study.challenge}</p>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Solution</h4>
+                  <p class="text-gray-600">{study.solution}</p>
+                </div>
+                
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Technologies Used</h4>
+                  <div class="flex flex-wrap gap-2">
+                    {study.technologies.map((tech) => (
+                      <span class="bg-primary-100 text-primary-800 px-3 py-1 rounded-full text-sm">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class={index % 2 === 1 ? 'lg:col-start-1' : ''}>
+            <div class="bg-primary-50 rounded-lg p-6">
+              <h4 class="text-xl font-bold text-gray-900 mb-6">Results</h4>
+              <div class="space-y-4">
+                {study.results.map((result) => (
+                  <div class="bg-white rounded-lg p-4 shadow-sm">
+                    <div class="text-2xl font-bold text-primary-600 mb-1">{result.value}</div>
+                    <div class="font-semibold text-gray-900 mb-1">{result.metric}</div>
+                    <div class="text-sm text-gray-600">{result.description}</div>
+                  </div>
+                ))}
+              </div>
+              
+              {study.url && (
+                <div class="mt-6">
+                  <a 
+                    href={study.url}
+                    class="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+                  >
+                    View Case Study
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Case Studies Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Case Studies",
+  "description": "Successful projects and their results",
+  "itemListElement": caseStudies.map((study, index) => ({
+    "@type": "CreativeWork",
+    "position": index + 1,
+    "name": study.title,
+    "description": study.description,
+    "author": {
+      "@type": "Organization",
+      "name": "EA Soft Lab"
+    },
+    "about": {
+      "@type": "Organization",
+      "name": study.client
+    }
+  }))
+})} /> 

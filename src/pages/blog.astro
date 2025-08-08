@@ -1,0 +1,270 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getPosts, getLatestPosts } from '../lib/queries.js';
+
+// Fetch CMS data
+const posts = await getPosts();
+const latestPosts = await getLatestPosts();
+
+// Fallback blog content for E-A-T
+const fallbackPosts = [
+  {
+    title: "The Future of Software Development: AI-Powered Solutions",
+    excerpt: "Explore how artificial intelligence is revolutionizing software development processes and what it means for businesses in 2025.",
+    slug: { current: "future-software-development-ai" },
+    publishedAt: "2025-01-15",
+    author: { name: "Dr. Sarah Chen", role: "Lead Software Architect" },
+    categories: [{ title: "Technology Trends", slug: "technology-trends" }],
+    readingTime: 8,
+    featuredImage: "/images/blog/ai-software-development.svg"
+  },
+  {
+    title: "Building Scalable Web Applications: Best Practices for 2025",
+    excerpt: "Learn the essential strategies for creating web applications that can handle millions of users while maintaining performance.",
+    slug: { current: "scalable-web-applications-2025" },
+    publishedAt: "2025-01-10",
+    author: { name: "Michael Rodriguez", role: "Senior Full-Stack Developer" },
+    categories: [{ title: "Web Development", slug: "web-development" }],
+    readingTime: 12,
+    featuredImage: "/images/blog/scalable-web-apps.svg"
+  },
+  {
+    title: "Digital Transformation Success Stories: Real Business Impact",
+    excerpt: "Discover how our clients achieved 300% ROI through strategic digital transformation initiatives.",
+    slug: { current: "digital-transformation-success-stories" },
+    publishedAt: "2025-01-05",
+    author: { name: "Emily Watson", role: "Digital Transformation Consultant" },
+    categories: [{ title: "Case Studies", slug: "case-studies" }],
+    readingTime: 10,
+    featuredImage: "/images/blog/digital-transformation.svg"
+  },
+  {
+    title: "Mobile App Development: Native vs Cross-Platform in 2025",
+    excerpt: "Comprehensive comparison of native and cross-platform mobile development approaches for modern businesses.",
+    slug: { current: "native-vs-cross-platform-2025" },
+    publishedAt: "2024-12-28",
+    author: { name: "Alex Thompson", role: "Mobile Development Lead" },
+    categories: [{ title: "Mobile Development", slug: "mobile-development" }],
+    readingTime: 15,
+    featuredImage: "/images/blog/mobile-development.svg"
+  },
+  {
+    title: "Cybersecurity in Software Development: Protecting Your Applications",
+    excerpt: "Essential security practices every software development team should implement to protect against modern threats.",
+    slug: { current: "cybersecurity-software-development" },
+    publishedAt: "2024-12-20",
+    author: { name: "David Kim", role: "Security Specialist" },
+    categories: [{ title: "Security", slug: "security" }],
+    readingTime: 14,
+    featuredImage: "/images/blog/cybersecurity.svg"
+  },
+  {
+    title: "Cloud-Native Development: Building for the Future",
+    excerpt: "How cloud-native architecture is reshaping software development and deployment strategies.",
+    slug: { current: "cloud-native-development-future" },
+    publishedAt: "2024-12-15",
+    author: { name: "Lisa Park", role: "Cloud Solutions Architect" },
+    categories: [{ title: "Cloud Computing", slug: "cloud-computing" }],
+    readingTime: 11,
+    featuredImage: "/images/blog/cloud-native.svg"
+  }
+];
+
+// Use CMS data or fallback
+const blogPosts = posts?.length > 0 ? posts : fallbackPosts;
+const featuredPosts = latestPosts?.length > 0 ? latestPosts : fallbackPosts.slice(0, 3);
+
+// SEO metadata
+const title = "Blog | EA Soft Lab - Software Development Insights & Trends";
+const description = "Expert insights on software development, digital transformation, and technology trends. Stay ahead with our comprehensive guides and industry analysis.";
+---
+
+<Layout 
+  title={title}
+  description={description}
+  type="website"
+  keywords={["software development blog", "technology insights", "digital transformation", "web development tips", "mobile app development", "AI software development"]}
+>
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Software Development
+          <span class="text-primary-600">Insights & Trends</span>
+        </h1>
+        <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          Expert analysis, best practices, and industry insights from our team of software development professionals. 
+          Stay ahead of the curve with our comprehensive guides and real-world case studies.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#featured-posts" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200">
+            Read Latest Posts
+          </a>
+          <a href="/contact" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200">
+            Get Expert Consultation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Posts -->
+  <section id="featured-posts" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Articles</h2>
+        <p class="text-lg text-gray-600">Expert insights and industry analysis</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredPosts.map((post) => (
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+              <img 
+                src={post.featuredImage || "/images/blog/placeholder.jpg"} 
+                alt={post.title}
+                class="w-full h-48 object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center mb-3">
+                <span class="text-sm text-primary-600 font-medium">
+                  {post.categories?.[0]?.title || "Technology"}
+                </span>
+                <span class="mx-2 text-gray-400">•</span>
+                <span class="text-sm text-gray-500">
+                  {new Date(post.publishedAt).toLocaleDateString()}
+                </span>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
+                {post.title}
+              </h3>
+              <p class="text-gray-600 mb-4 line-clamp-3">
+                {post.excerpt}
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                    <span class="text-primary-600 font-semibold text-sm">
+                      {post.author?.name?.charAt(0) || "E"}
+                    </span>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-gray-900">{post.author?.name || "EA Soft Lab Team"}</p>
+                    <p class="text-xs text-gray-500">{post.author?.role || "Software Development Expert"}</p>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-500">{post.readingTime} min read</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- All Posts -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">All Articles</h2>
+        <p class="text-lg text-gray-600">Comprehensive insights and guides</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {blogPosts.map((post) => (
+          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+              <img 
+                src={post.featuredImage || "/images/blog/placeholder.jpg"} 
+                alt={post.title}
+                class="w-full h-48 object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center mb-3">
+                <span class="text-sm text-primary-600 font-medium">
+                  {post.categories?.[0]?.title || "Technology"}
+                </span>
+                <span class="mx-2 text-gray-400">•</span>
+                <span class="text-sm text-gray-500">
+                  {new Date(post.publishedAt).toLocaleDateString()}
+                </span>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
+                {post.title}
+              </h3>
+              <p class="text-gray-600 mb-4 line-clamp-3">
+                {post.excerpt}
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                    <span class="text-primary-600 font-semibold text-sm">
+                      {post.author?.name?.charAt(0) || "E"}
+                    </span>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-gray-900">{post.author?.name || "EA Soft Lab Team"}</p>
+                    <p class="text-xs text-gray-500">{post.author?.role || "Software Development Expert"}</p>
+                  </div>
+                </div>
+                <span class="text-sm text-gray-500">{post.readingTime} min read</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">Ready to Transform Your Business?</h2>
+      <p class="text-xl text-primary-100 mb-8">
+        Get expert consultation and start your digital transformation journey today.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors duration-200">
+          Get Free Consultation
+        </a>
+        <a href="/services" class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-3 rounded-lg font-medium transition-colors duration-200">
+          View Our Services
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<!-- Blog Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "EA Soft Lab Blog",
+  "description": "Expert insights on software development, digital transformation, and technology trends",
+  "url": "https://easoftlab.com/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "EA Soft Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://easoftlab.com/logo.png"
+    }
+  },
+  "blogPost": blogPosts.map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "author": {
+      "@type": "Person",
+      "name": post.author?.name || "EA Soft Lab Team"
+    },
+    "datePublished": post.publishedAt,
+    "publisher": {
+      "@type": "Organization",
+      "name": "EA Soft Lab"
+    }
+  }))
+})} /> 

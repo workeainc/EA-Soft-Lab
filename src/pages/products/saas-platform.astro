@@ -1,0 +1,170 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Service from '../../components/structured-data/Service.astro';
+
+const title = "SaaS Platform - Enterprise Software Solution | EA Soft Lab";
+const description = "Discover EA Soft Lab's comprehensive SaaS platform solution. Scalable, secure, and customizable enterprise software for modern businesses.";
+const structuredData = {
+  type: 'service',
+  data: {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "SaaS Platform",
+    "description": "Comprehensive SaaS platform solution for enterprise businesses",
+    "provider": {
+      "@type": "Organization",
+      "name": "EA Soft Lab"
+    },
+    "serviceType": "Software as a Service",
+    "areaServed": "Worldwide",
+    "url": "https://easoftlab.com/products/saas-platform"
+  }
+};
+---
+
+<Layout title={title} description={description} structuredData={structuredData}>
+  <Service data={structuredData.data} />
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl font-bold mb-6">SaaS Platform</h1>
+        <p class="text-xl mb-8">Enterprise-grade software solution for modern businesses</p>
+        <p class="text-lg mb-8">Scalable, secure, and customizable SaaS platform designed to streamline your business operations.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#features" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+            Explore Features
+          </a>
+          <a href="/contact" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+            Get Demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section id="features" class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Platform Features</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Scalable Architecture</h3>
+            <p class="text-gray-600">
+              Built with microservices architecture that scales with your business growth. Handle thousands of concurrent users.
+            </p>
+          </div>
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Enterprise Security</h3>
+            <p class="text-gray-600">
+              Bank-level security with encryption, multi-factor authentication, and compliance with industry standards.
+            </p>
+          </div>
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Customizable Dashboard</h3>
+            <p class="text-gray-600">
+              Personalized dashboards with drag-and-drop widgets, real-time analytics, and customizable reports.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Overview -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Platform Overview</h2>
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Core Modules</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <span class="text-white font-bold text-sm">1</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-2">User Management</h4>
+                  <p class="text-gray-600">Comprehensive user authentication, role-based access control, and team management.</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <span class="text-white font-bold text-sm">2</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-2">Data Analytics</h4>
+                  <p class="text-gray-600">Advanced analytics and reporting tools with customizable dashboards.</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <span class="text-white font-bold text-sm">3</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-gray-800 mb-2">API Integration</h4>
+                  <p class="text-gray-600">RESTful APIs and webhook support for seamless integration.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Technical Stack</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h4 class="font-bold text-gray-800 mb-2">Frontend</h4>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>• React.js</li>
+                  <li>• TypeScript</li>
+                  <li>• Tailwind CSS</li>
+                </ul>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow-sm">
+                <h4 class="font-bold text-gray-800 mb-2">Backend</h4>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>• Node.js</li>
+                  <li>• Express.js</li>
+                  <li>• PostgreSQL</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-blue-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
+      <p class="text-xl mb-8">Start your SaaS platform journey with EA Soft Lab today.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+          Get Started
+        </a>
+        <a href="/contact" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+          Request Demo
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout> 

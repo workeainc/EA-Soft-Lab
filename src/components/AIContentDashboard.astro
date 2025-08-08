@@ -1,0 +1,487 @@
+---
+export interface Props {
+  enableDashboard?: boolean;
+  showRealTimeGeneration?: boolean;
+  allowBulkGeneration?: boolean;
+  maxConcurrentRequests?: number;
+}
+
+const {
+  enableDashboard = true,
+  showRealTimeGeneration = true,
+  allowBulkGeneration = true,
+  maxConcurrentRequests = 3
+} = Astro.props;
+---
+
+{enableDashboard && (
+  <div id="ai-content-dashboard" class="ai-dashboard">
+    <div class="dashboard-header">
+      <h2>AI Content Engine Dashboard</h2>
+      <div class="model-status">
+        <span class="status-indicator active"></span>
+        <span class="status-text">All Models Active</span>
+      </div>
+    </div>
+
+    <div class="dashboard-content">
+      <!-- Content Generation Form -->
+      <div class="generation-form">
+        <h3>Generate SEO Content</h3>
+        
+        <div class="form-group">
+          <label for="content-type">Content Type:</label>
+          <select id="content-type" class="form-select">
+            <option value="blog_post">Blog Post</option>
+            <option value="meta_description">Meta Description</option>
+            <option value="faq_content">FAQ Content</option>
+            <option value="how_to_guide">How-To Guide</option>
+            <option value="technical_documentation">Technical Documentation</option>
+            <option value="page_title">Page Title</option>
+            <option value="social_media">Social Media Post</option>
+            <option value="long_article">Long Article</option>
+            <option value="premium_content">Premium Content</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="topic">Topic:</label>
+          <input type="text" id="topic" class="form-input" placeholder="Enter your topic here...">
+        </div>
+
+        <div class="form-group">
+          <label for="keywords">Keywords (comma-separated):</label>
+          <input type="text" id="keywords" class="form-input" placeholder="seo, content, optimization">
+        </div>
+
+        <div class="form-group">
+          <label for="options">Additional Options:</label>
+          <textarea id="options" class="form-textarea" placeholder="JSON options (optional)"></textarea>
+        </div>
+
+        <button id="generate-btn" class="generate-btn">
+          <span class="btn-text">Generate Content</span>
+          <span class="btn-loading" style="display: none;">Generating...</span>
+        </button>
+      </div>
+
+      <!-- Content Results -->
+      <div class="content-results">
+        <h3>Generated Content</h3>
+        <div id="results-container" class="results-container">
+          <div class="no-content">
+            <p>No content generated yet. Start by filling out the form above.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Model Usage Stats -->
+      <div class="usage-stats">
+        <h3>Model Usage</h3>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-title">Ministral 8B</div>
+            <div class="stat-value" id="primary-usage">0</div>
+            <div class="stat-label">Primary Content</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Ministral 3B</div>
+            <div class="stat-value" id="meta-usage">0</div>
+            <div class="stat-label">Meta Content</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Mistral Nemo 12B</div>
+            <div class="stat-value" id="complex-usage">0</div>
+            <div class="stat-label">Complex Content</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Premium Model</div>
+            <div class="stat-value" id="premium-usage">0</div>
+            <div class="stat-label">Premium Content</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+<style>
+  .ai-dashboard {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+    overflow: hidden;
+  }
+
+  .dashboard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dashboard-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .model-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+  }
+
+  .status-indicator.active {
+    background: #10b981;
+    animation: pulse 2s infinite;
+  }
+
+  .dashboard-content {
+    padding: 2rem;
+  }
+
+  .generation-form {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .generation-form h3 {
+    margin: 0 0 1rem 0;
+    color: #1f2937;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+
+  .form-textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  .generate-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .generate-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .generate-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .content-results {
+    margin-bottom: 2rem;
+  }
+
+  .content-results h3 {
+    margin: 0 0 1rem 0;
+    color: #1f2937;
+  }
+
+  .results-container {
+    min-height: 200px;
+  }
+
+  .no-content {
+    text-align: center;
+    color: #6b7280;
+    padding: 2rem;
+  }
+
+  .content-item {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .content-type {
+    background: #e0e7ff;
+    color: #3730a3;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .content-model {
+    color: #6b7280;
+    font-size: 0.875rem;
+  }
+
+  .content-text {
+    color: #374151;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .usage-stats {
+    background: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .usage-stats h3 {
+    margin: 0 0 1rem 0;
+    color: #1f2937;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+  }
+
+  .stat-title {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-header {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script>
+  // AI Content Dashboard JavaScript
+  class AIContentDashboard {
+    constructor() {
+      this.initializeElements();
+      this.bindEvents();
+      this.usageStats = {
+        primary: 0,
+        meta: 0,
+        complex: 0,
+        premium: 0
+      };
+    }
+
+    initializeElements() {
+      this.generateBtn = document.getElementById('generate-btn');
+      this.contentType = document.getElementById('content-type');
+      this.topic = document.getElementById('topic');
+      this.keywords = document.getElementById('keywords');
+      this.options = document.getElementById('options');
+      this.resultsContainer = document.getElementById('results-container');
+    }
+
+    bindEvents() {
+      this.generateBtn.addEventListener('click', () => this.generateContent());
+    }
+
+    async generateContent() {
+      const contentType = this.contentType.value;
+      const topic = this.topic.value.trim();
+      const keywords = this.keywords.value.split(',').map(k => k.trim()).filter(k => k);
+      const options = this.parseOptions();
+
+      if (!topic) {
+        alert('Please enter a topic');
+        return;
+      }
+
+      this.setLoading(true);
+
+      try {
+        const response = await fetch('/api/ai-content', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contentType,
+            topic,
+            keywords,
+            options
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          this.displayContent(result.data);
+          this.updateUsageStats(result.data.model);
+        } else {
+          alert(`Error: ${result.error}`);
+        }
+      } catch (error) {
+        console.error('Content generation error:', error);
+        alert('Failed to generate content. Please try again.');
+      } finally {
+        this.setLoading(false);
+      }
+    }
+
+    parseOptions() {
+      try {
+        const optionsText = this.options.value.trim();
+        return optionsText ? JSON.parse(optionsText) : {};
+      } catch (error) {
+        console.warn('Invalid JSON options, using defaults');
+        return {};
+      }
+    }
+
+    displayContent(data) {
+      const contentItem = document.createElement('div');
+      contentItem.className = 'content-item';
+      
+      const modelType = this.getModelType(data.model);
+      
+      contentItem.innerHTML = `
+        <div class="content-header">
+          <span class="content-type">${data.contentType.replace('_', ' ').toUpperCase()}</span>
+          <span class="content-model">${modelType}</span>
+        </div>
+        <div class="content-text">${data.content}</div>
+        <div style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
+          Generated at: ${new Date(data.generatedAt).toLocaleString()}
+        </div>
+      `;
+
+      // Remove no-content message if present
+      const noContent = this.resultsContainer.querySelector('.no-content');
+      if (noContent) {
+        noContent.remove();
+      }
+
+      // Add new content at the top
+      this.resultsContainer.insertBefore(contentItem, this.resultsContainer.firstChild);
+    }
+
+    getModelType(model) {
+      if (model.includes('ministral-8b')) return 'Ministral 8B (Primary)';
+      if (model.includes('ministral-3b')) return 'Ministral 3B (Meta)';
+      if (model.includes('mistral-nemo')) return 'Mistral Nemo 12B (Complex)';
+      return model;
+    }
+
+    updateUsageStats(model) {
+      if (model.includes('ministral-8b')) {
+        this.usageStats.primary++;
+        document.getElementById('primary-usage').textContent = this.usageStats.primary;
+      } else if (model.includes('ministral-3b')) {
+        this.usageStats.meta++;
+        document.getElementById('meta-usage').textContent = this.usageStats.meta;
+      } else if (model.includes('mistral-nemo')) {
+        this.usageStats.complex++;
+        document.getElementById('complex-usage').textContent = this.usageStats.complex;
+      }
+    }
+
+    setLoading(loading) {
+      const btnText = this.generateBtn.querySelector('.btn-text');
+      const btnLoading = this.generateBtn.querySelector('.btn-loading');
+      
+      if (loading) {
+        btnText.style.display = 'none';
+        btnLoading.style.display = 'inline';
+        this.generateBtn.disabled = true;
+      } else {
+        btnText.style.display = 'inline';
+        btnLoading.style.display = 'none';
+        this.generateBtn.disabled = false;
+      }
+    }
+  }
+
+  // Initialize dashboard when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new AIContentDashboard();
+  });
+</script> 

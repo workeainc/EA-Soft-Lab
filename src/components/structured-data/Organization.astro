@@ -1,0 +1,58 @@
+---
+export interface Props {
+  name?: string;
+  url?: string;
+  logo?: string;
+  description?: string;
+  address?: {
+    streetAddress?: string;
+    addressLocality?: string;
+    addressRegion?: string;
+    postalCode?: string;
+    addressCountry?: string;
+  };
+  contactPoint?: {
+    contactType?: string;
+    telephone?: string;
+    email?: string;
+  };
+  sameAs?: string[];
+}
+
+const {
+  name = "EA Soft Lab",
+  url = "https://easoftlab.com",
+  logo = "https://easoftlab.com/logo.png",
+  description = "Innovative software solutions for modern businesses",
+  address = {
+    addressCountry: "US"
+  },
+  contactPoint = {
+    contactType: "customer service",
+    email: "contact@easoftlab.com"
+  },
+  sameAs = [
+    "https://linkedin.com/company/easoftlab",
+    "https://twitter.com/easoftlab",
+    "https://github.com/easoftlab"
+  ]
+} = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": name,
+  "url": url,
+  "logo": logo,
+  "description": description,
+  "address": {
+    "@type": "PostalAddress",
+    ...address
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    ...contactPoint
+  },
+  "sameAs": sameAs
+})} /> 

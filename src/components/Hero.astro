@@ -1,0 +1,96 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  image?: string;
+}
+
+const {
+  title,
+  subtitle,
+  description,
+  ctaText = "Get Started",
+  ctaLink = "/contact",
+  image
+} = Astro.props;
+---
+
+<section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="animate-fade-in">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+          {title}
+        </h1>
+        {subtitle && (
+          <h2 class="text-2xl md:text-3xl font-semibold text-primary-600 mb-4">
+            {subtitle}
+          </h2>
+        )}
+        {description && (
+          <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+            {description}
+          </p>
+        )}
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href={ctaLink}
+            class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200 text-center"
+          >
+            {ctaText}
+          </a>
+          <a
+            href="/portfolio"
+            class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200 text-center"
+          >
+            View Our Work
+          </a>
+        </div>
+      </div>
+      <div class="animate-slide-up">
+        <div class="relative">
+          {image ? (
+            <img src={image} alt={title} class="w-full h-auto rounded-lg shadow-lg" />
+          ) : (
+            <img src="/images/hero-illustration.svg" alt="Software Development Illustration" class="w-full h-auto" />
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -1,0 +1,196 @@
+---
+export interface Props {
+  primaryKeyword: string;
+  relatedKeywords: string[];
+  intent: 'informational' | 'transactional' | 'navigational';
+  lsiKeywords: string[];
+}
+
+const { primaryKeyword, relatedKeywords, intent, lsiKeywords } = Astro.props;
+---
+
+<!-- Semantic Search Optimization -->
+<div class="semantic-optimizer" data-keyword={primaryKeyword} data-intent={intent}>
+  <!-- Hidden semantic content for search engines -->
+  <div class="sr-only">
+    <h2>Related to {primaryKeyword}</h2>
+    <p>Explore comprehensive information about {primaryKeyword} and related topics including {relatedKeywords.join(', ')}.</p>
+    
+    <h3>Key Topics</h3>
+    <ul>
+      {lsiKeywords.map(keyword => (
+        <li>{keyword}</li>
+      ))}
+    </ul>
+    
+    <h3>Common Questions</h3>
+    <ul>
+      <li>What is {primaryKeyword}?</li>
+      <li>How does {primaryKeyword} work?</li>
+      <li>Why choose {primaryKeyword}?</li>
+      <li>Best practices for {primaryKeyword}</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  class SemanticOptimizer {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      // Track semantic search interactions
+      this.trackSemanticInteractions();
+      
+      // Optimize for voice search
+      this.optimizeForVoiceSearch();
+      
+      // Track search intent
+      this.trackSearchIntent();
+    }
+
+    trackSemanticInteractions() {
+      // Track when users interact with semantic content
+      document.addEventListener('click', (e) => {
+        const target = e.target;
+        const semanticContent = target.closest('.semantic-optimizer');
+        
+        if (semanticContent) {
+          const keyword = semanticContent.dataset.keyword;
+          const intent = semanticContent.dataset.intent;
+          
+          this.reportSemanticInteraction(keyword, intent, 'click');
+        }
+      });
+
+      // Track semantic content visibility
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const semanticContent = entry.target;
+            const keyword = semanticContent.dataset.keyword;
+            const intent = semanticContent.dataset.intent;
+            
+            this.reportSemanticInteraction(keyword, intent, 'view');
+          }
+        });
+      });
+
+      document.querySelectorAll('.semantic-optimizer').forEach(el => {
+        observer.observe(el);
+      });
+    }
+
+    optimizeForVoiceSearch() {
+      // Add voice search friendly content structure
+      const voiceSearchContent = document.querySelector('.semantic-optimizer');
+      if (voiceSearchContent) {
+        const keyword = voiceSearchContent.dataset.keyword;
+        
+        // Add FAQ schema for voice search
+        const faqSchema = {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": `What is ${keyword}?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": `${keyword} is a comprehensive solution that helps businesses achieve their goals through innovative technology and expert implementation.`
+              }
+            },
+            {
+              "@type": "Question",
+              "name": `How does ${keyword} work?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": `${keyword} works by leveraging advanced technologies and proven methodologies to deliver measurable results for your business.`
+              }
+            },
+            {
+              "@type": "Question",
+              "name": `Why choose ${keyword}?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": `Choose ${keyword} for its proven track record, expert team, and comprehensive approach to solving complex business challenges.`
+              }
+            }
+          ]
+        };
+
+        // Add FAQ schema to page
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(faqSchema);
+        document.head.appendChild(script);
+      }
+    }
+
+    trackSearchIntent() {
+      // Track different search intents
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchQuery = urlParams.get('q') || urlParams.get('search');
+      
+      if (searchQuery) {
+        this.analyzeSearchIntent(searchQuery);
+      }
+
+      // Track internal search
+      const searchForms = document.querySelectorAll('form[role="search"], input[type="search"]');
+      searchForms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+          const searchInput = form.querySelector('input[type="search"], input[name="q"]');
+          if (searchInput) {
+            this.analyzeSearchIntent(searchInput.value);
+          }
+        });
+      });
+    }
+
+    analyzeSearchIntent(query) {
+      const informationalKeywords = ['what', 'how', 'why', 'when', 'where', 'guide', 'tutorial', 'learn'];
+      const transactionalKeywords = ['buy', 'purchase', 'order', 'get', 'start', 'begin', 'contact', 'quote'];
+      const navigationalKeywords = ['login', 'sign in', 'account', 'dashboard', 'portal', 'home'];
+
+      let intent = 'informational';
+      
+      if (transactionalKeywords.some(keyword => query.toLowerCase().includes(keyword))) {
+        intent = 'transactional';
+      } else if (navigationalKeywords.some(keyword => query.toLowerCase().includes(keyword))) {
+        intent = 'navigational';
+      }
+
+      this.reportSearchIntent(query, intent);
+    }
+
+    reportSemanticInteraction(keyword, intent, action) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'semantic_interaction', {
+          event_category: 'Semantic Search',
+          event_label: `${keyword} - ${intent} - ${action}`,
+          custom_parameter_keyword: keyword,
+          custom_parameter_intent: intent,
+          custom_parameter_action: action
+        });
+      }
+    }
+
+    reportSearchIntent(query, intent) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'search_intent', {
+          event_category: 'Search Behavior',
+          event_label: query,
+          custom_parameter_intent: intent,
+          custom_parameter_query: query
+        });
+      }
+    }
+  }
+
+  // Initialize semantic optimization
+  document.addEventListener('DOMContentLoaded', () => {
+    window.semanticOptimizer = new SemanticOptimizer();
+  });
+</script> 

@@ -1,0 +1,231 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Organization from '../../components/structured-data/Organization.astro';
+
+const title = "About EA Soft Lab - Leading Software Development Company";
+const description = "Learn about EA Soft Lab's mission, values, and journey as a leading software development company. Discover our commitment to innovation and excellence.";
+const structuredData = {
+  type: 'organization',
+  data: {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "EA Soft Lab",
+    "url": "https://easoftlab.com/about/company",
+    "logo": "https://easoftlab.com/logo.png",
+    "description": "Leading software development company specializing in custom solutions, web development, and digital transformation",
+    "foundingDate": "2020",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "US"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "contact@easoftlab.com"
+    },
+    "sameAs": [
+      "https://linkedin.com/company/easoftlab",
+      "https://twitter.com/easoftlab"
+    ]
+  }
+};
+---
+
+<Layout title={title} description={description} structuredData={structuredData}>
+  <Organization data={structuredData.data} />
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl font-bold mb-6">About EA Soft Lab</h1>
+        <p class="text-xl mb-8">Empowering businesses through innovative software solutions since 2020</p>
+        <div class="flex justify-center space-x-8 text-sm">
+          <div class="text-center">
+            <div class="text-3xl font-bold">50+</div>
+            <div>Projects Delivered</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold">30+</div>
+            <div>Happy Clients</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold">5+</div>
+            <div>Years Experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">Our Mission</h2>
+            <p class="text-lg text-gray-600 mb-6">
+              To transform businesses through innovative software solutions that drive growth, efficiency, and competitive advantage. We believe that technology should be an enabler, not a barrier.
+            </p>
+            <p class="text-lg text-gray-600">
+              Our mission is to deliver cutting-edge software solutions that empower organizations to achieve their full potential in the digital age.
+            </p>
+          </div>
+          <div>
+            <h2 class="text-3xl font-bold mb-6 text-gray-800">Our Vision</h2>
+            <p class="text-lg text-gray-600 mb-6">
+              To be the trusted technology partner for businesses worldwide, known for our innovative solutions, exceptional service, and commitment to client success.
+            </p>
+            <p class="text-lg text-gray-600">
+              We envision a future where every business can leverage technology to create meaningful impact and sustainable growth.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Our Story</h2>
+        <div class="prose prose-lg mx-auto">
+          <p class="text-lg text-gray-600 mb-6">
+            Founded in 2020, EA Soft Lab began with a simple yet powerful vision: to make technology accessible and beneficial for businesses of all sizes. What started as a small team of passionate developers has grown into a comprehensive software development company.
+          </p>
+          <p class="text-lg text-gray-600 mb-6">
+            Our journey has been marked by continuous learning, innovation, and an unwavering commitment to client success. We've evolved from a web development startup to a full-service technology partner, offering everything from custom software development to digital transformation consulting.
+          </p>
+          <p class="text-lg text-gray-600">
+            Today, we're proud to have delivered over 50 successful projects and built lasting relationships with clients across various industries. Our team continues to grow, bringing together diverse expertise and fresh perspectives to solve complex business challenges.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Our Core Values</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Innovation</h3>
+            <p class="text-gray-600">
+              We constantly explore new technologies and methodologies to deliver cutting-edge solutions that give our clients a competitive edge.
+            </p>
+          </div>
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Collaboration</h3>
+            <p class="text-gray-600">
+              We believe in the power of teamwork and close collaboration with our clients to ensure their vision becomes reality.
+            </p>
+          </div>
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Excellence</h3>
+            <p class="text-gray-600">
+              We maintain the highest standards of quality in everything we do, from code quality to client communication.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Why Choose EA Soft Lab?</h2>
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Expert Team</h3>
+            <p class="text-lg text-gray-600 mb-6">
+              Our team consists of experienced developers, designers, and project managers who are passionate about technology and committed to delivering exceptional results.
+            </p>
+            <ul class="space-y-3 text-gray-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Certified professionals with industry expertise
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Continuous learning and skill development
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Collaborative approach to problem-solving
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Proven Track Record</h3>
+            <p class="text-lg text-gray-600 mb-6">
+              With over 50 successful projects and 30+ satisfied clients, we have a proven track record of delivering high-quality solutions that drive business growth.
+            </p>
+            <ul class="space-y-3 text-gray-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                95% client satisfaction rate
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                On-time project delivery
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Long-term client relationships
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-blue-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">Ready to Work With Us?</h2>
+      <p class="text-xl mb-8">Let's discuss how we can help transform your business with innovative software solutions.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+          Get Started
+        </a>
+        <a href="/services" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+          View Services
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout> 

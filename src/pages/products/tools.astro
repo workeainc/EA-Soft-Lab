@@ -1,0 +1,320 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Service from '../../components/structured-data/Service.astro';
+
+const title = "Development Tools & Utilities | EA Soft Lab";
+const description = "Discover EA Soft Lab's collection of powerful development tools and utilities. Streamline your workflow with our professional-grade software tools.";
+const structuredData = {
+  type: 'service',
+  data: {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Development Tools",
+    "description": "Professional development tools and utilities for software developers",
+    "provider": {
+      "@type": "Organization",
+      "name": "EA Soft Lab"
+    },
+    "serviceType": "Software Tools",
+    "areaServed": "Worldwide",
+    "url": "https://easoftlab.com/products/tools"
+  }
+};
+---
+
+<Layout title={title} description={description} structuredData={structuredData}>
+  <Service data={structuredData.data} />
+  
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-green-600 to-blue-600 text-white py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl font-bold mb-6">Development Tools</h1>
+        <p class="text-xl mb-8">Professional-grade tools to streamline your development workflow</p>
+        <p class="text-lg mb-8">Boost productivity with our collection of powerful utilities designed for modern software development.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#tools" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+            Explore Tools
+          </a>
+          <a href="/contact" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition duration-300">
+            Get Access
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools Overview -->
+  <section id="tools" class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Our Development Tools</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Code Generator -->
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Code Generator</h3>
+            <p class="text-gray-600 mb-4">
+              Generate boilerplate code, CRUD operations, and API endpoints with our intelligent code generator.
+            </p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Multiple framework support</li>
+              <li>• Custom templates</li>
+              <li>• Database integration</li>
+            </ul>
+          </div>
+
+          <!-- API Tester -->
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">API Tester</h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive API testing tool with request/response validation and automated testing capabilities.
+            </p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• REST API testing</li>
+              <li>• GraphQL support</li>
+              <li>• Automated test suites</li>
+            </ul>
+          </div>
+
+          <!-- Database Manager -->
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Database Manager</h3>
+            <p class="text-gray-600 mb-4">
+              Visual database management tool with schema design, query builder, and migration management.
+            </p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Visual schema designer</li>
+              <li>• Query builder</li>
+              <li>• Migration tools</li>
+            </ul>
+          </div>
+
+          <!-- Performance Monitor -->
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-orange-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Performance Monitor</h3>
+            <p class="text-gray-600 mb-4">
+              Real-time application performance monitoring with detailed analytics and alerting.
+            </p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Real-time monitoring</li>
+              <li>• Performance analytics</li>
+              <li>• Custom alerts</li>
+            </ul>
+          </div>
+
+          <!-- Security Scanner -->
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Security Scanner</h3>
+            <p class="text-gray-600 mb-4">
+              Automated security vulnerability scanning and code analysis for your applications.
+            </p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• Vulnerability scanning</li>
+              <li>• Code analysis</li>
+              <li>• Security reports</li>
+            </ul>
+          </div>
+
+          <!-- Deployment Manager -->
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <div class="w-16 h-16 bg-indigo-600 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-4 text-gray-800">Deployment Manager</h3>
+            <p class="text-gray-600 mb-4">
+              Streamlined deployment pipeline with automated testing and rollback capabilities.
+            </p>
+            <ul class="text-sm text-gray-600 space-y-1">
+              <li>• CI/CD pipelines</li>
+              <li>• Automated testing</li>
+              <li>• Rollback features</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Key Features</h2>
+        <div class="grid md:grid-cols-2 gap-12">
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Developer Experience</h3>
+            <ul class="space-y-3 text-gray-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Intuitive user interface
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Cross-platform compatibility
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Extensive documentation
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Plugin ecosystem
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">Integration & Automation</h3>
+            <ul class="space-y-3 text-gray-600">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Git integration
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                CI/CD pipeline integration
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Cloud platform support
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                API-first architecture
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Pricing Plans</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-white p-8 rounded-lg shadow-md">
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">Free Tier</h3>
+            <div class="text-4xl font-bold text-green-600 mb-6">$0<span class="text-lg text-gray-600">/month</span></div>
+            <ul class="space-y-3 text-gray-600 mb-8">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Basic tools access
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Community support
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Limited usage
+              </li>
+            </ul>
+            <a href="/contact" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-300 text-center block">
+              Get Started
+            </a>
+          </div>
+          <div class="bg-white p-8 rounded-lg shadow-lg border-2 border-green-600">
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">Pro Plan</h3>
+            <div class="text-4xl font-bold text-green-600 mb-6">$29<span class="text-lg text-gray-600">/month</span></div>
+            <ul class="space-y-3 text-gray-600 mb-8">
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                All tools access
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Priority support
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Unlimited usage
+              </li>
+              <li class="flex items-center">
+                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                Advanced features
+              </li>
+            </ul>
+            <a href="/contact" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition duration-300 text-center block">
+              Upgrade Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-green-600 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-6">Ready to Boost Your Productivity?</h2>
+      <p class="text-xl mb-8">Start using our professional development tools today.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+          Get Started
+        </a>
+        <a href="/contact" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-600 transition duration-300">
+          Request Demo
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout> 

@@ -1,0 +1,15 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background rectangle -->
+  <rect width="200" height="60" rx="8" fill="#2563eb" opacity="0.1"/>
+  
+  <!-- EA Soft Lab Text -->
+  <text x="100" y="35" font-family="Inter, sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#1f2937">
+    EA Soft Lab
+  </text>
+  
+  <!-- Tech icon -->
+  <g transform="translate(20, 15)">
+    <rect x="0" y="0" width="30" height="30" rx="4" fill="#2563eb"/>
+    <path d="M8 8h14v2H8V8zm0 4h14v2H8v-2zm0 4h10v2H8v-2z" fill="white"/>
+  </g>
+</svg> 

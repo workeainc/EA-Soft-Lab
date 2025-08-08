@@ -1,0 +1,58 @@
+---
+export interface Props {
+  content: any[]
+  className?: string
+}
+
+const { content, className = '' } = Astro.props
+
+// Simple Portable Text renderer
+function renderPortableText(blocks) {
+  if (!blocks || !Array.isArray(blocks)) return ''
+  
+  return blocks.map(block => {
+    if (block._type === 'block') {
+      const style = block.style || 'normal'
+      const children = block.children?.map(child => {
+        if (child.marks?.includes('strong')) {
+          return `<strong>${child.text}</strong>`
+        }
+        if (child.marks?.includes('em')) {
+          return `<em>${child.text}</em>`
+        }
+        if (child.marks?.includes('code')) {
+          return `<code>${child.text}</code>`
+        }
+        return child.text || ''
+      }).join('') || ''
+      
+      switch (style) {
+        case 'h1':
+          return `<h1 class="text-3xl font-bold mb-4">${children}</h1>`
+        case 'h2':
+          return `<h2 class="text-2xl font-bold mb-3">${children}</h2>`
+        case 'h3':
+          return `<h3 class="text-xl font-semibold mb-2">${children}</h3>`
+        case 'h4':
+          return `<h4 class="text-lg font-semibold mb-2">${children}</h4>`
+        case 'blockquote':
+          return `<blockquote class="border-l-4 border-primary-500 pl-4 italic my-4">${children}</blockquote>`
+        default:
+          return `<p class="mb-4 leading-relaxed">${children}</p>`
+      }
+    }
+    
+    if (block._type === 'image') {
+      return `<img src="${block.asset?.url || ''}" alt="${block.alt || ''}" class="my-4 rounded-lg max-w-full h-auto" />`
+    }
+    
+    if (block._type === 'code') {
+      return `<pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto my-4"><code>${block.code || ''}</code></pre>`
+    }
+    
+    return ''
+  }).join('')
+}
+---
+
+<div class={`prose prose-lg max-w-none ${className}`} set:html={renderPortableText(content)} /> 

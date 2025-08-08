@@ -1,0 +1,112 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  priority?: boolean;
+  sizes?: string;
+  formats?: ('webp' | 'avif' | 'jpeg')[];
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  class: className = '',
+  priority = false,
+  sizes = '100vw',
+  formats = ['webp', 'jpeg']
+} = Astro.props;
+
+// Generate responsive image URLs
+const generateSrcSet = (baseUrl: string, widths: number[], format: string) => {
+  return widths.map(w => `${baseUrl}?w=${w}&fm=${format} ${w}w`).join(', ');
+};
+
+// Generate picture element sources
+const generateSources = (baseUrl: string, widths: number[]) => {
+  const sources = [];
+  
+  // WebP source (preferred)
+  if (formats.includes('webp')) {
+    sources.push({
+      srcset: generateSrcSet(baseUrl, widths, 'webp'),
+      type: 'image/webp'
+    });
+  }
+  
+  // AVIF source (if supported)
+  if (formats.includes('avif')) {
+    sources.push({
+      srcset: generateSrcSet(baseUrl, widths, 'avif'),
+      type: 'image/avif'
+    });
+  }
+  
+  return sources;
+};
+
+const responsiveWidths = [400, 800, 1200, 1600];
+const sources = generateSources(src, responsiveWidths);
+const fallbackSrc = `${src}?w=${width}&fm=jpeg`;
+---
+
+<picture>
+  {sources.map(source => (
+    <source
+      srcset={source.srcset}
+      type={source.type}
+      sizes={sizes}
+    />
+  ))}
+  
+  <img
+    src={fallbackSrc}
+    alt={alt}
+    width={width}
+    height={height}
+    class={className}
+    loading={priority ? 'eager' : 'lazy'}
+    decoding="async"
+    sizes={sizes}
+  />
+</picture>
+
+<script>
+  // WebP support detection
+  function checkWebPSupport() {
+    const webP = new Image();
+    webP.onload = webP.onerror = function () {
+      const isSupported = webP.height === 2;
+      if (isSupported) {
+        document.documentElement.classList.add('webp');
+      } else {
+        document.documentElement.classList.add('no-webp');
+      }
+    };
+    webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+  }
+
+  // Check WebP support on page load
+  document.addEventListener('DOMContentLoaded', checkWebPSupport);
+</script>
+
+<style>
+  /* Optimize image loading */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* WebP fallback styles */
+  .no-webp img {
+    /* Fallback for browsers without WebP support */
+  }
+  
+  .webp img {
+    /* Enhanced styles for WebP support */
+  }
+</style> 

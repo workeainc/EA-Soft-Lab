@@ -1,0 +1,43 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  secondaryText?: string;
+  secondaryLink?: string;
+}
+
+const {
+  title = "Ready to Start Your Project?",
+  description = "Let's discuss how we can help you achieve your goals with custom software solutions.",
+  ctaText = "Get Started",
+  ctaLink = "/contact",
+  secondaryText = "View Our Work",
+  secondaryLink = "/portfolio"
+} = Astro.props;
+---
+
+<section class="py-16 bg-primary-600">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">{title}</h2>
+      <p class="text-xl text-primary-100 mb-8">{description}</p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={ctaLink}
+          class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200 text-center"
+        >
+          {ctaText}
+        </a>
+        <a
+          href={secondaryLink}
+          class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200 text-center"
+        >
+          {secondaryText}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

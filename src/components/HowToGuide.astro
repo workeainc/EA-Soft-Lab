@@ -1,0 +1,237 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  totalTime?: string;
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+  tools?: string[];
+  materials?: string[];
+  steps: {
+    name: string;
+    text: string;
+    image?: string;
+    url?: string;
+  }[];
+  image?: string;
+  author?: string;
+  datePublished?: string;
+  dateModified?: string;
+  category?: string;
+  tags?: string[];
+}
+
+const {
+  title,
+  description,
+  totalTime = "30 minutes",
+  difficulty = "Intermediate",
+  tools = [],
+  materials = [],
+  steps,
+  image,
+  author = "EA Soft Lab",
+  datePublished = new Date().toISOString(),
+  dateModified = new Date().toISOString(),
+  category = "Software Development",
+  tags = []
+} = Astro.props;
+
+// Generate HowTo structured data
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": title,
+  "description": description,
+  "image": image,
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "datePublished": datePublished,
+  "dateModified": dateModified,
+  "totalTime": totalTime,
+  "difficulty": difficulty,
+  "category": category,
+  "keywords": tags.join(", "),
+  "tool": tools.map(tool => ({
+    "@type": "HowToTool",
+    "name": tool
+  })),
+  "material": materials.map(material => ({
+    "@type": "HowToSupply",
+    "name": material
+  })),
+  "step": steps.map((step, index) => ({
+    "@type": "HowToStep",
+    "position": index + 1,
+    "name": step.name,
+    "text": step.text,
+    "image": step.image,
+    "url": step.url
+  }))
+};
+
+// Generate Speakable schema for voice assistants
+const speakableSchema = {
+  "@context": "https://schema.org",
+  "@type": "SpeakableSpecification",
+  "cssSelector": [
+    "h1",
+    "h2",
+    "h3",
+    ".how-to-description",
+    ".how-to-steps"
+  ]
+};
+---
+
+<div class="how-to-guide bg-white rounded-lg shadow-lg overflow-hidden">
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center mb-4">
+        <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm font-medium">
+          How-To Guide
+        </span>
+        <span class="ml-4 text-sm opacity-90">
+          {difficulty} • {totalTime}
+        </span>
+      </div>
+      
+      <h1 class="text-3xl font-bold mb-4">{title}</h1>
+      <p class="text-xl opacity-90 how-to-description">{description}</p>
+      
+      <div class="flex flex-wrap gap-2 mt-6">
+        {tags.map(tag => (
+          <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-4xl mx-auto p-8">
+    <!-- Meta Information -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      {tools.length > 0 && (
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Tools Needed</h3>
+          <ul class="space-y-2">
+            {tools.map(tool => (
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                {tool}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {materials.length > 0 && (
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-lg font-semibold text-gray-900 mb-3">Materials Required</h3>
+          <ul class="space-y-2">
+            {materials.map(material => (
+              <li class="flex items-center">
+                <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+                </svg>
+                {material}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+
+    <!-- Steps -->
+    <div class="how-to-steps">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Step-by-Step Instructions</h2>
+      
+      <div class="space-y-8">
+        {steps.map((step, index) => (
+          <div class="step-item bg-gray-50 rounded-lg p-6">
+            <div class="flex items-start">
+              <div class="flex-shrink-0">
+                <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                  {index + 1}
+                </div>
+              </div>
+              
+              <div class="ml-4 flex-1">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">{step.name}</h3>
+                <p class="text-gray-700 leading-relaxed">{step.text}</p>
+                
+                {step.image && (
+                  <div class="mt-4">
+                    <img 
+                      src={step.image} 
+                      alt={`Step ${index + 1}: ${step.name}`}
+                      class="rounded-lg shadow-md max-w-md"
+                    />
+                  </div>
+                )}
+                
+                {step.url && (
+                  <div class="mt-4">
+                    <a 
+                      href={step.url}
+                      class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+                    >
+                      Learn More
+                      <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Author Info -->
+    <div class="mt-8 pt-6 border-t border-gray-200">
+      <div class="flex items-center">
+        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+        <div>
+          <p class="text-sm text-gray-600">Written by</p>
+          <p class="font-semibold text-gray-900">{author}</p>
+          <p class="text-sm text-gray-500">
+            Published {new Date(datePublished).toLocaleDateString()}
+            {dateModified !== datePublished && (
+              <span> • Updated {new Date(dateModified).toLocaleDateString()}</span>
+            )}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HowTo Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+
+<!-- Speakable Schema for Voice Assistants -->
+<script type="application/ld+json" set:html={JSON.stringify(speakableSchema)} />
+
+<style>
+  .how-to-guide {
+    scroll-behavior: smooth;
+  }
+  
+  .step-item {
+    transition: all 0.3s ease;
+  }
+  
+  .step-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+</style> 

@@ -1,0 +1,192 @@
+---
+import SEO from '../components/SEO.astro';
+import PerformanceMonitor from '../components/PerformanceMonitor.astro';
+import EngagementTracker from '../components/EngagementTracker.astro';
+import PrivacyCompliance from '../components/PrivacyCompliance.astro';
+import SanityErrorHandler from '../components/SanityErrorHandler.astro';
+
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL;
+  type?: 'website' | 'article' | 'service' | 'organization';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+  keywords?: string[];
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  structuredData?: {
+    type: 'organization' | 'website' | 'service' | 'contact' | 'article' | 'faq' | 'breadcrumb';
+    data: any;
+  };
+}
+
+const {
+  title,
+  description = "EA Soft Lab - Innovative Software Solutions for Modern Businesses. We specialize in custom software development, web applications, and digital transformation services.",
+  image = "/og-image.jpg",
+  canonicalURL = Astro.url,
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  author = "EA Soft Lab",
+  section,
+  tags = ["software development", "web applications", "digital transformation", "custom software"],
+  keywords = ["software development", "web applications", "custom software", "digital transformation"],
+  canonical,
+  noindex = false,
+  nofollow = false,
+  structuredData
+} = Astro.props;
+
+const siteName = "EA Soft Lab";
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Component -->
+    <SEO 
+      title={fullTitle}
+      description={description}
+      image={image}
+      url={canonicalURL.href}
+      type={type}
+      author={author}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      keywords={keywords}
+      canonical={canonical}
+      noindex={noindex}
+      nofollow={nofollow}
+    />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    
+    <!-- Structured Data -->
+    {structuredData ? (
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData.data)} />
+    ) : (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "EA Soft Lab",
+        "url": "https://easoftlab.com",
+        "logo": "https://easoftlab.com/logo.png",
+        "description": "Innovative software solutions for modern businesses",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "US"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "contact@easoftlab.com"
+        },
+        "sameAs": [
+          "https://linkedin.com/company/easoftlab",
+          "https://twitter.com/easoftlab",
+          "https://github.com/easoftlab",
+          "https://www.facebook.com/easoftlab",
+          "https://www.instagram.com/easoftlab",
+          "https://www.youtube.com/channel/easoftlab",
+          "https://medium.com/@easoftlab",
+          "https://dev.to/easoftlab",
+          "https://stackoverflow.com/users/easoftlab",
+          "https://www.behance.net/easoftlab",
+          "https://dribbble.com/easoftlab"
+        ],
+        "@id": "https://easoftlab.com/#organization",
+        "foundingDate": "2020",
+        "foundingLocation": {
+          "@type": "Place",
+          "name": "United States"
+        },
+        "numberOfEmployees": "10-50",
+        "industry": "Software Development",
+        "knowsAbout": [
+          "Software Development",
+          "Web Applications",
+          "Mobile Applications",
+          "UI/UX Design",
+          "Digital Transformation",
+          "Cloud Computing",
+          "Artificial Intelligence",
+          "Machine Learning",
+          "DevOps",
+          "Agile Development"
+        ],
+        "award": [
+          "Top Software Development Company 2024",
+          "Excellence in Digital Transformation"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Software Development Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Custom Software Development"
+              }
+            },
+            {
+              "@type": "Offer", 
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Web Application Development"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service", 
+                "name": "Mobile Application Development"
+              }
+            }
+          ]
+        }
+      })} />
+    )}
+    
+    <!-- Performance Monitoring -->
+    <PerformanceMonitor />
+    
+    <!-- Error Handling -->
+    <SanityErrorHandler />
+    
+
+  </head>
+  <body class="bg-white text-gray-900 antialiased">
+    <!-- Engagement Tracking -->
+    <EngagementTracker />
+    
+    <!-- Privacy Compliance -->
+    <PrivacyCompliance />
+    
+    <!-- Main Content -->
+    <slot />
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+  </body>
+</html> 

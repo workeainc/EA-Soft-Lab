@@ -1,0 +1,119 @@
+---
+export interface Props {
+  links: {
+    text: string;
+    url: string;
+    description?: string;
+    category?: string;
+    relevance?: number;
+  }[];
+  title?: string;
+  className?: string;
+  currentPage?: string;
+  showRelevance?: boolean;
+  maxLinks?: number;
+}
+
+const { 
+  links, 
+  title = "Related Resources", 
+  className = "",
+  currentPage = "",
+  showRelevance = false,
+  maxLinks = 5
+} = Astro.props;
+
+// Intelligent link sorting based on relevance and category
+const sortedLinks = links
+  .sort((a, b) => {
+    // Sort by relevance score (if available)
+    if (a.relevance && b.relevance) {
+      return b.relevance - a.relevance;
+    }
+    // Sort by category match with current page
+    const aCategoryMatch = currentPage.includes(a.category || '');
+    const bCategoryMatch = currentPage.includes(b.category || '');
+    if (aCategoryMatch && !bCategoryMatch) return -1;
+    if (!aCategoryMatch && bCategoryMatch) return 1;
+    return 0;
+  })
+  .slice(0, maxLinks);
+
+// Group links by category for better organization
+const groupedLinks = sortedLinks.reduce((groups, link) => {
+  const category = link.category || 'General';
+  if (!groups[category]) {
+    groups[category] = [];
+  }
+  groups[category].push(link);
+  return groups;
+}, {} as Record<string, typeof links>);
+---
+
+<div class={`bg-gray-50 p-6 rounded-lg ${className}`}>
+  <h3 class="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+  
+  {Object.entries(groupedLinks).map(([category, categoryLinks]) => (
+    <div class="mb-6 last:mb-0">
+      {Object.keys(groupedLinks).length > 1 && (
+        <h4 class="text-sm font-medium text-gray-700 mb-3 uppercase tracking-wide">
+          {category}
+        </h4>
+      )}
+      
+      <div class="space-y-3">
+        {categoryLinks.map((link) => (
+          <a 
+            href={link.url}
+            class="block p-3 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md transition-all duration-200 group"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex-1">
+                <div class="font-medium text-primary-600 hover:text-primary-700 group-hover:text-primary-700">
+                  {link.text}
+                </div>
+                {link.description && (
+                  <div class="text-sm text-gray-600 mt-1 line-clamp-2">
+                    {link.description}
+                  </div>
+                )}
+              </div>
+              
+              {showRelevance && link.relevance && (
+                <div class="ml-3">
+                  <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    {Math.round(link.relevance * 100)}% match
+                  </span>
+                </div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  ))}
+  
+  {sortedLinks.length === 0 && (
+    <div class="text-center py-4 text-gray-500">
+      <p>No related resources found.</p>
+    </div>
+  )}
+</div>
+
+<!-- Schema markup for internal links -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": title,
+  "description": `Related resources for ${currentPage}`,
+  "itemListElement": sortedLinks.map((link, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "WebPage",
+      "name": link.text,
+      "url": link.url,
+      "description": link.description
+    }
+  }))
+})} /> 

@@ -1,0 +1,24 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#06b6d4" opacity="0.1"/>
+  
+  <!-- Graduation cap -->
+  <path d="M8 32 L32 16 L56 32 L32 48 Z" fill="white" stroke="#06b6d4" stroke-width="2"/>
+  <rect x="28" y="32" width="8" height="16" rx="4" fill="white" stroke="#06b6d4" stroke-width="2"/>
+  
+  <!-- Tassel -->
+  <path d="M32 16 L32 8" stroke="#06b6d4" stroke-width="2" fill="none"/>
+  <circle cx="32" cy="8" r="3" fill="#06b6d4"/>
+  
+  <!-- Books -->
+  <rect x="12" y="40" width="8" height="12" rx="2" fill="#06b6d4"/>
+  <rect x="22" y="40" width="8" height="12" rx="2" fill="#06b6d4"/>
+  <rect x="32" y="40" width="8" height="12" rx="2" fill="#06b6d4"/>
+  <rect x="42" y="40" width="8" height="12" rx="2" fill="#06b6d4"/>
+  
+  <!-- Lightbulb -->
+  <circle cx="48" cy="24" r="6" fill="#f59e0b"/>
+  <path d="M48 18 L48 12" stroke="#f59e0b" stroke-width="2" fill="none"/>
+  <path d="M42 24 L36 24" stroke="#f59e0b" stroke-width="2" fill="none"/>
+  <path d="M54 24 L60 24" stroke="#f59e0b" stroke-width="2" fill="none"/>
+</svg> 

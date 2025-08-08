@@ -1,0 +1,241 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import HowToGuide from '../../components/HowToGuide.astro';
+
+const pageData = {
+  title: "How to Optimize Your Website for SEO in 2025",
+  description: "Complete step-by-step guide to optimize your website for search engines and improve your rankings in 2025.",
+  keywords: ["SEO optimization", "website SEO", "search engine optimization", "technical SEO", "on-page SEO"],
+  structuredData: {
+    type: "article",
+    data: {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "How to Optimize Your Website for SEO in 2025",
+      "description": "Complete step-by-step guide to optimize your website for search engines and improve your rankings in 2025.",
+      "image": "https://easoftlab.com/images/blog/seo-optimization.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "EA Soft Lab Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "EA Soft Lab",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://easoftlab.com/logo.png"
+        }
+      },
+      "datePublished": "2025-08-03T00:00:00.000Z",
+      "dateModified": "2025-08-03T00:00:00.000Z",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://easoftlab.com/blog/how-to-optimize-website-seo"
+      }
+    }
+  }
+};
+
+const howToData = {
+  title: "How to Optimize Your Website for SEO in 2025",
+  description: "Learn the essential steps to optimize your website for search engines and improve your organic rankings with this comprehensive guide.",
+  totalTime: "2 hours",
+  difficulty: "Intermediate",
+  tools: [
+    "Google Search Console",
+    "Google Analytics",
+    "Screaming Frog SEO Spider",
+    "GTmetrix",
+    "Google PageSpeed Insights"
+  ],
+  materials: [
+    "Access to your website's code",
+    "Content management system access",
+    "Keyword research tools"
+  ],
+  steps: [
+    {
+      name: "Conduct Technical SEO Audit",
+      text: "Start by analyzing your website's technical foundation. Check for proper meta tags, structured data, XML sitemap, robots.txt, and site architecture. Use tools like Screaming Frog to identify technical issues.",
+      image: "/images/blog/seo-audit.jpg"
+    },
+    {
+      name: "Optimize Page Speed",
+      text: "Page speed is crucial for SEO. Compress images, minify CSS/JS, enable browser caching, and use a CDN. Aim for Core Web Vitals scores above 90.",
+      image: "/images/blog/page-speed.jpg"
+    },
+    {
+      name: "Research and Implement Keywords",
+      text: "Conduct thorough keyword research using tools like Google Keyword Planner. Identify high-volume, low-competition keywords and naturally integrate them into your content.",
+      image: "/images/blog/keyword-research.jpg"
+    },
+    {
+      name: "Create High-Quality Content",
+      text: "Develop comprehensive, valuable content that answers user queries. Use proper heading structure (H1, H2, H3), include internal links, and ensure content is well-written and informative.",
+      image: "/images/blog/content-creation.jpg"
+    },
+    {
+      name: "Optimize for Mobile",
+      text: "Ensure your website is mobile-friendly with responsive design. Test on various devices and optimize for mobile-first indexing, as Google prioritizes mobile performance.",
+      image: "/images/blog/mobile-optimization.jpg"
+    },
+    {
+      name: "Build Quality Backlinks",
+      text: "Focus on earning high-quality backlinks from authoritative websites. Create linkable content, reach out to industry influencers, and participate in relevant online communities.",
+      image: "/images/blog/backlink-building.jpg"
+    },
+    {
+      name: "Monitor and Analyze Performance",
+      text: "Set up Google Search Console and Analytics to track your SEO performance. Monitor rankings, traffic, and user behavior to identify areas for improvement.",
+      image: "/images/blog/performance-monitoring.jpg"
+    }
+  ],
+  author: "EA Soft Lab Team",
+  datePublished: "2025-08-03T00:00:00.000Z",
+  dateModified: "2025-08-03T00:00:00.000Z",
+  category: "SEO",
+  tags: ["SEO", "website optimization", "search engine optimization", "technical SEO", "content marketing"]
+};
+---
+
+<Layout 
+  title={pageData.title}
+  description={pageData.description}
+  keywords={pageData.keywords}
+  structuredData={pageData.structuredData}
+  type="article"
+>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium mb-4 inline-block">
+            How-To Guide
+          </span>
+          <h1 class="text-4xl font-bold mb-6">How to Optimize Your Website for SEO in 2025</h1>
+          <p class="text-xl mb-8 max-w-3xl mx-auto">
+            Complete step-by-step guide to optimize your website for search engines and improve your rankings in 2025.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Technical SEO</span>
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Content Optimization</span>
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Mobile SEO</span>
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Performance</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center space-x-2 py-4 text-sm">
+          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
+          <span class="text-gray-400">/</span>
+          <a href="/blog" class="text-gray-500 hover:text-gray-700">Blog</a>
+          <span class="text-gray-400">/</span>
+          <a href="/blog/seo" class="text-gray-500 hover:text-gray-700">SEO</a>
+          <span class="text-gray-400">/</span>
+          <span class="text-gray-900 font-medium">How to Optimize Website SEO</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Main Content -->
+          <div class="lg:col-span-2">
+            <HowToGuide {...howToData} />
+            
+            <!-- Additional Resources -->
+            <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
+              <h2 class="text-2xl font-bold text-gray-900 mb-6">Additional Resources</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">Related Articles</h3>
+                  <ul class="space-y-2">
+                    <li><a href="/blog/technical-seo-guide" class="text-blue-600 hover:text-blue-700">Technical SEO Complete Guide</a></li>
+                    <li><a href="/blog/content-marketing-strategy" class="text-blue-600 hover:text-blue-700">Content Marketing Strategy</a></li>
+                    <li><a href="/blog/mobile-seo-optimization" class="text-blue-600 hover:text-blue-700">Mobile SEO Optimization</a></li>
+                  </ul>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg">
+                  <h3 class="text-lg font-semibold text-gray-900 mb-3">SEO Services</h3>
+                  <ul class="space-y-2">
+                    <li><a href="/services/web-development" class="text-blue-600 hover:text-blue-700">Web Development</a></li>
+                    <li><a href="/services/mobile-development" class="text-blue-600 hover:text-blue-700">Mobile Development</a></li>
+                    <li><a href="/contact" class="text-blue-600 hover:text-blue-700">SEO Consultation</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="lg:col-span-1">
+            <!-- Table of Contents -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8 sticky top-4">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Table of Contents</h3>
+              <nav class="space-y-2">
+                {howToData.steps.map((step, index) => (
+                  <a 
+                    href={`#step-${index + 1}`}
+                    class="block text-blue-600 hover:text-blue-700 py-2 text-sm"
+                  >
+                    {index + 1}. {step.name}
+                  </a>
+                ))}
+              </nav>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h3>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Time Required:</span>
+                  <span class="font-medium">{howToData.totalTime}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Difficulty:</span>
+                  <span class="font-medium">{howToData.difficulty}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Tools Needed:</span>
+                  <span class="font-medium">{howToData.tools.length}</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-gray-600">Steps:</span>
+                  <span class="font-medium">{howToData.steps.length}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Related Topics -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Related Topics</h3>
+              <div class="space-y-2">
+                <a href="/blog/web-development" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Web Development
+                </a>
+                <a href="/blog/digital-marketing" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Digital Marketing
+                </a>
+                <a href="/blog/content-strategy" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Content Strategy
+                </a>
+                <a href="/blog/analytics" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Analytics & Tracking
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout> 

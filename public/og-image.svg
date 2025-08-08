@@ -1,0 +1,71 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="ogGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#ogGradient)"/>
+  
+  <!-- Logo area -->
+  <g transform="translate(100, 100)">
+    <rect x="0" y="0" width="80" height="80" rx="12" fill="white"/>
+    <rect x="20" y="20" width="40" height="40" rx="6" fill="#2563eb"/>
+    <path d="M28 28h24v4H28v-4zm0 6h16v4H28v-4zm0 6h20v4H28v-4z" fill="white"/>
+  </g>
+  
+  <!-- Company name -->
+  <text x="200" y="140" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="700" fill="white">EA Soft Lab</text>
+  
+  <!-- Tagline -->
+  <text x="200" y="180" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="400" fill="rgba(255,255,255,0.9)">Innovative Software Solutions for Modern Businesses</text>
+  
+  <!-- Services -->
+  <g transform="translate(100, 250)">
+    <rect x="0" y="0" width="200" height="120" rx="8" fill="white" opacity="0.1"/>
+    <text x="20" y="30" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="white">Web Development</text>
+    <text x="20" y="50" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Custom web applications</text>
+    <text x="20" y="70" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">E-commerce solutions</text>
+    <text x="20" y="90" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Progressive web apps</text>
+  </g>
+  
+  <g transform="translate(350, 250)">
+    <rect x="0" y="0" width="200" height="120" rx="8" fill="white" opacity="0.1"/>
+    <text x="20" y="30" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="white">Mobile Development</text>
+    <text x="20" y="50" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">iOS & Android apps</text>
+    <text x="20" y="70" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Cross-platform solutions</text>
+    <text x="20" y="90" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Native development</text>
+  </g>
+  
+  <g transform="translate(600, 250)">
+    <rect x="0" y="0" width="200" height="120" rx="8" fill="white" opacity="0.1"/>
+    <text x="20" y="30" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="white">Custom Software</text>
+    <text x="20" y="50" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Enterprise solutions</text>
+    <text x="20" y="70" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">SaaS platforms</text>
+    <text x="20" y="90" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">API development</text>
+  </g>
+  
+  <g transform="translate(850, 250)">
+    <rect x="0" y="0" width="200" height="120" rx="8" fill="white" opacity="0.1"/>
+    <text x="20" y="30" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="white">UI/UX Design</text>
+    <text x="20" y="50" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">User experience design</text>
+    <text x="20" y="70" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Prototyping</text>
+    <text x="20" y="90" font-family="Inter, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)">Design systems</text>
+  </g>
+  
+  <!-- Contact info -->
+  <text x="100" y="450" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="white">Contact Us</text>
+  <text x="100" y="480" font-family="Inter, Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.9)">info@easoftlab.com</text>
+  <text x="100" y="500" font-family="Inter, Arial, sans-serif" font-size="16" fill="rgba(255,255,255,0.9)">+1 (555) 123-4567</text>
+  
+  <!-- Website -->
+  <text x="100" y="540" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="600" fill="white">easoftlab.com</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="1000" cy="150" r="60" fill="white" opacity="0.1"/>
+  <circle cx="1050" cy="200" r="40" fill="white" opacity="0.1"/>
+  <circle cx="950" cy="250" r="50" fill="white" opacity="0.1"/>
+</svg> 

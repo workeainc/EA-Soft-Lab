@@ -1,0 +1,180 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getPostsByCategory } from '../../../lib/queries.js';
+
+// Fetch SEO-related blog posts
+const seoPosts = await getPostsByCategory('seo') || [];
+
+const seoCategoryData = {
+  title: "SEO & Digital Marketing",
+  description: "Comprehensive guides and insights on SEO, digital marketing, and search engine optimization strategies for modern businesses.",
+  keywords: ["SEO", "digital marketing", "search engine optimization", "content marketing", "keyword research", "technical SEO"],
+  structuredData: {
+    type: "collection",
+    data: {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "SEO & Digital Marketing",
+      "description": "Comprehensive guides and insights on SEO, digital marketing, and search engine optimization strategies for modern businesses.",
+      "url": "https://easoftlab.com/blog/seo",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": seoPosts.map((post, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Article",
+            "name": post.title,
+            "url": `https://easoftlab.com/blog/${post.slug}`,
+            "description": post.excerpt
+          }
+        }))
+      }
+    }
+  }
+};
+---
+
+<Layout 
+  title={seoCategoryData.title}
+  description={seoCategoryData.description}
+  keywords={seoCategoryData.keywords}
+  structuredData={seoCategoryData.structuredData}
+  type="article"
+>
+  <div class="min-h-screen bg-gray-50">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl font-bold mb-6">SEO & Digital Marketing</h1>
+          <p class="text-xl mb-8 max-w-3xl mx-auto">
+            Comprehensive guides and insights on SEO, digital marketing, and search engine optimization strategies for modern businesses.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Technical SEO</span>
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Content Marketing</span>
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Keyword Research</span>
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Local SEO</span>
+            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Voice Search</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <nav class="bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center space-x-2 py-4 text-sm">
+          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
+          <span class="text-gray-400">/</span>
+          <a href="/blog" class="text-gray-500 hover:text-gray-700">Blog</a>
+          <span class="text-gray-400">/</span>
+          <span class="text-gray-900 font-medium">SEO & Digital Marketing</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content Section -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Main Content -->
+          <div class="lg:col-span-2">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest SEO Articles</h2>
+            
+            {seoPosts.length > 0 ? (
+              <div class="space-y-8">
+                {seoPosts.map((post) => (
+                  <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                    <div class="p-6">
+                      <div class="flex items-center mb-4">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                          SEO
+                        </span>
+                        <span class="text-gray-500 text-sm ml-4">
+                          {new Date(post.publishedAt).toLocaleDateString()}
+                        </span>
+                      </div>
+                      
+                      <h3 class="text-xl font-semibold text-gray-900 mb-3">
+                        <a href={`/blog/${post.slug}`} class="hover:text-blue-600 transition-colors">
+                          {post.title}
+                        </a>
+                      </h3>
+                      
+                      <p class="text-gray-600 mb-4 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                      
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                          {post.author && (
+                            <div class="flex items-center">
+                              <div class="w-8 h-8 bg-gray-300 rounded-full mr-2"></div>
+                              <span class="text-sm text-gray-600">{post.author}</span>
+                            </div>
+                          )}
+                        </div>
+                        
+                        <a href={`/blog/${post.slug}`} class="text-blue-600 hover:text-blue-700 font-medium text-sm">
+                          Read More →
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div class="text-center py-12">
+                <h3 class="text-xl font-semibold text-gray-900 mb-4">No SEO Articles Yet</h3>
+                <p class="text-gray-600 mb-6">We're working on comprehensive SEO content. Check back soon!</p>
+                <a href="/blog" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                  View All Articles
+                </a>
+              </div>
+            )}
+          </div>
+
+          <!-- Sidebar -->
+          <div class="lg:col-span-1">
+            <!-- Related Topics -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Related Topics</h3>
+              <div class="space-y-2">
+                <a href="/blog/web-development" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Web Development
+                </a>
+                <a href="/blog/mobile-development" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Mobile Development
+                </a>
+                <a href="/blog/ui-ux-design" class="block text-blue-600 hover:text-blue-700 py-2">
+                  UI/UX Design
+                </a>
+                <a href="/blog/digital-transformation" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Digital Transformation
+                </a>
+              </div>
+            </div>
+
+            <!-- SEO Resources -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">SEO Resources</h3>
+              <div class="space-y-3">
+                <a href="/services/web-development" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Web Development Services
+                </a>
+                <a href="/services/mobile-development" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Mobile App Development
+                </a>
+                <a href="/contact" class="block text-blue-600 hover:text-blue-700 py-2">
+                  Get SEO Consultation
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout> 

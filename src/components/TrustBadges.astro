@@ -1,0 +1,183 @@
+---
+export interface Props {
+  badges: {
+    type: 'certification' | 'award' | 'security' | 'compliance' | 'partnership';
+    name: string;
+    description: string;
+    image?: string;
+    url?: string;
+    verified?: boolean;
+    dateIssued?: string;
+    issuer?: string;
+  }[];
+  title?: string;
+  layout?: 'grid' | 'list' | 'compact';
+  showSchema?: boolean;
+}
+
+const {
+  badges,
+  title = "Trust & Certifications",
+  layout = "grid",
+  showSchema = true
+} = Astro.props;
+
+// Generate TrustBadge schema for E-E-A-T
+const trustBadgeSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "EA Soft Lab",
+  "hasCredential": badges.map(badge => ({
+    "@type": "EducationalOccupationalCredential",
+    "name": badge.name,
+    "description": badge.description,
+    "credentialCategory": badge.type,
+    "recognizedBy": {
+      "@type": "Organization",
+      "name": badge.issuer || "Certifying Authority"
+    },
+    "validIn": {
+      "@type": "Country",
+      "name": "United States"
+    },
+    "dateIssued": badge.dateIssued
+  }))
+};
+---
+
+<div class="trust-badges">
+  {title && (
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">{title}</h3>
+  )}
+  
+  {layout === 'grid' && (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {badges.map((badge) => (
+        <div class="bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow duration-200">
+          <div class="flex items-start">
+            {badge.image ? (
+              <img 
+                src={badge.image} 
+                alt={badge.name}
+                class="w-12 h-12 object-contain mr-3"
+              />
+            ) : (
+              <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            )}
+            
+            <div class="flex-1">
+              <div class="flex items-center mb-1">
+                <h4 class="font-medium text-gray-900 text-sm">{badge.name}</h4>
+                {badge.verified && (
+                  <svg class="w-4 h-4 text-green-500 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                )}
+              </div>
+              
+              <p class="text-xs text-gray-600 mb-2">{badge.description}</p>
+              
+              {badge.issuer && (
+                <p class="text-xs text-gray-500">
+                  <span class="font-medium">Issuer:</span> {badge.issuer}
+                </p>
+              )}
+              
+              {badge.dateIssued && (
+                <p class="text-xs text-gray-500">
+                  <span class="font-medium">Issued:</span> {new Date(badge.dateIssued).toLocaleDateString()}
+                </p>
+              )}
+            </div>
+          </div>
+          
+          {badge.url && (
+            <a 
+              href={badge.url}
+              class="inline-block mt-3 text-xs text-blue-600 hover:text-blue-700 font-medium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Verify Certificate →
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+  
+  {layout === 'list' && (
+    <div class="space-y-3">
+      {badges.map((badge) => (
+        <div class="flex items-center bg-white rounded-lg border border-gray-200 p-4">
+          {badge.image ? (
+            <img 
+              src={badge.image} 
+              alt={badge.name}
+              class="w-10 h-10 object-contain mr-4"
+            />
+          ) : (
+            <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-4">
+              <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          )}
+          
+          <div class="flex-1">
+            <div class="flex items-center">
+              <h4 class="font-medium text-gray-900">{badge.name}</h4>
+              {badge.verified && (
+                <svg class="w-4 h-4 text-green-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+              )}
+            </div>
+            <p class="text-sm text-gray-600">{badge.description}</p>
+          </div>
+          
+          {badge.url && (
+            <a 
+              href={badge.url}
+              class="text-blue-600 hover:text-blue-700 text-sm font-medium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Verify
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+  
+  {layout === 'compact' && (
+    <div class="flex flex-wrap gap-2">
+      {badges.map((badge) => (
+        <div class="flex items-center bg-white border border-gray-200 rounded-full px-3 py-1">
+          {badge.image && (
+            <img 
+              src={badge.image} 
+              alt={badge.name}
+              class="w-5 h-5 object-contain mr-2"
+            />
+          )}
+          <span class="text-sm font-medium text-gray-700">{badge.name}</span>
+          {badge.verified && (
+            <svg class="w-4 h-4 text-green-500 ml-1" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          )}
+        </div>
+      ))}
+    </div>
+  )}
+</div>
+
+{showSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(trustBadgeSchema)} />
+)} 

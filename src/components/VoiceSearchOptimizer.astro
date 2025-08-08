@@ -1,0 +1,86 @@
+---
+export interface Props {
+  questions: {
+    question: string;
+    answer: string;
+    keywords?: string[];
+  }[];
+  title?: string;
+}
+
+const { questions, title = "Frequently Asked Questions" } = Astro.props;
+---
+
+<section class="py-12 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">{title}</h2>
+      <p class="text-lg text-gray-600">Find answers to common questions about our services</p>
+    </div>
+    
+    <div class="space-y-6">
+      {questions.map((item, index) => (
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <button
+            class="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200"
+            onclick={`toggleFAQ(${index})`}
+            aria-expanded="false"
+            aria-controls={`faq-answer-${index}`}
+          >
+            <h3 class="text-lg font-medium text-gray-900 pr-4">{item.question}</h3>
+            <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div 
+            id={`faq-answer-${index}`}
+            class="px-6 pb-4 hidden"
+            aria-labelledby={`faq-question-${index}`}
+          >
+            <p class="text-gray-600 leading-relaxed">{item.answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleFAQ(index) {
+    const button = event.target.closest('button');
+    const answer = document.getElementById(`faq-answer-${index}`);
+    const icon = button.querySelector('svg');
+    
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    
+    // Toggle visibility
+    answer.classList.toggle('hidden');
+    button.setAttribute('aria-expanded', !isExpanded);
+    
+    // Rotate icon
+    icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+    
+    // Track FAQ interactions
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'faq_interaction', {
+        event_category: 'FAQ',
+        event_label: button.querySelector('h3').textContent,
+        value: isExpanded ? 0 : 1
+      });
+    }
+  }
+</script>
+
+<!-- FAQ Schema for Voice Search -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": questions.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+})} /> 

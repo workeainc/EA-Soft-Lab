@@ -1,0 +1,85 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="aboutGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#aboutGradient)"/>
+  
+  <!-- Team members -->
+  <g transform="translate(100, 100)">
+    <!-- Person 1 -->
+    <circle cx="0" cy="0" r="25" fill="#3b82f6"/>
+    <circle cx="0" cy="-15" r="8" fill="white"/>
+    <rect x="-12" y="5" width="24" height="30" rx="12" fill="white"/>
+  </g>
+  
+  <g transform="translate(200, 120)">
+    <!-- Person 2 -->
+    <circle cx="0" cy="0" r="25" fill="#10b981"/>
+    <circle cx="0" cy="-15" r="8" fill="white"/>
+    <rect x="-12" y="5" width="24" height="30" rx="12" fill="white"/>
+  </g>
+  
+  <g transform="translate(300, 100)">
+    <!-- Person 3 -->
+    <circle cx="0" cy="0" r="25" fill="#f59e0b"/>
+    <circle cx="0" cy="-15" r="8" fill="white"/>
+    <rect x="-12" y="5" width="24" height="30" rx="12" fill="white"/>
+  </g>
+  
+  <g transform="translate(400, 120)">
+    <!-- Person 4 -->
+    <circle cx="0" cy="0" r="25" fill="#8b5cf6"/>
+    <circle cx="0" cy="-15" r="8" fill="white"/>
+    <rect x="-12" y="5" width="24" height="30" rx="12" fill="white"/>
+  </g>
+  
+  <!-- Connection lines -->
+  <path d="M125 100 L175 120" stroke="#3b82f6" stroke-width="3" stroke-dasharray="5,5"/>
+  <path d="M225 120 L275 100" stroke="#10b981" stroke-width="3" stroke-dasharray="5,5"/>
+  <path d="M325 100 L375 120" stroke="#f59e0b" stroke-width="3" stroke-dasharray="5,5"/>
+  
+  <!-- Office building -->
+  <g transform="translate(450, 200)">
+    <rect x="0" y="0" width="80" height="120" rx="4" fill="#1f2937"/>
+    <rect x="5" y="5" width="70" height="15" rx="2" fill="#6b7280"/>
+    <rect x="5" y="25" width="70" height="15" rx="2" fill="#6b7280"/>
+    <rect x="5" y="45" width="70" height="15" rx="2" fill="#6b7280"/>
+    <rect x="5" y="65" width="70" height="15" rx="2" fill="#6b7280"/>
+    <rect x="5" y="85" width="70" height="15" rx="2" fill="#6b7280"/>
+    <rect x="5" y="105" width="70" height="15" rx="2" fill="#6b7280"/>
+  </g>
+  
+  <!-- Floating elements -->
+  <g transform="translate(150, 250)">
+    <!-- Laptop -->
+    <rect x="0" y="0" width="60" height="40" rx="4" fill="#374151"/>
+    <rect x="5" y="5" width="50" height="30" rx="2" fill="#3b82f6"/>
+    <rect x="0" y="40" width="60" height="4" rx="2" fill="#6b7280"/>
+  </g>
+  
+  <g transform="translate(350, 280)">
+    <!-- Coffee cup -->
+    <rect x="0" y="0" width="20" height="25" rx="10" fill="#f59e0b"/>
+    <rect x="15" y="5" width="8" height="15" rx="4" fill="#f59e0b"/>
+    <rect x="5" y="5" width="10" height="15" rx="5" fill="#fef3c7"/>
+  </g>
+  
+  <!-- Speech bubbles -->
+  <g transform="translate(120, 80)">
+    <rect x="0" y="0" width="40" height="20" rx="10" fill="white"/>
+    <path d="M20 20 L15 15 L25 15 Z" fill="white"/>
+    <text x="20" y="12" font-family="Arial" font-size="8" text-anchor="middle" fill="#374151">Hi!</text>
+  </g>
+  
+  <g transform="translate(280, 60)">
+    <rect x="0" y="0" width="40" height="20" rx="10" fill="white"/>
+    <path d="M20 20 L15 15 L25 15 Z" fill="white"/>
+    <text x="20" y="12" font-family="Arial" font-size="8" text-anchor="middle" fill="#374151">Great!</text>
+  </g>
+</svg> 

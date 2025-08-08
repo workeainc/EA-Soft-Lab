@@ -1,0 +1,188 @@
+---
+// Privacy compliance component for GDPR and CCPA
+---
+
+<div id="privacy-notice" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 z-50 hidden">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between">
+    <div class="text-sm mb-4 sm:mb-0">
+      <p>We use cookies and similar technologies to provide you with the best experience on our website. By continuing to use this site, you consent to our use of cookies.</p>
+    </div>
+    <div class="flex space-x-4">
+      <button id="accept-cookies" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded text-sm">
+        Accept All
+      </button>
+      <button id="reject-cookies" class="border border-white text-white hover:bg-white hover:text-gray-900 px-4 py-2 rounded text-sm">
+        Reject
+      </button>
+      <a href="/privacy" class="text-primary-300 hover:text-primary-200 underline text-sm">
+        Learn More
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  class PrivacyCompliance {
+    constructor() {
+      this.cookieConsent = localStorage.getItem('cookie-consent');
+      this.init();
+    }
+
+    init() {
+      // Show privacy notice if no consent given
+      if (!this.cookieConsent) {
+        this.showPrivacyNotice();
+      }
+
+      // Handle cookie consent
+      this.handleCookieConsent();
+      
+      // Track privacy compliance
+      this.trackPrivacyCompliance();
+    }
+
+    showPrivacyNotice() {
+      const notice = document.getElementById('privacy-notice');
+      if (notice) {
+        notice.classList.remove('hidden');
+      }
+    }
+
+    handleCookieConsent() {
+      const acceptBtn = document.getElementById('accept-cookies');
+      const rejectBtn = document.getElementById('reject-cookies');
+
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', () => {
+          this.setCookieConsent('accepted');
+          this.hidePrivacyNotice();
+        });
+      }
+
+      if (rejectBtn) {
+        rejectBtn.addEventListener('click', () => {
+          this.setCookieConsent('rejected');
+          this.hidePrivacyNotice();
+          this.disableTracking();
+        });
+      }
+    }
+
+    setCookieConsent(status) {
+      localStorage.setItem('cookie-consent', status);
+      localStorage.setItem('cookie-consent-date', new Date().toISOString());
+      
+      // Report consent to analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('consent', 'update', {
+          analytics_storage: status === 'accepted' ? 'granted' : 'denied',
+          ad_storage: status === 'accepted' ? 'granted' : 'denied',
+          functionality_storage: status === 'accepted' ? 'granted' : 'denied',
+          personalization_storage: status === 'accepted' ? 'granted' : 'denied',
+          security_storage: 'granted'
+        });
+      }
+    }
+
+    hidePrivacyNotice() {
+      const notice = document.getElementById('privacy-notice');
+      if (notice) {
+        notice.classList.add('hidden');
+      }
+    }
+
+    disableTracking() {
+      // Disable Google Analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('config', 'GA_MEASUREMENT_ID', {
+          send_page_view: false
+        });
+      }
+
+      // Disable other tracking scripts
+      const trackingScripts = document.querySelectorAll('script[data-tracking]');
+      trackingScripts.forEach(script => {
+        script.remove();
+      });
+    }
+
+    trackPrivacyCompliance() {
+      // Track privacy-related interactions
+      document.addEventListener('click', (e) => {
+        if (e.target.matches('[href*="privacy"], [href*="terms"], [href*="cookies"]')) {
+          this.reportPrivacyInteraction('privacy_link_click', e.target.href);
+        }
+      });
+
+      // Track consent changes
+      const consentStatus = localStorage.getItem('cookie-consent');
+      if (consentStatus) {
+        this.reportPrivacyInteraction('consent_status', consentStatus);
+      }
+    }
+
+    reportPrivacyInteraction(action, value) {
+      if (typeof gtag !== 'undefined') {
+        gtag('event', action, {
+          event_category: 'Privacy',
+          event_label: value,
+          non_interaction: true
+        });
+      }
+    }
+
+    // GDPR compliance methods
+    getDataSubjectRights() {
+      return {
+        right_to_access: true,
+        right_to_rectification: true,
+        right_to_erasure: true,
+        right_to_portability: true,
+        right_to_object: true
+      };
+    }
+
+    // CCPA compliance methods
+    getCCPARights() {
+      return {
+        right_to_know: true,
+        right_to_delete: true,
+        right_to_opt_out: true,
+        right_to_portability: true
+      };
+    }
+
+    // Data retention policy
+    getDataRetentionPolicy() {
+      return {
+        analytics_data: '26 months',
+        cookie_data: '2 years',
+        user_consent: '5 years',
+        contact_form_data: '2 years'
+      };
+    }
+  }
+
+  // Initialize privacy compliance
+  document.addEventListener('DOMContentLoaded', () => {
+    window.privacyCompliance = new PrivacyCompliance();
+  });
+</script>
+
+<!-- Privacy Schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "EA Soft Lab",
+  "url": "https://easoftlab.com",
+  "potentialAction": {
+    "@type": "ReadAction",
+    "target": "https://easoftlab.com/privacy"
+  },
+  "hasPart": {
+    "@type": "WebPage",
+    "name": "Privacy Policy",
+    "url": "https://easoftlab.com/privacy",
+    "description": "Our privacy policy explains how we collect, use, and protect your personal information in compliance with GDPR and CCPA regulations."
+  }
+})} /> 

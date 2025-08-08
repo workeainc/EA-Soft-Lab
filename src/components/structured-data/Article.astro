@@ -1,0 +1,63 @@
+---
+export interface Props {
+  headline: string;
+  description: string;
+  image?: string;
+  author?: {
+    "@type": string;
+    name: string;
+    url?: string;
+  };
+  publisher?: {
+    "@type": string;
+    name: string;
+    logo?: {
+      "@type": string;
+      url: string;
+    };
+  };
+  datePublished: string;
+  dateModified?: string;
+  mainEntityOfPage?: {
+    "@type": string;
+    "@id": string;
+  };
+}
+
+const {
+  headline,
+  description,
+  image,
+  author = {
+    "@type": "Person",
+    "name": "EA Soft Lab Team"
+  },
+  publisher = {
+    "@type": "Organization",
+    "name": "EA Soft Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://easoftlab.com/logo.png"
+    }
+  },
+  datePublished,
+  dateModified,
+  mainEntityOfPage = {
+    "@type": "WebPage",
+    "@id": Astro.url.href
+  }
+} = Astro.props;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": headline,
+  "description": description,
+  "image": image,
+  "author": author,
+  "publisher": publisher,
+  "datePublished": datePublished,
+  "dateModified": dateModified || datePublished,
+  "mainEntityOfPage": mainEntityOfPage
+})} /> 

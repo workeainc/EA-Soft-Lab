@@ -1,0 +1,97 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  priority?: boolean;
+  placeholder?: string;
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  class: className = '',
+  priority = false,
+  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+'
+} = Astro.props;
+
+const imageId = `lazy-image-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<img
+  id={imageId}
+  src={priority ? src : placeholder}
+  data-src={priority ? undefined : src}
+  alt={alt}
+  width={width}
+  height={height}
+  class={`${className} ${priority ? '' : 'lazy-image'}`}
+  loading={priority ? 'eager' : 'lazy'}
+  decoding="async"
+  style={priority ? undefined : 'background-color: #f3f4f6;'}
+/>
+
+{!priority && (
+  <script>
+    // Intersection Observer for lazy loading
+    const observerOptions = {
+      root: null,
+      rootMargin: '50px',
+      threshold: 0.1
+    };
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          const dataSrc = img.getAttribute('data-src');
+          
+          if (dataSrc) {
+            img.src = dataSrc;
+            img.classList.remove('lazy-image');
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all lazy images
+    document.addEventListener('DOMContentLoaded', () => {
+      const lazyImages = document.querySelectorAll('.lazy-image');
+      lazyImages.forEach(img => imageObserver.observe(img));
+    });
+
+    // Also observe images that might be added dynamically
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) { // Element node
+            const lazyImages = node.querySelectorAll ? node.querySelectorAll('.lazy-image') : [];
+            lazyImages.forEach(img => imageObserver.observe(img));
+          }
+        });
+      });
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  </script>
+)}
+
+<style>
+  .lazy-image {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .lazy-image[src]:not([src^="data:image/svg+xml"]) {
+    opacity: 1;
+  }
+</style> 

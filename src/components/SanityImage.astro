@@ -1,0 +1,89 @@
+---
+import { urlFor } from '../lib/sanity.js'
+
+export interface Props {
+  image: any
+  alt?: string
+  className?: string
+  width?: number
+  height?: number
+  sizes?: string
+  priority?: boolean
+  formats?: ('webp' | 'avif' | 'jpeg')[]
+}
+
+const {
+  image,
+  alt = '',
+  className = '',
+  width = 800,
+  height = 600,
+  sizes = '100vw',
+  priority = false,
+  formats = ['webp', 'jpeg']
+} = Astro.props
+
+// Generate responsive image URLs with WebP support
+const generateSanitySrcSet = (image: any, widths: number[], format: string) => {
+  return widths.map(w => 
+    urlFor(image)
+      .width(w)
+      .height(Math.round((height / width) * w))
+      .fit('crop')
+      .format(format)
+      .url()
+  ).join(', ');
+};
+
+// Generate picture element sources
+const generateSanitySources = (image: any, widths: number[]) => {
+  const sources = [];
+  
+  // WebP source (preferred)
+  if (formats.includes('webp')) {
+    sources.push({
+      srcset: generateSanitySrcSet(image, widths, 'webp'),
+      type: 'image/webp'
+    });
+  }
+  
+  // AVIF source (if supported)
+  if (formats.includes('avif')) {
+    sources.push({
+      srcset: generateSanitySrcSet(image, widths, 'avif'),
+      type: 'image/avif'
+    });
+  }
+  
+  return sources;
+};
+
+const responsiveWidths = [400, 800, 1200, 1600];
+const imageUrl = image ? urlFor(image).width(width).height(height).fit('crop').url() : null;
+const imageAlt = alt || image?.alt || '';
+const sources = image ? generateSanitySources(image, responsiveWidths) : [];
+const fallbackSrc = image ? urlFor(image).width(width).height(height).fit('crop').format('jpeg').url() : null;
+---
+
+{imageUrl && (
+  <picture>
+    {sources.map(source => (
+      <source
+        srcset={source.srcset}
+        type={source.type}
+        sizes={sizes}
+      />
+    ))}
+    
+    <img
+      src={fallbackSrc}
+      alt={imageAlt}
+      class={className}
+      width={width}
+      height={height}
+      sizes={sizes}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  </picture>
+)} 

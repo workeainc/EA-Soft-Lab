@@ -1,0 +1,42 @@
+{
+  "name": "ea-soft-lab-website",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "studio": "sanity dev",
+    "studio:build": "sanity build",
+    "studio:deploy": "sanity deploy",
+    "lint": "echo 'Linting not configured yet'",
+    "lint:fix": "echo 'Linting not configured yet'",
+    "test": "echo 'Tests not configured yet'",
+    "test:ci": "echo 'Tests not configured yet'",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "security-audit": "npm audit --audit-level=moderate"
+  },
+  "dependencies": {
+
+    "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/tailwind": "^5.0.0",
+    "@sanity/astro": "^3.2.10",
+    "@sanity/cli": "^4.2.0",
+    "@sanity/client": "^7.8.1",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^4.2.0",
+    "astro": "^4.0.0",
+    "sharp": "^0.34.3",
+    "styled-components": "^6.1.19",
+    "tailwindcss": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  }
+}

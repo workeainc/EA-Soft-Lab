@@ -1,0 +1,27 @@
+{
+  "name": "EA Soft Lab - Software Development Services",
+  "short_name": "EA Soft Lab",
+  "description": "Innovative software solutions for modern businesses. We specialize in custom software development, web applications, and digital transformation services.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+} 

@@ -1,0 +1,165 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCompanyInfo } from '../../lib/queries.js';
+import SanityImage from '../../components/SanityImage.astro';
+
+// Fetch company info for dynamic content
+const companyInfo = await getCompanyInfo();
+
+// SEO metadata
+const title = 'SaaS Development | EA Soft Lab - Software as a Service Solutions';
+const description = 'Professional SaaS development services. We build scalable, cloud-based software solutions with subscription models, multi-tenancy, and enterprise features.';
+
+// Structured data for this service
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "SaaS Development",
+  "description": "Professional SaaS development services. We build scalable, cloud-based software solutions with subscription models, multi-tenancy, and enterprise features.",
+  "url": "https://easoftlab.com/services/saas-development",
+  "provider": {
+    "@type": "Organization",
+    "name": "EA Soft Lab",
+    "url": "https://easoftlab.com"
+  },
+  "areaServed": ["Worldwide"],
+  "serviceType": ["SaaS Development", "Cloud Software"],
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock"
+  }
+};
+---
+
+<Layout 
+  title={title} 
+  description={description}
+  structuredData={{
+    type: 'service',
+    data: structuredData
+  }}
+>
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Professional 
+            <span class="text-primary-600">SaaS Development</span>
+            Services
+          </h1>
+          <p class="text-xl text-gray-600 mb-8">
+            We build scalable, cloud-based software solutions with subscription models, multi-tenancy, and enterprise features that drive recurring revenue.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
+              Get Started
+            </a>
+            <a href="/portfolio" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
+              View Projects
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-8 shadow-2xl">
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <div class="flex items-center space-x-3 mb-4">
+                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+              <div class="space-y-3">
+                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">What We Offer</h2>
+        <p class="text-lg text-gray-600">Comprehensive SaaS development solutions for modern businesses</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Multi-Tenant Architecture -->
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Multi-Tenant Architecture</h3>
+          <p class="text-gray-600 mb-4">Scalable multi-tenant architecture that efficiently serves multiple customers with data isolation and security.</p>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li>• Tenant Isolation</li>
+            <li>• Data Security</li>
+            <li>• Scalable Infrastructure</li>
+            <li>• Resource Optimization</li>
+          </ul>
+        </div>
+
+        <!-- Subscription Management -->
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Subscription Management</h3>
+          <p class="text-gray-600 mb-4">Complete subscription billing and management systems with flexible pricing models and payment processing.</p>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li>• Billing Systems</li>
+            <li>• Payment Processing</li>
+            <li>• Usage Tracking</li>
+            <li>• Revenue Analytics</li>
+          </ul>
+        </div>
+
+        <!-- Cloud Infrastructure -->
+        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">Cloud Infrastructure</h3>
+          <p class="text-gray-600 mb-4">Robust cloud infrastructure with auto-scaling, monitoring, and high availability for your SaaS application.</p>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li>• Auto-Scaling</li>
+            <li>• Load Balancing</li>
+            <li>• Monitoring & Alerts</li>
+            <li>• Disaster Recovery</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">Ready to Build Your SaaS Platform?</h2>
+      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+        Let's create a scalable SaaS solution that generates recurring revenue and serves your customers effectively
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200">
+          Get a Quote
+        </a>
+        <a href="/portfolio" class="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-primary-600 transition-colors duration-200">
+          View Our Work
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout> 

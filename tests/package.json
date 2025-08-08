@@ -1,0 +1,24 @@
+{
+  "name": "ea-soft-lab-tests",
+  "version": "1.0.0",
+  "description": "Test suite for EA Soft Lab AI Content Engine",
+  "type": "module",
+  "scripts": {
+    "test:seo": "node seo-test.js",
+    "test:keyword-monitor": "node keyword-monitor-test.js",
+    "test:content-management": "node content-management-system-test.js",
+    "test:final": "node final-ai-content-engine-test.js",
+    "test:all": "npm run test:seo && npm run test:keyword-monitor && npm run test:content-management && npm run test:final"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0",
+    "@sanity/client": "^6.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "eslint": "^8.0.0"
+  },
+  "keywords": ["testing", "ai", "content", "seo"],
+  "author": "EA Soft Lab",
+  "license": "MIT"
+} 

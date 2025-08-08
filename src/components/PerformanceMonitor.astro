@@ -1,0 +1,182 @@
+---
+// This component monitors and reports performance metrics
+---
+
+<script>
+  // Performance monitoring for Core Web Vitals
+  class PerformanceMonitor {
+    constructor() {
+      this.metrics = {};
+      this.init();
+    }
+
+    init() {
+      // Monitor Largest Contentful Paint (LCP)
+      this.observeLCP();
+      
+      // Monitor First Input Delay (FID)
+      this.observeFID();
+      
+      // Monitor Cumulative Layout Shift (CLS)
+      this.observeCLS();
+      
+      // Monitor First Contentful Paint (FCP)
+      this.observeFCP();
+      
+      // Monitor Time to Interactive (TTI)
+      this.observeTTI();
+    }
+
+    observeLCP() {
+      const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const lastEntry = entries[entries.length - 1];
+        this.metrics.lcp = lastEntry.startTime;
+        this.reportMetric('LCP', lastEntry.startTime);
+      });
+      observer.observe({ entryTypes: ['largest-contentful-paint'] });
+    }
+
+    observeFID() {
+      const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        entries.forEach((entry) => {
+          this.metrics.fid = entry.processingStart - entry.startTime;
+          this.reportMetric('FID', this.metrics.fid);
+        });
+      });
+      observer.observe({ entryTypes: ['first-input'] });
+    }
+
+    observeCLS() {
+      let clsValue = 0;
+      const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        entries.forEach((entry) => {
+          if (!entry.hadRecentInput) {
+            clsValue += entry.value;
+            this.metrics.cls = clsValue;
+            this.reportMetric('CLS', clsValue);
+          }
+        });
+      });
+      observer.observe({ entryTypes: ['layout-shift'] });
+    }
+
+    observeFCP() {
+      const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const firstEntry = entries[0];
+        this.metrics.fcp = firstEntry.startTime;
+        this.reportMetric('FCP', firstEntry.startTime);
+      });
+      observer.observe({ entryTypes: ['first-contentful-paint'] });
+    }
+
+    observeTTI() {
+      // TTI is calculated using Performance API
+      const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        entries.forEach((entry) => {
+          if (entry.name === 'TTI') {
+            this.metrics.tti = entry.startTime;
+            this.reportMetric('TTI', entry.startTime);
+          }
+        });
+      });
+      observer.observe({ entryTypes: ['measure'] });
+    }
+
+    reportMetric(name, value) {
+      // Send to analytics (Google Analytics, etc.)
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'web_vitals', {
+          event_category: 'Web Vitals',
+          event_label: name,
+          value: Math.round(name === 'CLS' ? value * 1000 : value),
+          non_interaction: true,
+        });
+      }
+
+      // Log to console in development
+      if (import.meta.env.DEV) {
+        console.log(`${name}: ${value}ms`);
+      }
+
+      // Store in localStorage for debugging
+      try {
+        const stored = JSON.parse(localStorage.getItem('web-vitals') || '{}');
+        stored[name] = value;
+        localStorage.setItem('web-vitals', JSON.stringify(stored));
+      } catch (e) {
+        // Ignore localStorage errors
+      }
+    }
+
+    // Get all metrics
+    getMetrics() {
+      return this.metrics;
+    }
+
+    // Report all metrics at once
+    reportAllMetrics() {
+      Object.entries(this.metrics).forEach(([name, value]) => {
+        this.reportMetric(name, value);
+      });
+    }
+  }
+
+  // Initialize performance monitoring
+  document.addEventListener('DOMContentLoaded', () => {
+    window.performanceMonitor = new PerformanceMonitor();
+  });
+
+  // Report metrics on page unload
+  window.addEventListener('beforeunload', () => {
+    if (window.performanceMonitor) {
+      window.performanceMonitor.reportAllMetrics();
+    }
+  });
+
+  // Monitor resource loading performance
+  window.addEventListener('load', () => {
+    const navigation = performance.getEntriesByType('navigation')[0];
+    if (navigation) {
+      const metrics = {
+        'DNS Lookup': navigation.domainLookupEnd - navigation.domainLookupStart,
+        'TCP Connection': navigation.connectEnd - navigation.connectStart,
+        'Server Response': navigation.responseEnd - navigation.requestStart,
+        'DOM Content Loaded': navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
+        'Page Load': navigation.loadEventEnd - navigation.loadEventStart,
+        'Total Page Load': navigation.loadEventEnd - navigation.fetchStart
+      };
+
+      Object.entries(metrics).forEach(([name, value]) => {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'timing_complete', {
+            name: name,
+            value: Math.round(value),
+            event_category: 'Performance'
+          });
+        }
+      });
+    }
+  });
+
+  // Monitor long tasks
+  const observer = new PerformanceObserver((list) => {
+    list.getEntries().forEach((entry) => {
+      if (entry.duration > 50) { // Tasks longer than 50ms
+        console.warn('Long task detected:', entry.duration + 'ms');
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'long_task', {
+            event_category: 'Performance',
+            value: Math.round(entry.duration),
+            event_label: 'Long Task'
+          });
+        }
+      }
+    });
+  });
+  observer.observe({ entryTypes: ['longtask'] });
+</script> 

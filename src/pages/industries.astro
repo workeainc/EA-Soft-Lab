@@ -1,0 +1,215 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCompanyInfo } from '../lib/queries.js';
+import SanityImage from '../components/SanityImage.astro';
+
+// Fetch company info for dynamic content
+const companyInfo = await getCompanyInfo();
+
+// SEO metadata
+const title = 'Industries We Serve | EA Soft Lab - Industry-Specific Software Solutions';
+const description = 'We specialize in creating custom software solutions for various industries including e-commerce, healthcare, education, real estate, logistics, and media & entertainment.';
+---
+
+<Layout title={title} description={description}>
+  <!-- Hero Section -->
+  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          Industries We Serve
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          We understand the unique challenges of different industries and create tailored software solutions that drive growth and efficiency
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries Grid -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- E-commerce -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">E-commerce</h3>
+            <p class="text-gray-600 mb-4">Complete e-commerce solutions including online stores, inventory management, and payment processing systems.</p>
+            <ul class="space-y-1 text-sm text-gray-600 mb-4">
+              <li>• Online Store Platforms</li>
+              <li>• Inventory Management</li>
+              <li>• Payment Processing</li>
+              <li>• Analytics & Reporting</li>
+            </ul>
+            <a href="/industries/ecommerce" class="text-primary-600 hover:text-primary-700 font-medium">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Real Estate -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Real Estate</h3>
+            <p class="text-gray-600 mb-4">Property management systems, listing platforms, and real estate analytics solutions.</p>
+            <ul class="space-y-1 text-sm text-gray-600 mb-4">
+              <li>• Property Management</li>
+              <li>• Listing Platforms</li>
+              <li>• CRM Systems</li>
+              <li>• Market Analytics</li>
+            </ul>
+            <a href="/industries/real-estate" class="text-primary-600 hover:text-primary-700 font-medium">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Healthcare -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Healthcare</h3>
+            <p class="text-gray-600 mb-4">Healthcare management systems, patient portals, and medical practice management solutions.</p>
+            <ul class="space-y-1 text-sm text-gray-600 mb-4">
+              <li>• Patient Management</li>
+              <li>• Electronic Health Records</li>
+              <li>• Appointment Scheduling</li>
+              <li>• Telemedicine Platforms</li>
+            </ul>
+            <a href="/industries/healthcare" class="text-primary-600 hover:text-primary-700 font-medium">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Education</h3>
+            <p class="text-gray-600 mb-4">Learning management systems, student portals, and educational technology platforms.</p>
+            <ul class="space-y-1 text-sm text-gray-600 mb-4">
+              <li>• Learning Management</li>
+              <li>• Student Portals</li>
+              <li>• Online Assessment</li>
+              <li>• Virtual Classrooms</li>
+            </ul>
+            <a href="/industries/education" class="text-primary-600 hover:text-primary-700 font-medium">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Logistics -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Logistics</h3>
+            <p class="text-gray-600 mb-4">Supply chain management, fleet tracking, and logistics optimization solutions.</p>
+            <ul class="space-y-1 text-sm text-gray-600 mb-4">
+              <li>• Supply Chain Management</li>
+              <li>• Fleet Tracking</li>
+              <li>• Route Optimization</li>
+              <li>• Warehouse Management</li>
+            </ul>
+            <a href="/industries/logistics" class="text-primary-600 hover:text-primary-700 font-medium">Learn More →</a>
+          </div>
+        </div>
+
+        <!-- Media & Entertainment -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <div class="h-48 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center">
+            <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">Media & Entertainment</h3>
+            <p class="text-gray-600 mb-4">Content management systems, streaming platforms, and media production tools.</p>
+            <ul class="space-y-1 text-sm text-gray-600 mb-4">
+              <li>• Content Management</li>
+              <li>• Streaming Platforms</li>
+              <li>• Digital Asset Management</li>
+              <li>• Analytics & Insights</li>
+            </ul>
+            <a href="/industries/media-entertainment" class="text-primary-600 hover:text-primary-700 font-medium">Learn More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Choose EA Soft Lab?</h2>
+        <p class="text-lg text-gray-600">We bring industry expertise and technical excellence to every project</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Industry Expertise</h3>
+          <p class="text-gray-600">Deep understanding of industry-specific challenges and regulatory requirements.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Custom Solutions</h3>
+          <p class="text-gray-600">Tailored software solutions designed specifically for your business needs.</p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 109.75 9.75A9.75 9.75 0 0012 2.25z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Ongoing Support</h3>
+          <p class="text-gray-600">Continuous support and maintenance to ensure your software evolves with your business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-primary-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-white mb-4">Ready to Transform Your Industry?</h2>
+      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+        Let's discuss how our industry-specific solutions can help your business grow and succeed
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200">
+          Get Started
+        </a>
+        <a href="/portfolio" class="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-primary-600 transition-colors duration-200">
+          View Case Studies
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout> 
