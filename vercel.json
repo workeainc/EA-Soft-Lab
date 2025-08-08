@@ -55,8 +55,8 @@
     }
   ],
   "env": {
-    "SANITY_PROJECT_ID": "@sanity-project-id",
-    "SANITY_DATASET": "@sanity-dataset",
-    "SANITY_API_VERSION": "@sanity-api-version"
+    "SANITY_PROJECT_ID": "oxjbgkqf",
+    "SANITY_DATASET": "production",
+    "SANITY_API_VERSION": "2024-01-01"
   }
 }
