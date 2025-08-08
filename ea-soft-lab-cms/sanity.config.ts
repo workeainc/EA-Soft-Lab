@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'EA Soft Lab CMS',
 
-  projectId: '4rqmh05v',
+  projectId: 'oxjbgkqf',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
