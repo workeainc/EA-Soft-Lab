@@ -15,4 +15,10 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+
+  // Authentication configuration
+  auth: {
+    loginMethod: 'token',
+    redirectOnSingle: true,
+  },
 })

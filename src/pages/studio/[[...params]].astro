@@ -1,0 +1,25 @@
+---
+// Secure studio route with authentication check
+import { getSanityStudio } from '@sanity/astro'
+
+// You can add custom authentication logic here
+// For example, check if user is logged in or has specific permissions
+
+export const prerender = false
+export const ssr = false
+
+const { studio } = await getSanityStudio()
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EA Soft Lab CMS</title>
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+  <body>
+    <div id="sanity-studio"></div>
+    {studio}
+  </body>
+</html>
