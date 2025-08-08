@@ -9,7 +9,7 @@ export default defineConfig({
     tailwind(),
     sitemap(),
     sanity({
-      projectId: '4rqmh05v',
+      projectId: 'oxjbgkqf',
       dataset: 'production',
       apiVersion: '2024-01-01',
       useCdn: false, // Set to true for production

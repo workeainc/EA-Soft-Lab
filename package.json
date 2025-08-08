@@ -20,7 +20,6 @@
     "security-audit": "npm audit --audit-level=moderate"
   },
   "dependencies": {
-
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/tailwind": "^5.0.0",
     "@sanity/astro": "^3.2.10",
@@ -35,8 +34,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "typescript": "^5.0.0",
     "eslint": "^8.0.0",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
   }
 }
