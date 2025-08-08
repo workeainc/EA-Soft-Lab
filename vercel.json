@@ -6,7 +6,7 @@
   "devCommand": "npm run dev",
   "regions": ["iad1"],
   "functions": {
-    "src/pages/api/**/*.js": {
+    "src/pages/api/*.js": {
       "maxDuration": 30
     }
   },
