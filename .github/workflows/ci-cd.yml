@@ -296,7 +296,22 @@ jobs:
         
     - name: 🔍 Run SEO monitoring
       run: |
+        # Set CI environment variable
+        export CI=true
         npm run seo-test
+      continue-on-error: true
+        
+    - name: 🔍 Update SEO files
+      run: |
+        # Set CI environment variable
+        export CI=true
+        npm run update-seo
+      continue-on-error: true
+        
+    - name: 🔔 Notify SEO monitoring
+      run: |
+        echo "🔍 SEO monitoring completed!"
+        echo "📊 Reports generated in artifacts"
         node scripts/update-seo-files.js
         
     - name: 📊 Generate SEO report

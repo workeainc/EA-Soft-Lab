@@ -113,11 +113,16 @@ const navItems = [
       <div class="lg:hidden">
         <button
           id="mobile-menu-button"
-          class="text-secondary-300 hover:text-white p-2 rounded-lg hover:bg-secondary-800/50 transition-colors duration-200 touch-manipulation"
+          type="button"
+          class="text-secondary-300 hover:text-white p-2 rounded-lg hover:bg-secondary-800/50 transition-colors duration-200 touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary-500"
           aria-label="Toggle mobile menu"
+          aria-expanded="false"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
@@ -160,67 +165,97 @@ const navItems = [
 </header>
 
 <script>
-  // Mobile menu functionality
+  // Mobile menu functionality with improved error handling
   function initMobileMenu() {
+    console.log('Initializing mobile menu...');
+    
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+    
+    if (!mobileMenuButton) {
+      console.error('Mobile menu button not found');
+      return;
+    }
+    
+    if (!mobileMenu) {
+      console.error('Mobile menu not found');
+      return;
+    }
+    
     let isMenuOpen = false;
 
-    if (mobileMenuButton && mobileMenu) {
-      mobileMenuButton.addEventListener('click', function() {
-        isMenuOpen = !isMenuOpen;
-        
-        if (isMenuOpen) {
-          mobileMenu.classList.remove('hidden');
-          mobileMenu.classList.add('block');
-          // Change button to X icon
-          mobileMenuButton.innerHTML = `
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          `;
-        } else {
-          mobileMenu.classList.remove('block');
-          mobileMenu.classList.add('hidden');
-          // Change button back to hamburger icon
-          mobileMenuButton.innerHTML = `
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          `;
-        }
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-          if (isMenuOpen) {
-            mobileMenu.classList.remove('block');
-            mobileMenu.classList.add('hidden');
-            mobileMenuButton.innerHTML = `
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-            `;
-            isMenuOpen = false;
-          }
-        }
-      });
-
-      // Close menu when window is resized to desktop
-      window.addEventListener('resize', function() {
-        if (window.innerWidth >= 1024 && isMenuOpen) {
-          mobileMenu.classList.remove('block');
-          mobileMenu.classList.add('hidden');
-          mobileMenuButton.innerHTML = `
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          `;
-          isMenuOpen = false;
-        }
-      });
+    function toggleMenu() {
+      console.log('Toggling menu, current state:', isMenuOpen);
+      
+      isMenuOpen = !isMenuOpen;
+      
+      if (isMenuOpen) {
+        // Open menu
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('block');
+        hamburgerIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'true');
+        console.log('Menu opened');
+      } else {
+        // Close menu
+        mobileMenu.classList.remove('block');
+        mobileMenu.classList.add('hidden');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        console.log('Menu closed');
+      }
     }
+
+    function closeMenu() {
+      if (isMenuOpen) {
+        isMenuOpen = false;
+        mobileMenu.classList.remove('block');
+        mobileMenu.classList.add('hidden');
+        hamburgerIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        console.log('Menu closed by outside click or resize');
+      }
+    }
+
+    // Add click event listener
+    mobileMenuButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close menu when window is resized to desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth >= 1024) {
+        closeMenu();
+      }
+    });
+
+    // Close menu when pressing Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    });
+
+    // Add touch event listeners for better mobile support
+    mobileMenuButton.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+    }, { passive: false });
+
+    console.log('Mobile menu initialized successfully');
   }
 
   // Ensure header always stays visible
@@ -250,15 +285,24 @@ const navItems = [
     });
   }
 
-  // Run on page load
-  document.addEventListener('DOMContentLoaded', function() {
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM Content Loaded - initializing mobile menu');
+      initMobileMenu();
+      ensureHeaderVisible();
+      ensureDropdownsOnTop();
+    });
+  } else {
+    console.log('DOM already loaded - initializing mobile menu immediately');
     initMobileMenu();
     ensureHeaderVisible();
     ensureDropdownsOnTop();
-  });
+  }
 
-  // Run on window load
+  // Also initialize on window load as backup
   window.addEventListener('load', function() {
+    console.log('Window loaded - ensuring mobile menu is initialized');
     initMobileMenu();
     ensureHeaderVisible();
     ensureDropdownsOnTop();
