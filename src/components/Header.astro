@@ -113,7 +113,7 @@ const navItems = [
       <div class="lg:hidden">
         <button
           id="mobile-menu-button"
-          class="text-secondary-300 hover:text-white p-2"
+          class="text-secondary-300 hover:text-white p-2 rounded-lg hover:bg-secondary-800/50 transition-colors duration-200 touch-manipulation"
           aria-label="Toggle mobile menu"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -124,8 +124,8 @@ const navItems = [
     </div>
 
     <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="hidden lg:hidden">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-secondary-700/50">
+    <div id="mobile-menu" class="hidden lg:hidden bg-secondary-900/95 backdrop-blur-md border-t border-secondary-700/50 shadow-lg">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         {navItems.map((item) => (
           <div class="space-y-1">
             <a
@@ -160,6 +160,69 @@ const navItems = [
 </header>
 
 <script>
+  // Mobile menu functionality
+  function initMobileMenu() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let isMenuOpen = false;
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenu.classList.add('block');
+          // Change button to X icon
+          mobileMenuButton.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          `;
+        } else {
+          mobileMenu.classList.remove('block');
+          mobileMenu.classList.add('hidden');
+          // Change button back to hamburger icon
+          mobileMenuButton.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          `;
+        }
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+          if (isMenuOpen) {
+            mobileMenu.classList.remove('block');
+            mobileMenu.classList.add('hidden');
+            mobileMenuButton.innerHTML = `
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            `;
+            isMenuOpen = false;
+          }
+        }
+      });
+
+      // Close menu when window is resized to desktop
+      window.addEventListener('resize', function() {
+        if (window.innerWidth >= 1024 && isMenuOpen) {
+          mobileMenu.classList.remove('block');
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          `;
+          isMenuOpen = false;
+        }
+      });
+    }
+  }
+
   // Ensure header always stays visible
   function ensureHeaderVisible() {
     const header = document.querySelector('header');
@@ -189,12 +252,14 @@ const navItems = [
 
   // Run on page load
   document.addEventListener('DOMContentLoaded', function() {
+    initMobileMenu();
     ensureHeaderVisible();
     ensureDropdownsOnTop();
   });
 
   // Run on window load
   window.addEventListener('load', function() {
+    initMobileMenu();
     ensureHeaderVisible();
     ensureDropdownsOnTop();
   });
