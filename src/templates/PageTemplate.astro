@@ -1,0 +1,153 @@
+---
+import ThemeLayout from '../layouts/ThemeLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ThemeElements from '../components/ThemeElements.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  sections?: Array<{
+    id: string;
+    title: string;
+    content: string;
+    type: 'text' | 'cards' | 'grid' | 'contact';
+  }>;
+}
+
+const {
+  title,
+  description = "EA Soft Lab - Innovative Software Solutions",
+  showHeader = true,
+  showFooter = true,
+  heroTitle,
+  heroSubtitle,
+  sections = []
+} = Astro.props;
+---
+
+<ThemeLayout 
+  title={title}
+  description={description}
+>
+  {showHeader && <Header />}
+  
+  <!-- Hero Section -->
+  {heroTitle && (
+    <div class="theme-section pt-24 pb-16" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold theme-text-primary mb-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+            {heroTitle}
+          </h1>
+          {heroSubtitle && (
+            <p class="text-xl theme-text-secondary max-w-3xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+              {heroSubtitle}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Dynamic Sections -->
+  {sections.map((section, index) => (
+    <div class="theme-section py-16" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold theme-text-primary mb-8 text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style={`animation-delay: ${(index + 1) * 200}ms`}>
+          {section.title}
+        </h2>
+        
+        {section.type === 'text' && (
+          <div class="prose prose-lg theme-text-secondary max-w-4xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style={`animation-delay: ${(index + 1) * 200 + 200}ms`}>
+            <div set:html={section.content} />
+          </div>
+        )}
+        
+        {section.type === 'cards' && (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style={`animation-delay: ${(index + 1) * 200 + 200}ms`}>
+            <ThemeElements type="card" class="p-6">
+              <h3 class="text-xl font-semibold theme-text-primary mb-4">Card 1</h3>
+              <p class="theme-text-secondary">Card content goes here.</p>
+            </ThemeElements>
+            <ThemeElements type="card" class="p-6">
+              <h3 class="text-xl font-semibold theme-text-primary mb-4">Card 2</h3>
+              <p class="theme-text-secondary">Card content goes here.</p>
+            </ThemeElements>
+            <ThemeElements type="card" class="p-6">
+              <h3 class="text-xl font-semibold theme-text-primary mb-4">Card 3</h3>
+              <p class="theme-text-secondary">Card content goes here.</p>
+            </ThemeElements>
+          </div>
+        )}
+        
+        {section.type === 'grid' && (
+          <div class="grid md:grid-cols-2 gap-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style={`animation-delay: ${(index + 1) * 200 + 200}ms`}>
+            <div class="theme-text-secondary">
+              <div set:html={section.content} />
+            </div>
+            <div class="theme-text-secondary">
+              <p>Additional content can be added here.</p>
+            </div>
+          </div>
+        )}
+        
+        {section.type === 'contact' && (
+          <div class="max-w-2xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style={`animation-delay: ${(index + 1) * 200 + 200}ms`}>
+            <form class="space-y-6">
+              <ThemeElements type="input" label="Name" placeholder="Your name" />
+              <ThemeElements type="input" label="Email" placeholder="your@email.com" />
+              <ThemeElements type="input" label="Message" placeholder="Your message" />
+              <ThemeElements type="button" variant="primary">
+                Send Message
+              </ThemeElements>
+            </form>
+          </div>
+        )}
+      </div>
+    </div>
+  ))}
+
+  <!-- Default Content Slot -->
+  <div class="theme-section py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <slot />
+    </div>
+  </div>
+
+  {showFooter && <Footer />}
+</ThemeLayout>
+
+<style>
+  /* Ensure proper spacing for themed content */
+  .theme-section {
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Prose styles for text content */
+  .prose {
+    color: inherit;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    color: #ffffff;
+  }
+  
+  .prose p, .prose li {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .prose a {
+    color: #6366f1;
+  }
+  
+  .prose a:hover {
+    color: #8b5cf6;
+  }
+</style>
+

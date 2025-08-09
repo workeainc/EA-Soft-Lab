@@ -5,9 +5,11 @@ import ServicesOverview from '../../components/ServicesOverview.astro';
 import Technologies from '../../components/Technologies.astro';
 import Process from '../../components/Process.astro';
 import CTA from '../../components/CTA.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
-const title = "E-commerce Software Development Services | EA Soft Lab";
-const description = "Transform your online business with our comprehensive e-commerce development services. From custom platforms to marketplace solutions, we help businesses scale their digital commerce operations.";
+// SEO metadata
+const title = 'E-commerce Software Solutions | EA Soft Lab - Online Retail Technology';
+const description = 'Custom e-commerce software solutions for online retail businesses. Build scalable online stores, inventory management, and payment processing systems.';
 const structuredData = {
   type: 'service',
   data: {
@@ -31,154 +33,355 @@ const structuredData = {
 ---
 
 <Layout title={title} description={description} structuredData={structuredData}>
-  <Hero
-    title="E-commerce Software Development"
-    subtitle="Transform your online business with cutting-edge e-commerce solutions"
-    description="From custom platforms to marketplace solutions, we help businesses scale their digital commerce operations with innovative technology and strategic insights."
-    ctaText="Start Your E-commerce Project"
-    ctaLink="/contact"
-    image="/images/industries/ecommerce-hero.jpg"
-  />
-
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">E-commerce Solutions That Drive Growth</h2>
-        <p class="text-lg text-gray-600">
-          We specialize in creating powerful e-commerce platforms that convert visitors into customers and drive sustainable business growth.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-            </svg>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb 
+      items={[
+        { name: "Home", url: "https://easoftlab.com", position: 1 },
+        { name: "Industries", url: "https://easoftlab.com/industries", position: 2 },
+        { name: "E-commerce", url: "https://easoftlab.com/industries/ecommerce", position: 3 }
+      ]} 
+    />
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            E-commerce Software Development
+          </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            Transform your online business with cutting-edge e-commerce solutions
+          </p>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            From custom platforms to marketplace solutions, we help businesses scale their digital commerce operations with innovative technology and strategic insights.
+          </p>
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-800" data-lazy-animate>
+            <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow">
+              Start Your E-commerce Project
+            </a>
           </div>
-          <h3 class="text-xl font-semibold mb-3">Custom E-commerce Platforms</h3>
-          <p class="text-gray-600">Tailored solutions designed specifically for your business model, products, and target audience.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Marketplace Solutions</h3>
-          <p class="text-gray-600">Multi-vendor platforms that enable businesses to create thriving online marketplaces.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Analytics & Optimization</h3>
-          <p class="text-gray-600">Advanced analytics and A/B testing to optimize conversion rates and user experience.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Payment Integration</h3>
-          <p class="text-gray-600">Secure payment gateways and multiple payment options to maximize sales opportunities.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Inventory Management</h3>
-          <p class="text-gray-600">Comprehensive inventory tracking and management systems for efficient operations.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Customer Experience</h3>
-          <p class="text-gray-600">Personalized shopping experiences with AI-powered recommendations and smart search.</p>
         </div>
       </div>
     </div>
-  </section>
 
-  <Technologies
-    title="E-commerce Technologies We Use"
-    technologies={[
-      { name: "React/Next.js", description: "Modern frontend frameworks for dynamic user interfaces" },
-      { name: "Node.js/Express", description: "Scalable backend solutions for e-commerce platforms" },
-      { name: "MongoDB/PostgreSQL", description: "Robust database solutions for product and user data" },
-      { name: "Stripe/PayPal", description: "Secure payment processing and gateway integration" },
-      { name: "AWS/Azure", description: "Cloud infrastructure for scalable e-commerce solutions" },
-      { name: "Redis", description: "High-performance caching for improved user experience" }
-    ]}
-  />
+    <!-- E-commerce Solutions -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">E-commerce Solutions That Drive Growth</h2>
+          <p class="text-lg text-gray-300">
+            We specialize in creating powerful e-commerce platforms that convert visitors into customers and drive sustainable business growth.
+          </p>
+        </div>
 
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-12">Our E-commerce Development Process</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Custom E-commerce Platforms</h3>
+            <p class="text-gray-300">Tailored solutions designed specifically for your business model, products, and target audience.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Marketplace Solutions</h3>
+            <p class="text-gray-300">Multi-vendor platforms that enable businesses to create thriving online marketplaces.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Analytics & Optimization</h3>
+            <p class="text-gray-300">Advanced analytics and A/B testing to optimize conversion rates and user experience.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Payment Integration</h3>
+            <p class="text-gray-300">Secure payment gateways and multiple payment options to maximize sales opportunities.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1000ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Inventory Management</h3>
+            <p class="text-gray-300">Comprehensive inventory tracking and management systems for efficient operations.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1200ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Customer Experience</h3>
+            <p class="text-gray-300">Personalized shopping experiences with AI-powered recommendations and smart search.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technologies Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">E-commerce Technologies We Use</h2>
+          <p class="text-lg text-gray-300">Modern tech stack for scalable e-commerce solutions</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <h3 class="text-xl font-semibold text-white mb-3">React/Next.js</h3>
+            <p class="text-gray-300">Modern frontend frameworks for dynamic user interfaces</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <h3 class="text-xl font-semibold text-white mb-3">Node.js/Express</h3>
+            <p class="text-gray-300">Scalable backend solutions for e-commerce platforms</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <h3 class="text-xl font-semibold text-white mb-3">MongoDB/PostgreSQL</h3>
+            <p class="text-gray-300">Robust database solutions for product and user data</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <h3 class="text-xl font-semibold text-white mb-3">Stripe/PayPal</h3>
+            <p class="text-gray-300">Secure payment processing and gateway integration</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1000ms">
+            <h3 class="text-xl font-semibold text-white mb-3">AWS/Azure</h3>
+            <p class="text-gray-300">Cloud infrastructure for scalable e-commerce solutions</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1200ms">
+            <h3 class="text-xl font-semibold text-white mb-3">Redis</h3>
+            <p class="text-gray-300">High-performance caching for improved user experience</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Development Process -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Our E-commerce Development Process</h2>
+          <p class="text-lg text-gray-300">A systematic approach to building successful e-commerce platforms</p>
+        </div>
         
         <div class="space-y-8">
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Discovery & Strategy</h3>
-              <p class="text-gray-600">We analyze your business model, target audience, and competitive landscape to create a comprehensive e-commerce strategy.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Discovery & Strategy</h3>
+              <p class="text-gray-300">We analyze your business model, target audience, and competitive landscape to create a comprehensive e-commerce strategy.</p>
             </div>
           </div>
 
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Design & UX</h3>
-              <p class="text-gray-600">Creating intuitive user experiences that guide customers through the purchase journey with minimal friction.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Design & UX</h3>
+              <p class="text-gray-300">Creating intuitive user experiences that guide customers through the purchase journey with minimal friction.</p>
             </div>
           </div>
 
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 600ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Development</h3>
-              <p class="text-gray-600">Building robust, scalable e-commerce platforms with modern technologies and best practices.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Development</h3>
+              <p class="text-gray-300">Building robust, scalable e-commerce platforms with modern technologies and best practices.</p>
             </div>
           </div>
 
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 800ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Testing & Optimization</h3>
-              <p class="text-gray-600">Comprehensive testing and performance optimization to ensure seamless user experience.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Testing & Optimization</h3>
+              <p class="text-gray-300">Comprehensive testing and performance optimization to ensure seamless user experience.</p>
             </div>
           </div>
 
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 1000ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Launch & Support</h3>
-              <p class="text-gray-600">Smooth deployment and ongoing support to ensure your e-commerce platform continues to perform optimally.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Launch & Support</h3>
+              <p class="text-gray-300">Smooth deployment and ongoing support to ensure your e-commerce platform continues to perform optimally.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <CTA
-    title="Ready to Build Your E-commerce Platform?"
-    description="Let's discuss how we can help you create a powerful online presence that drives sales and growth."
-    ctaText="Start Your Project"
-    ctaLink="/contact"
-  />
-</Layout> 
+    <!-- FAQ Section -->
+    <section class="py-16 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+            Get answers to common questions about our e-commerce development services
+          </p>
+        </div>
+        
+        <div class="grid gap-6 max-w-4xl mx-auto">
+          {[
+            {
+              question: "How long does it take to develop an e-commerce platform?",
+              answer: "Development time varies from 3-8 months depending on complexity. A basic e-commerce site takes 3-4 months, while complex platforms with advanced features can take 6-8 months. We provide detailed timelines and regular updates throughout the process."
+            },
+            {
+              question: "What payment gateways do you integrate?",
+              answer: "We integrate all major payment gateways including Stripe, PayPal, Square, and regional payment providers. We also support cryptocurrency payments and can customize payment solutions based on your target market and requirements."
+            },
+            {
+              question: "Do you provide inventory management systems?",
+              answer: "Yes, we develop comprehensive inventory management systems with real-time tracking, automated reordering, stock alerts, and integration with suppliers. This helps you maintain optimal stock levels and reduce carrying costs."
+            },
+            {
+              question: "How do you handle e-commerce security?",
+              answer: "We implement enterprise-grade security including SSL certificates, PCI DSS compliance, secure payment processing, data encryption, and regular security audits. We also provide fraud protection and monitoring systems."
+            },
+            {
+              question: "Can you integrate with existing business systems?",
+              answer: "Absolutely! We specialize in integrating e-commerce platforms with existing ERP, CRM, accounting, and inventory systems. This ensures seamless data flow and operational efficiency across your entire business."
+            },
+            {
+              question: "Do you provide ongoing maintenance and support?",
+              answer: "Yes, we offer comprehensive maintenance packages including security updates, performance optimization, feature enhancements, and 24/7 technical support to ensure your e-commerce platform runs smoothly."
+            }
+          ].map((faq, index) => (
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+              <button 
+                class="w-full text-left flex justify-between items-center"
+                onclick={`toggleFAQ(${index})`}
+                aria-expanded="false"
+              >
+                <h3 class="text-lg font-semibold text-white pr-4">{faq.question}</h3>
+                <svg class="w-5 h-5 text-primary-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id={`faq-answer-${index}`} class="hidden mt-4">
+                <p class="text-gray-300 leading-relaxed">{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How long does it take to develop an e-commerce platform?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Development time varies from 3-8 months depending on complexity. A basic e-commerce site takes 3-4 months, while complex platforms with advanced features can take 6-8 months. We provide detailed timelines and regular updates throughout the process."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What payment gateways do you integrate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We integrate all major payment gateways including Stripe, PayPal, Square, and regional payment providers. We also support cryptocurrency payments and can customize payment solutions based on your target market and requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide inventory management systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we develop comprehensive inventory management systems with real-time tracking, automated reordering, stock alerts, and integration with suppliers. This helps you maintain optimal stock levels and reduce carrying costs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle e-commerce security?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We implement enterprise-grade security including SSL certificates, PCI DSS compliance, secure payment processing, data encryption, and regular security audits. We also provide fraud protection and monitoring systems."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you integrate with existing business systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely! We specialize in integrating e-commerce platforms with existing ERP, CRM, accounting, and inventory systems. This ensures seamless data flow and operational efficiency across your entire business."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide ongoing maintenance and support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we offer comprehensive maintenance packages including security updates, performance optimization, feature enhancements, and 24/7 technical support to ensure your e-commerce platform runs smoothly."
+          }
+        }
+      ]
+    })} />
+
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>Ready to Build Your E-commerce Platform?</h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          Let's discuss how we can help you create a powerful online presence that drives sales and growth
+        </p>
+        <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+          <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow">
+            Start Your Project
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  function toggleFAQ(index) {
+    const answer = document.getElementById(`faq-answer-${index}`);
+    const button = answer.previousElementSibling;
+    const icon = button.querySelector('svg');
+    
+    if (answer.classList.contains('hidden')) {
+      answer.classList.remove('hidden');
+      button.setAttribute('aria-expanded', 'true');
+      icon.style.transform = 'rotate(180deg)';
+    } else {
+      answer.classList.add('hidden');
+      button.setAttribute('aria-expanded', 'false');
+      icon.style.transform = 'rotate(0deg)';
+    }
+  }
+</script> 

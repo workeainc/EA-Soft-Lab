@@ -1,165 +1,405 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCompanyInfo } from '../../lib/queries.js';
-import SanityImage from '../../components/SanityImage.astro';
-
-// Fetch company info for dynamic content
-const companyInfo = await getCompanyInfo();
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 // SEO metadata
-const title = 'CRM/ERP Development | EA Soft Lab - Business Management Systems';
-const description = 'Professional CRM and ERP development services. We build comprehensive business management systems for customer relationships, resource planning, and operational efficiency.';
-
-// Structured data for this service
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "CRM/ERP Development",
-  "description": "Professional CRM and ERP development services. We build comprehensive business management systems for customer relationships, resource planning, and operational efficiency.",
-  "url": "https://easoftlab.com/services/crm-erp",
-  "provider": {
-    "@type": "Organization",
-    "name": "EA Soft Lab",
-    "url": "https://easoftlab.com"
-  },
-  "areaServed": ["Worldwide"],
-  "serviceType": ["CRM Development", "ERP Development", "Business Software"],
-  "offers": {
-    "@type": "Offer",
-    "availability": "https://schema.org/InStock"
-  }
-};
+const title = 'CRM/ERP Development Services | EA Soft Lab - Business Management Systems';
+const description = 'Custom CRM and ERP development services. Build comprehensive business management systems that streamline operations and boost productivity.';
 ---
 
-<Layout 
-  title={title} 
-  description={description}
-  structuredData={{
-    type: 'service',
-    data: structuredData
-  }}
->
-  <!-- Hero Section -->
-  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Professional 
-            <span class="text-primary-600">CRM/ERP Development</span>
-            Services
+<Layout title={title} description={description}>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb 
+      items={[
+        { name: "Home", url: "https://easoftlab.com", position: 1 },
+        { name: "Services", url: "https://easoftlab.com/services", position: 2 },
+        { name: "CRM/ERP Development", url: "https://easoftlab.com/services/crm-erp", position: 3 }
+      ]} 
+    />
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            CRM & ERP Development
           </h1>
-          <p class="text-xl text-gray-600 mb-8">
-            We build comprehensive business management systems that streamline customer relationships, resource planning, and operational efficiency.
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            Streamline your business operations with custom CRM and ERP solutions designed to boost productivity and drive growth
           </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
-              Get Started
-            </a>
-            <a href="/portfolio" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
-              View Projects
-            </a>
-          </div>
         </div>
-        <div class="relative">
-          <div class="bg-gradient-to-br from-teal-500 to-blue-600 rounded-2xl p-8 shadow-2xl">
-            <div class="bg-white rounded-xl p-6 shadow-lg">
-              <div class="flex items-center space-x-3 mb-4">
-                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <div class="space-y-3">
-                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
-                <div class="h-4 bg-gray-200 rounded w-5/6"></div>
-                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+      </div>
+    </div>
+
+    <!-- Services Overview -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <h2 class="text-3xl font-bold text-white mb-6">Enterprise Solutions</h2>
+            <p class="text-lg text-gray-300 mb-6">
+              Our CRM and ERP solutions are designed to integrate seamlessly with your existing business processes, providing comprehensive management of customers, resources, and operations.
+            </p>
+            <ul class="space-y-3 text-gray-300">
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Customer Relationship Management
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Enterprise Resource Planning
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Business Process Automation
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Analytics & Reporting
+              </li>
+            </ul>
+          </div>
+
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
+              <h3 class="text-2xl font-bold text-white mb-4">Key Features</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/10 rounded-lg p-4">
+                  <h4 class="text-white font-semibold mb-2">CRM Features</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• Lead Management</li>
+                    <li>• Sales Automation</li>
+                    <li>• Customer Analytics</li>
+                    <li>• Communication Tools</li>
+                  </ul>
+                </div>
+                <div class="bg-white/10 rounded-lg p-4">
+                  <h4 class="text-white font-semibold mb-2">ERP Features</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• Inventory Management</li>
+                    <li>• Financial Planning</li>
+                    <li>• HR Management</li>
+                    <li>• Supply Chain</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Services Overview -->
-  <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">What We Offer</h2>
-        <p class="text-lg text-gray-600">Comprehensive CRM and ERP development solutions</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Customer Relationship Management -->
-        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Customer Relationship Management</h3>
-          <p class="text-gray-600 mb-4">Comprehensive CRM systems that manage customer interactions, sales pipelines, and customer data effectively.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li>• Lead Management</li>
-            <li>• Sales Pipeline</li>
-            <li>• Customer Analytics</li>
-            <li>• Communication Tools</li>
-          </ul>
+    <!-- Development Services -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">Our Development Services</h2>
+          <p class="text-lg text-gray-300">Comprehensive enterprise solutions</p>
         </div>
 
-        <!-- Enterprise Resource Planning -->
-        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-            </svg>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">CRM Development</h3>
+            <p class="text-gray-300 mb-4">Custom customer relationship management systems to track leads, manage sales, and improve customer satisfaction.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Lead Management</li>
+              <li>• Sales Pipeline</li>
+              <li>• Customer Analytics</li>
+              <li>• Communication Tools</li>
+            </ul>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Enterprise Resource Planning</h3>
-          <p class="text-gray-600 mb-4">Integrated ERP systems that manage business processes, inventory, finance, and human resources.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li>• Inventory Management</li>
-            <li>• Financial Management</li>
-            <li>• HR Management</li>
-            <li>• Supply Chain</li>
-          </ul>
-        </div>
 
-        <!-- Business Intelligence -->
-        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">ERP Development</h3>
+            <p class="text-gray-300 mb-4">Enterprise resource planning systems to manage inventory, finances, and business operations.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Inventory Management</li>
+              <li>• Financial Planning</li>
+              <li>• HR Management</li>
+              <li>• Supply Chain</li>
+            </ul>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Business Intelligence</h3>
-          <p class="text-gray-600 mb-4">Advanced analytics and reporting tools that provide insights into business performance and trends.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li>• Data Analytics</li>
-            <li>• Custom Reports</li>
-            <li>• Performance Dashboards</li>
-            <li>• Predictive Analytics</li>
-          </ul>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Business Automation</h3>
+            <p class="text-gray-300 mb-4">Automate repetitive tasks and streamline business processes for improved efficiency.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Workflow Automation</li>
+              <li>• Process Optimization</li>
+              <li>• Task Management</li>
+              <li>• Reporting Automation</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Analytics & Reporting</h3>
+            <p class="text-gray-300 mb-4">Comprehensive analytics and reporting tools to track performance and make data-driven decisions.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Real-time Dashboards</li>
+              <li>• Custom Reports</li>
+              <li>• Data Visualization</li>
+              <li>• Performance Metrics</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1000ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Integration Services</h3>
+            <p class="text-gray-300 mb-4">Seamless integration with existing systems and third-party applications.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• API Development</li>
+              <li>• Third-party Integration</li>
+              <li>• Data Migration</li>
+              <li>• System Synchronization</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1200ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Training & Support</h3>
+            <p class="text-gray-300 mb-4">Comprehensive training and ongoing support to ensure successful implementation.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• User Training</li>
+              <li>• Documentation</li>
+              <li>• Technical Support</li>
+              <li>• System Maintenance</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CTA Section -->
-  <section class="py-16 bg-primary-600">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-white mb-4">Ready to Streamline Your Business Operations?</h2>
-      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-        Let's build a comprehensive CRM/ERP system that optimizes your business processes and drives growth
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200">
-          Get a Quote
-        </a>
-        <a href="/portfolio" class="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-primary-600 transition-colors duration-200">
-          View Our Work
-        </a>
+    <!-- Benefits -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">Why Choose Our CRM & ERP Solutions?</h2>
+          <p class="text-lg text-gray-300">Enterprise-grade solutions that drive business growth</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Increased Efficiency</h3>
+            <p class="text-gray-300">Streamlined processes that reduce manual work and improve productivity</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Better Insights</h3>
+            <p class="text-gray-300">Comprehensive analytics and reporting for data-driven decision making</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 109.75 9.75A9.75 9.75 0 0012 2.25z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Scalable Growth</h3>
+            <p class="text-gray-300">Solutions that grow with your business and adapt to changing needs</p>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+            Get answers to common questions about our CRM & ERP development services
+          </p>
+        </div>
+        
+        <div class="grid gap-6 max-w-4xl mx-auto">
+          {[
+            {
+              question: "What's the difference between CRM and ERP systems?",
+              answer: "CRM (Customer Relationship Management) focuses on managing customer interactions, sales, and marketing. ERP (Enterprise Resource Planning) manages internal business processes like inventory, finance, and operations. We can develop integrated solutions that combine both functionalities."
+            },
+            {
+              question: "How long does it take to develop a CRM/ERP system?",
+              answer: "Development time varies from 4-12 months depending on complexity and scope. Basic CRM systems take 4-6 months, while comprehensive ERP solutions can take 8-12 months. We use agile methodologies to deliver working modules incrementally."
+            },
+            {
+              question: "Can you integrate with existing business systems?",
+              answer: "Yes, we specialize in integrating CRM/ERP systems with existing business software including accounting systems, e-commerce platforms, marketing tools, and third-party APIs. This ensures seamless data flow across your entire business ecosystem."
+            },
+            {
+              question: "How do you handle data migration from legacy systems?",
+              answer: "We provide comprehensive data migration services including data analysis, cleaning, mapping, and validation. We ensure data integrity and minimal downtime during the migration process, with rollback capabilities if needed."
+            },
+            {
+              question: "What about user training and adoption?",
+              answer: "We provide comprehensive training programs, user documentation, and change management support. We also offer ongoing support to ensure smooth adoption and help your team maximize the benefits of the new system."
+            },
+            {
+              question: "How do you ensure system security and compliance?",
+              answer: "We implement enterprise-grade security including role-based access control, data encryption, audit trails, and compliance with industry regulations (SOX, GDPR, HIPAA). We also provide security documentation and regular security audits."
+            }
+          ].map((faq, index) => (
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+              <button 
+                class="w-full text-left flex justify-between items-center"
+                onclick={`toggleFAQ(${index})`}
+                aria-expanded="false"
+              >
+                <h3 class="text-lg font-semibold text-white pr-4">{faq.question}</h3>
+                <svg class="w-5 h-5 text-primary-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id={`faq-answer-${index}`} class="hidden mt-4">
+                <p class="text-gray-300 leading-relaxed">{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What's the difference between CRM and ERP systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CRM (Customer Relationship Management) focuses on managing customer interactions, sales, and marketing. ERP (Enterprise Resource Planning) manages internal business processes like inventory, finance, and operations. We can develop integrated solutions that combine both functionalities."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does it take to develop a CRM/ERP system?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Development time varies from 4-12 months depending on complexity and scope. Basic CRM systems take 4-6 months, while comprehensive ERP solutions can take 8-12 months. We use agile methodologies to deliver working modules incrementally."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you integrate with existing business systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we specialize in integrating CRM/ERP systems with existing business software including accounting systems, e-commerce platforms, marketing tools, and third-party APIs. This ensures seamless data flow across your entire business ecosystem."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle data migration from legacy systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide comprehensive data migration services including data analysis, cleaning, mapping, and validation. We ensure data integrity and minimal downtime during the migration process, with rollback capabilities if needed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What about user training and adoption?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide comprehensive training programs, user documentation, and change management support. We also offer ongoing support to ensure smooth adoption and help your team maximize the benefits of the new system."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure system security and compliance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We implement enterprise-grade security including role-based access control, data encryption, audit trails, and compliance with industry regulations (SOX, GDPR, HIPAA). We also provide security documentation and regular security audits."
+          }
+        }
+      ]
+    })} />
+
+    <script>
+      function toggleFAQ(index) {
+        const button = event.target.closest('button');
+        const answer = document.getElementById(`faq-answer-${index}`);
+        const icon = button.querySelector('svg');
+        
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        // Toggle visibility
+        answer.classList.toggle('hidden');
+        button.setAttribute('aria-expanded', !isExpanded);
+        
+        // Rotate icon
+        icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        
+        // Track FAQ interactions
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'faq_interaction', {
+            event_category: 'FAQ',
+            event_label: button.querySelector('h3').textContent,
+            value: isExpanded ? 0 : 1
+          });
+        }
+      }
+    </script>
+
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>Ready to Transform Your Business Operations?</h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          Let's build a custom CRM or ERP solution that streamlines your operations and drives growth
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+          <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow">
+            Start Your Project
+          </a>
+          <a href="/portfolio" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg animate-bounce-slow animation-delay-200">
+            View Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </Layout> 

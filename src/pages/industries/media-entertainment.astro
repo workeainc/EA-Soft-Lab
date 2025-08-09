@@ -5,9 +5,11 @@ import ServicesOverview from '../../components/ServicesOverview.astro';
 import Technologies from '../../components/Technologies.astro';
 import Process from '../../components/Process.astro';
 import CTA from '../../components/CTA.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
-const title = "Media & Entertainment Software Development Services | EA Soft Lab";
-const description = "Transform your media and entertainment business with our comprehensive software solutions. From streaming platforms to content management systems, we help media companies deliver engaging digital experiences.";
+// SEO metadata
+const title = 'Media & Entertainment Software Solutions | EA Soft Lab - Digital Content Platforms';
+const description = 'Custom software solutions for media and entertainment companies. Build content management systems, streaming platforms, and digital media tools.';
 const structuredData = {
   type: 'service',
   data: {
@@ -31,154 +33,357 @@ const structuredData = {
 ---
 
 <Layout title={title} description={description} structuredData={structuredData}>
-  <Hero
-    title="Media & Entertainment Software Development"
-    subtitle="Transform your media business with innovative technology solutions"
-    description="From streaming platforms to content management systems, we help media companies deliver engaging digital experiences with cutting-edge software solutions."
-    ctaText="Start Your Media Project"
-    ctaLink="/contact"
-    image="/images/industries/media-entertainment-hero.jpg"
-  />
-
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Media & Entertainment Solutions That Engage Audiences</h2>
-        <p class="text-lg text-gray-600">
-          We specialize in creating powerful media software that helps companies deliver compelling content and engaging user experiences.
-        </p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-            </svg>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb 
+      items={[
+        { name: "Home", url: "https://easoftlab.com", position: 1 },
+        { name: "Industries", url: "https://easoftlab.com/industries", position: 2 },
+        { name: "Media & Entertainment", url: "https://easoftlab.com/industries/media-entertainment", position: 3 }
+      ]} 
+    />
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            Media & Entertainment Software Development
+          </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            Transform your media business with innovative technology solutions
+          </p>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            From streaming platforms to content management systems, we help media companies deliver engaging digital experiences with cutting-edge software solutions.
+          </p>
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-800" data-lazy-animate>
+            <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow">
+              Start Your Media Project
+            </a>
           </div>
-          <h3 class="text-xl font-semibold mb-3">Streaming Platforms</h3>
-          <p class="text-gray-600">High-performance streaming platforms with adaptive bitrate and multi-device support.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Content Management Systems</h3>
-          <p class="text-gray-600">Advanced CMS platforms for managing digital content, metadata, and publishing workflows.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">User Engagement Tools</h3>
-          <p class="text-gray-600">Interactive features, social sharing, and community building tools to increase user engagement.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Analytics & Insights</h3>
-          <p class="text-gray-600">Comprehensive analytics and reporting tools for content performance and audience insights.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Monetization Platforms</h3>
-          <p class="text-gray-600">Subscription management, payment processing, and advertising integration for revenue generation.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-3">Personalization Engine</h3>
-          <p class="text-gray-600">AI-powered recommendation systems and personalized content delivery for enhanced user experience.</p>
         </div>
       </div>
     </div>
-  </section>
 
-  <Technologies
-    title="Media & Entertainment Technologies We Use"
-    technologies={[
-      { name: "React/Next.js", description: "Modern frontend frameworks for media interfaces" },
-      { name: "Node.js/Express", description: "Scalable backend solutions for media platforms" },
-      { name: "PostgreSQL/MongoDB", description: "Robust database solutions for content and user data" },
-      { name: "FFmpeg/WebRTC", description: "Video processing and real-time streaming technologies" },
-      { name: "AWS/Azure", description: "Cloud infrastructure for scalable media solutions" },
-      { name: "Machine Learning", description: "AI-powered content recommendations and personalization" }
-    ]}
-  />
+    <!-- Media & Entertainment Solutions -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Media & Entertainment Solutions That Engage Audiences</h2>
+          <p class="text-lg text-gray-300">
+            We specialize in creating powerful media software that helps companies deliver compelling content and engaging user experiences.
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Streaming Platforms</h3>
+            <p class="text-gray-300">High-performance streaming platforms with adaptive bitrate and multi-device support.</p>
+          </div>
 
-  <section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-center mb-12">Our Media & Entertainment Development Process</h2>
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Content Management Systems</h3>
+            <p class="text-gray-300">Advanced CMS platforms for managing digital content, metadata, and publishing workflows.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">User Engagement Tools</h3>
+            <p class="text-gray-300">Interactive features, social sharing, and community building tools to increase user engagement.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Analytics & Insights</h3>
+            <p class="text-gray-300">Comprehensive analytics and reporting tools for content performance and audience insights.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1000ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Monetization Platforms</h3>
+            <p class="text-gray-300">Subscription management, payment processing, and advertising integration for revenue generation.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1200ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Personalization Engine</h3>
+            <p class="text-gray-300">AI-powered content recommendations and personalized user experiences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technologies Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Media & Entertainment Technologies We Use</h2>
+          <p class="text-lg text-gray-300">Modern tech stack for engaging media experiences</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <h3 class="text-xl font-semibold text-white mb-3">React/Next.js</h3>
+            <p class="text-gray-300">Modern frontend frameworks for media interfaces</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <h3 class="text-xl font-semibold text-white mb-3">Node.js/Express</h3>
+            <p class="text-gray-300">Scalable backend solutions for media platforms</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <h3 class="text-xl font-semibold text-white mb-3">PostgreSQL/MongoDB</h3>
+            <p class="text-gray-300">Robust database solutions for content management</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <h3 class="text-xl font-semibold text-white mb-3">WebRTC/RTMP</h3>
+            <p class="text-gray-300">Real-time streaming and video processing</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1000ms">
+            <h3 class="text-xl font-semibold text-white mb-3">AWS/Azure</h3>
+            <p class="text-gray-300">Cloud infrastructure for scalable media solutions</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1200ms">
+            <h3 class="text-xl font-semibold text-white mb-3">Machine Learning</h3>
+            <p class="text-gray-300">AI-powered content recommendations and analytics</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Development Process -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Our Media & Entertainment Development Process</h2>
+          <p class="text-lg text-gray-300">A systematic approach to building engaging media experiences</p>
+        </div>
         
         <div class="space-y-8">
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Content Strategy Analysis</h3>
-              <p class="text-gray-600">We analyze your content strategy, target audience, and business goals to create tailored media solutions.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Content Strategy</h3>
+              <p class="text-gray-300">We analyze your content strategy, target audience, and engagement goals to create compelling digital experiences.</p>
             </div>
           </div>
-
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+          
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">User Experience Design</h3>
-              <p class="text-gray-600">Creating intuitive, engaging user experiences that maximize content consumption and user retention.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Platform Design</h3>
+              <p class="text-gray-300">We design intuitive platforms that deliver content seamlessly across devices and provide engaging user experiences.</p>
             </div>
           </div>
-
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+          
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 600ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Development & Integration</h3>
-              <p class="text-gray-600">Building robust media platforms with seamless integration to content delivery networks and third-party services.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Content Management</h3>
+              <p class="text-gray-300">We build robust content management systems that streamline publishing workflows and content organization.</p>
             </div>
           </div>
-
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+          
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 800ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Performance Optimization</h3>
-              <p class="text-gray-600">Comprehensive testing and optimization to ensure smooth content delivery and excellent user experience.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Engagement Features</h3>
+              <p class="text-gray-300">We implement interactive features, social sharing, and community tools to maximize user engagement.</p>
             </div>
           </div>
-
-          <div class="flex items-start space-x-6">
-            <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
+          
+          <div class="flex items-start space-x-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 1000ms">
+            <div class="flex-shrink-0 w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
             <div>
-              <h3 class="text-xl font-semibold mb-2">Launch & Analytics</h3>
-              <p class="text-gray-600">Smooth deployment and comprehensive analytics to track performance and optimize content delivery.</p>
+              <h3 class="text-xl font-semibold text-white mb-2">Analytics & Optimization</h3>
+              <p class="text-gray-300">We provide comprehensive analytics and optimization tools to track performance and improve content delivery.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <CTA
-    title="Ready to Transform Your Media Business?"
-    description="Let's discuss how we can help you create engaging digital experiences, optimize content delivery, and maximize audience engagement with innovative software solutions."
-    ctaText="Start Your Project"
-    ctaLink="/contact"
-  />
-</Layout> 
+    <!-- FAQ Section -->
+    <section class="py-16 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+            Get answers to common questions about our media & entertainment software development services
+          </p>
+        </div>
+        
+        <div class="grid gap-6 max-w-4xl mx-auto">
+          {[
+            {
+              question: "What types of media software do you develop?",
+              answer: "We develop comprehensive media software including content management systems, streaming platforms, video processing tools, social media applications, podcast platforms, and interactive entertainment applications."
+            },
+            {
+              question: "How do you handle video streaming and processing?",
+              answer: "We implement advanced video streaming technologies including adaptive bitrate streaming, video compression, real-time processing, and multi-platform delivery to ensure smooth playback across all devices."
+            },
+            {
+              question: "Can you integrate with existing media platforms?",
+              answer: "Yes, we specialize in integrating with existing media platforms, content management systems, social media APIs, and third-party media services. This ensures seamless content distribution and workflow automation."
+            },
+            {
+              question: "How do you handle content recommendations?",
+              answer: "We implement AI-powered recommendation engines using machine learning algorithms to analyze user behavior, preferences, and engagement patterns to deliver personalized content recommendations."
+            },
+            {
+              question: "Do you provide mobile media applications?",
+              answer: "Yes, we develop mobile applications for media consumption, content creation, and social sharing. These apps include offline viewing, push notifications, and seamless cross-platform synchronization."
+            },
+            {
+              question: "How do you ensure content security and DRM?",
+              answer: "We implement comprehensive content security including Digital Rights Management (DRM), encryption, watermarking, and access controls to protect your intellectual property and ensure secure content distribution."
+            }
+          ].map((faq, index) => (
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+              <button 
+                class="w-full text-left flex justify-between items-center"
+                onclick={`toggleFAQ(${index})`}
+                aria-expanded="false"
+              >
+                <h3 class="text-lg font-semibold text-white pr-4">{faq.question}</h3>
+                <svg class="w-5 h-5 text-primary-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id={`faq-answer-${index}`} class="hidden mt-4">
+                <p class="text-gray-300 leading-relaxed">{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What types of media software do you develop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We develop comprehensive media software including content management systems, streaming platforms, video processing tools, social media applications, podcast platforms, and interactive entertainment applications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle video streaming and processing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We implement advanced video streaming technologies including adaptive bitrate streaming, video compression, real-time processing, and multi-platform delivery to ensure smooth playback across all devices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you integrate with existing media platforms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we specialize in integrating with existing media platforms, content management systems, social media APIs, and third-party media services. This ensures seamless content distribution and workflow automation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle content recommendations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We implement AI-powered recommendation engines using machine learning algorithms to analyze user behavior, preferences, and engagement patterns to deliver personalized content recommendations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide mobile media applications?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we develop mobile applications for media consumption, content creation, and social sharing. These apps include offline viewing, push notifications, and seamless cross-platform synchronization."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you ensure content security and DRM?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We implement comprehensive content security including Digital Rights Management (DRM), encryption, watermarking, and access controls to protect your intellectual property and ensure secure content distribution."
+          }
+        }
+      ]
+    })} />
+
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Ready to Engage Your Audience?</h2>
+          <p class="text-xl text-gray-300 mb-8">Transform your media business with our comprehensive software solutions.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25">
+              Get Started
+            </a>
+            <a href="/contact" class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function toggleFAQ(index) {
+    const answer = document.getElementById(`faq-answer-${index}`);
+    const button = answer.previousElementSibling;
+    const icon = button.querySelector('svg');
+    
+    if (answer.classList.contains('hidden')) {
+      answer.classList.remove('hidden');
+      button.setAttribute('aria-expanded', 'true');
+      icon.style.transform = 'rotate(180deg)';
+    } else {
+      answer.classList.add('hidden');
+      button.setAttribute('aria-expanded', 'false');
+      icon.style.transform = 'rotate(0deg)';
+    }
+  }
+</script> 

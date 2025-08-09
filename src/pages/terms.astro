@@ -1,0 +1,254 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+// SEO metadata
+const title = 'Terms of Service | EA Soft Lab - Legal Terms';
+const description = 'Read EA Soft Lab\'s terms of service to understand the legal terms and conditions for using our services.';
+---
+
+<Layout title={title} description={description}>
+  <!-- Breadcrumb Navigation -->
+  <Breadcrumb 
+    items={[
+      { name: "Home", url: "https://easoftlab.com", position: 1 },
+      { name: "Terms of Service", url: "https://easoftlab.com/terms", position: 2 }
+    ]} 
+  />
+  
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Hero Section -->
+    <div class="pt-40 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+             <div class="inline-flex items-center px-4 py-2 rounded-full bg-primary-500/20 text-primary-400 text-sm font-medium mt-8 mb-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+         Legal Information
+       </div>
+      <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-300" data-lazy-animate>
+        Terms of Service
+      </h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+        Clear, transparent terms for our software development services. We believe in building trust through open communication and fair agreements.
+      </p>
+             <div class="flex flex-col sm:flex-row gap-4 justify-center pb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-500" data-lazy-animate>
+         <a href="#terms-content" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-2xl hover:shadow-primary-500/25">
+           Read Terms
+         </a>
+         <a href="/contact" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300">
+           Contact Us
+         </a>
+       </div>
+    </div>
+  </div>
+
+  <!-- Terms Content -->
+  <section id="terms-content" class="py-16 relative z-10" data-lazy-load>
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-700" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">1. Acceptance of Terms</h2>
+        <p class="text-gray-300 mb-6">
+          By accessing and using EA Soft Lab's services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+        </p>
+        <p class="text-gray-300 mb-6">
+          These terms apply to all visitors, users, and others who access or use our software development services, website, and related services.
+        </p>
+      </div>
+
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-800" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">2. Services Description</h2>
+        <p class="text-gray-300 mb-6">
+          EA Soft Lab provides software development services including but not limited to:
+        </p>
+        <ul class="text-gray-300 space-y-3 mb-6">
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            Custom software development and web application development
+          </li>
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            Mobile application development for iOS and Android platforms
+          </li>
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            UI/UX design and user experience optimization
+          </li>
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            SaaS development and cloud-based solutions
+          </li>
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            CRM and ERP system development
+          </li>
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            Technical consulting and project management
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-900" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">3. Project Terms and Conditions</h2>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-3">3.1 Project Scope</h3>
+            <p class="text-gray-300">
+              The scope of work will be defined in a separate project agreement or statement of work. Any changes to the scope must be agreed upon in writing by both parties.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-3">3.2 Timeline and Deliverables</h3>
+            <p class="text-gray-300">
+              Project timelines and deliverables will be specified in the project agreement. We commit to meeting agreed-upon deadlines and will communicate any potential delays promptly.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-3">3.3 Payment Terms</h3>
+            <p class="text-gray-300">
+              Payment terms will be outlined in the project agreement. Typically, we require a deposit before project commencement, with milestone payments throughout the project lifecycle.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1000" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">4. Intellectual Property Rights</h2>
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-3">4.1 Client Ownership</h3>
+            <p class="text-gray-300">
+              Upon full payment, clients own the intellectual property rights to custom-developed software and deliverables created specifically for their project.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-3">4.2 EA Soft Lab Rights</h3>
+            <p class="text-gray-300">
+              We retain rights to our proprietary frameworks, libraries, and reusable components used across multiple projects.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-white mb-3">4.3 Third-Party Components</h3>
+            <p class="text-gray-300">
+              Third-party components and libraries used in projects are subject to their respective licenses and terms of use.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1100" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">5. Confidentiality and Data Protection</h2>
+        <p class="text-gray-300 mb-6">
+          We are committed to protecting your confidential information and personal data. Our data protection practices comply with applicable privacy laws and regulations.
+        </p>
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <span class="text-primary-400 mr-3 mt-1">•</span>
+            <p class="text-gray-300">All project information and client data is treated as confidential</p>
+          </div>
+          <div class="flex items-start">
+            <span class="text-primary-400 mr-3 mt-1">•</span>
+            <p class="text-gray-300">We implement appropriate security measures to protect sensitive information</p>
+          </div>
+          <div class="flex items-start">
+            <span class="text-primary-400 mr-3 mt-1">•</span>
+            <p class="text-gray-300">Personal data is processed in accordance with our Privacy Policy</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1200" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">6. Limitation of Liability</h2>
+        <p class="text-gray-300 mb-6">
+          EA Soft Lab's liability is limited to the amount paid for the specific services in question. We are not liable for indirect, incidental, or consequential damages.
+        </p>
+        <p class="text-gray-300">
+          While we strive for excellence in all our work, we cannot guarantee specific business outcomes or results from our software development services.
+        </p>
+      </div>
+
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1300" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">7. Termination</h2>
+        <p class="text-gray-300 mb-6">
+          Either party may terminate a project agreement with written notice. Upon termination:
+        </p>
+        <ul class="text-gray-300 space-y-3 mb-6">
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            Client will pay for work completed up to the termination date
+          </li>
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            EA Soft Lab will deliver all completed work and project materials
+          </li>
+          <li class="flex items-start">
+            <span class="text-primary-400 mr-3">•</span>
+            Confidentiality obligations remain in effect
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1400" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">8. Governing Law</h2>
+        <p class="text-gray-300">
+          These terms are governed by the laws of the United States. Any disputes will be resolved through good faith negotiation, and if necessary, through appropriate legal channels.
+        </p>
+      </div>
+
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1500" data-lazy-animate>
+        <h2 class="text-3xl font-bold text-white mb-6">9. Contact Information</h2>
+        <p class="text-gray-300 mb-6">
+          If you have any questions about these Terms of Service, please contact us:
+        </p>
+        <div class="space-y-3 text-gray-300">
+          <p><strong class="text-white">Email:</strong> legal@easoftlab.com</p>
+          <p><strong class="text-white">Phone:</strong> +1 (555) 123-4567</p>
+          <p><strong class="text-white">Address:</strong> 123 Tech Street, San Francisco, CA 94105</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 relative z-10" data-lazy-load>
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-white mb-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1600" data-lazy-animate>
+        Ready to Start Your Project?
+      </h2>
+      <p class="text-xl text-gray-300 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1700" data-lazy-animate>
+        Let's discuss your software development needs and create something amazing together.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-1800" data-lazy-animate>
+        <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 shadow-2xl hover:shadow-primary-500/25">
+          Get Started
+        </a>
+        <a href="/services" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300">
+          View Services
+        </a>
+      </div>
+    </div>
+  </section>
+  </div>
+</Layout>
+
+<script>
+  // Lazy loading animation
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('[data-lazy-animate]').forEach(el => {
+    observer.observe(el);
+  });
+</script>

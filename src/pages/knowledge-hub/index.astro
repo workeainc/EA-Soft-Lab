@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import InternalLinker from '../../components/InternalLinker.astro';
 
 const knowledgeHubData = {
@@ -108,51 +109,65 @@ const qaContent = [
   structuredData={knowledgeHubData.structuredData}
   type="article"
 >
-  <div class="min-h-screen bg-gray-50">
+  <!-- Breadcrumb Navigation -->
+  <Breadcrumb 
+    items={[
+      { name: "Home", url: "https://easoftlab.com", position: 1 },
+      { name: "Knowledge Hub", url: "https://easoftlab.com/knowledge-hub", position: 2 }
+    ]} 
+  />
+  
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-20">
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-          <h1 class="text-4xl font-bold mb-6">Knowledge Hub</h1>
-          <p class="text-xl mb-8 max-w-3xl mx-auto">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            Knowledge Hub
+          </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
             AI-optimized content library designed for modern search engines and generative AI systems.
           </p>
-          <div class="flex flex-wrap justify-center gap-4">
-            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">AI-Optimized</span>
-            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Semantic Search</span>
-            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Q&A Content</span>
-            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Expert Insights</span>
+          <div class="flex flex-wrap justify-center gap-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            <span class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white">AI-Optimized</span>
+            <span class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white">Semantic Search</span>
+            <span class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white">Q&A Content</span>
+            <span class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white">Expert Insights</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- Breadcrumb -->
-    <nav class="bg-white border-b">
+    <div class="relative z-10" data-lazy-load>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center space-x-2 py-4 text-sm">
-          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
-          <span class="text-gray-400">/</span>
-          <span class="text-gray-900 font-medium">Knowledge Hub</span>
-        </div>
+        <nav class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <div class="flex items-center space-x-2 text-sm">
+            <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+            <span class="text-gray-400">/</span>
+            <span class="text-white font-medium">Knowledge Hub</span>
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
 
     <!-- Content Section -->
-    <section class="py-16">
+    <div class="py-16 relative z-10" data-lazy-load>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Categories Grid -->
-        <div class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">Knowledge Categories</h2>
+        <div class="mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-8">Knowledge Categories</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((category) => (
-              <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+            {categories.map((category, index) => (
+              <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style={`animation-delay: ${(index + 1) * 200}ms`}>
                 <div class="text-4xl mb-4">{category.icon}</div>
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">{category.name}</h3>
-                <p class="text-gray-600 mb-4">{category.description}</p>
+                <h3 class="text-xl font-semibold text-white mb-2">{category.name}</h3>
+                <p class="text-gray-300 mb-4">{category.description}</p>
                 <div class="space-y-1">
                   {category.topics.map((topic) => (
-                    <span class="inline-block bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm mr-1 mb-1">
+                    <span class="inline-block bg-primary-500/20 text-primary-400 px-2 py-1 rounded text-sm mr-1 mb-1 border border-primary-400/30">
                       {topic}
                     </span>
                   ))}
@@ -163,47 +178,55 @@ const qaContent = [
         </div>
 
         <!-- Q&A Section -->
-        <div class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-8">Frequently Asked Questions</h2>
           <div class="space-y-6">
             {qaContent.map((item, index) => (
-              <div class="bg-white rounded-lg shadow-md p-6">
+              <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style={`animation-delay: ${(index + 1) * 200}ms`}>
                 <div class="flex items-start">
                   <div class="flex-shrink-0">
-                    <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                    <div class="w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
                       Q
                     </div>
                   </div>
                   <div class="ml-4 flex-1">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-3">{item.question}</h3>
-                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                      <div class="flex items-start">
-                        <div class="flex-shrink-0">
-                          <div class="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xs">
-                            A
+                    <button 
+                      class="w-full text-left flex justify-between items-center"
+                      onclick={`toggleFAQ(${index})`}
+                      aria-expanded="false"
+                    >
+                      <h3 class="text-lg font-semibold text-white mb-3 pr-4">{item.question}</h3>
+                      <svg class="w-5 h-5 text-primary-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    <div id={`faq-answer-${index}`} class="hidden">
+                      <div class="bg-white/10 rounded-lg p-4 mb-4">
+                        <div class="flex items-start">
+                          <div class="flex-shrink-0">
+                            <div class="w-6 h-6 bg-primary-600 text-white rounded-full flex items-center justify-center font-bold text-xs">
+                              A
+                            </div>
+                          </div>
+                          <div class="ml-3">
+                            <p class="text-gray-300 leading-relaxed">{item.answer}</p>
                           </div>
                         </div>
-                        <div class="ml-3">
-                          <p class="text-gray-700 leading-relaxed">{item.answer}</p>
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                          <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm font-medium border border-primary-400/30">
+                            {item.category}
+                          </span>
+                          <div class="flex space-x-1">
+                            {item.tags.map((tag) => (
+                              <span class="bg-white/10 text-gray-300 px-2 py-1 rounded text-xs border border-white/20">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center space-x-4">
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-                          {item.category}
-                        </span>
-                        <div class="flex space-x-1">
-                          {item.tags.map((tag) => (
-                            <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <button class="text-blue-600 hover:text-blue-700 text-sm font-medium">
-                        Learn More →
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -212,82 +235,27 @@ const qaContent = [
           </div>
         </div>
 
-        <!-- AI Optimization Features -->
-        <div class="mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">AI Search Optimization Features</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <div class="text-3xl mb-4">🧠</div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Semantic Content</h3>
-              <p class="text-gray-600">Content structured for AI understanding with natural language processing optimization.</p>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <div class="text-3xl mb-4">🔍</div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Intent Matching</h3>
-              <p class="text-gray-600">Content optimized for user intent and search query understanding.</p>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <div class="text-3xl mb-4">📊</div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Structured Data</h3>
-              <p class="text-gray-600">Comprehensive schema markup for AI search engine comprehension.</p>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <div class="text-3xl mb-4">💬</div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Q&A Format</h3>
-              <p class="text-gray-600">Question-answer content structure for featured snippets and AI responses.</p>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <div class="text-3xl mb-4">🎯</div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Topic Clustering</h3>
-              <p class="text-gray-600">Semantic topic clusters for comprehensive content coverage.</p>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <div class="text-3xl mb-4">🚀</div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Voice Search</h3>
-              <p class="text-gray-600">Conversational content optimized for voice assistants and AI queries.</p>
+        <!-- Search Section -->
+        <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 text-center">
+            <h3 class="text-2xl font-bold text-white mb-4">Search Our Knowledge Base</h3>
+            <p class="text-gray-300 mb-6">Find answers to your questions with our AI-powered search</p>
+            <div class="max-w-md mx-auto">
+              <div class="relative">
+                <input 
+                  type="text" 
+                  placeholder="Search for topics, questions, or solutions..."
+                  class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white/5 text-white placeholder-gray-400"
+                />
+                <button class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-md transition-colors">
+                  Search
+                </button>
+              </div>
             </div>
           </div>
         </div>
-
-        <!-- Related Resources -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Related Resources</h3>
-          <InternalLinker 
-            links={[
-              {
-                text: "Software Development Services",
-                url: "/services/web-development",
-                description: "Custom web development solutions",
-                category: "Services",
-                relevance: 0.9
-              },
-              {
-                text: "SEO Optimization Guide",
-                url: "/blog/how-to-optimize-website-seo",
-                description: "Complete SEO optimization guide",
-                category: "Blog",
-                relevance: 0.8
-              },
-              {
-                text: "Contact Our Experts",
-                url: "/contact",
-                description: "Get expert consultation",
-                category: "Contact",
-                relevance: 0.7
-              }
-            ]}
-            title="Explore More"
-            currentPage="knowledge-hub"
-            showRelevance={true}
-          />
-        </div>
       </div>
-    </section>
+    </div>
   </div>
 </Layout>
 
@@ -303,4 +271,22 @@ const qaContent = [
       "text": item.answer
     }
   }))
-})} /> 
+})} />
+
+<script>
+  function toggleFAQ(index) {
+    const answer = document.getElementById(`faq-answer-${index}`);
+    const button = answer.previousElementSibling;
+    const icon = button.querySelector('svg');
+    
+    if (answer.classList.contains('hidden')) {
+      answer.classList.remove('hidden');
+      button.setAttribute('aria-expanded', 'true');
+      icon.style.transform = 'rotate(180deg)';
+    } else {
+      answer.classList.add('hidden');
+      button.setAttribute('aria-expanded', 'false');
+      icon.style.transform = 'rotate(0deg)';
+    }
+  }
+</script> 

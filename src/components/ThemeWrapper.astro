@@ -1,0 +1,42 @@
+---
+// ThemeWrapper Component - Automatically applies dark theme to any content
+export interface Props {
+  class?: string;
+  showBackground?: boolean;
+  showAnimations?: boolean;
+}
+
+const { 
+  class: className = "",
+  showBackground = true,
+  showAnimations = true
+} = Astro.props;
+---
+
+<div class:list={[
+  "theme-seamless-container",
+  showBackground && "theme-dark-bg",
+  className
+]}>
+  <slot />
+</div>
+
+<style>
+  /* Ensure the wrapper takes full height */
+  .theme-seamless-container {
+    min-height: 100vh;
+    width: 100%;
+  }
+  
+  /* Apply animations if enabled */
+  .theme-seamless-container:global([data-lazy-load]) {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+  
+  .theme-seamless-container:global([data-lazy-load].loaded) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

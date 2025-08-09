@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import Organization from '../../components/structured-data/Organization.astro';
 
-const title = "Our Culture - EA Soft Lab's Values & Work Environment";
-const description = "Discover EA Soft Lab's unique culture, values, and work environment. Learn about our collaborative approach, innovation mindset, and commitment to excellence.";
+// SEO metadata
+const title = 'Our Culture | EA Soft Lab - Company Values & Work Environment';
+const description = 'Discover the culture and values that drive EA Soft Lab. Learn about our work environment, team collaboration, and company values.';
 const structuredData = {
   type: 'organization',
   data: {
@@ -27,301 +29,210 @@ const structuredData = {
 ---
 
 <Layout title={title} description={description} structuredData={structuredData}>
-  <Organization data={structuredData.data} />
+  <!-- Breadcrumb Navigation -->
+  <Breadcrumb 
+    items={[
+      { name: "Home", url: "https://easoftlab.com", position: 1 },
+      { name: "About", url: "https://easoftlab.com/about", position: 2 },
+      { name: "Culture", url: "https://easoftlab.com/about/culture", position: 3 }
+    ]} 
+  />
   
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl font-bold mb-6">Our Culture</h1>
-        <p class="text-xl mb-8">Building a workplace where innovation thrives and people grow</p>
-        <p class="text-lg">At EA Soft Lab, we believe that great software comes from great people working in an environment that fosters creativity, collaboration, and continuous learning.</p>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            Our Culture
+          </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            Building a workplace where innovation thrives and people grow
+          </p>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            At EA Soft Lab, we believe that great software comes from great people working in an environment that fosters creativity, collaboration, and continuous learning.
+          </p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Core Values -->
-  <section class="py-16">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Our Core Values</h2>
+    <!-- Core Values -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Our Core Values</h2>
+          <p class="text-lg text-gray-300">The principles that guide everything we do</p>
+        </div>
+        
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div class="text-center">
-            <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Innovation</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Innovation</h3>
+            <p class="text-gray-300">
               We constantly push boundaries and explore new technologies to deliver cutting-edge solutions.
             </p>
           </div>
-          <div class="text-center">
-            <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Collaboration</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Collaboration</h3>
+            <p class="text-gray-300">
               We believe in the power of teamwork and diverse perspectives to solve complex problems.
             </p>
           </div>
-          <div class="text-center">
-            <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Excellence</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Excellence</h3>
+            <p class="text-gray-300">
               We maintain the highest standards in everything we do, from code quality to client service.
             </p>
           </div>
-          <div class="text-center">
-            <div class="w-20 h-20 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 5.477 5.754 5 7.5 5s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.523 18.246 19 16.5 19c-1.746 0-3.332-.477-4.5-1.253"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Learning</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Learning</h3>
+            <p class="text-gray-300">
               We foster continuous learning and personal growth for all team members.
             </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Work Environment -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Our Work Environment</h2>
-        <div class="grid md:grid-cols-2 gap-12">
-          <div>
-            <h3 class="text-2xl font-bold mb-6 text-gray-800">Flexible & Remote-First</h3>
-            <p class="text-lg text-gray-600 mb-6">
-              We embrace flexibility in how and where we work. Our remote-first culture allows team members to work from anywhere while maintaining strong collaboration and communication.
-            </p>
-            <ul class="space-y-3 text-gray-600">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Remote work options
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Flexible hours
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Work-life balance
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold mb-6 text-gray-800">Collaborative & Inclusive</h3>
-            <p class="text-lg text-gray-600 mb-6">
-              We foster an inclusive environment where every voice is heard and valued. Our diverse team brings different perspectives that drive innovation and better solutions.
-            </p>
-            <ul class="space-y-3 text-gray-600">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Diverse perspectives
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Open communication
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Team collaboration
-              </li>
-            </ul>
-          </div>
+    <!-- Work Environment -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Our Work Environment</h2>
+          <p class="text-lg text-gray-300">Creating a space where creativity and productivity thrive</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Growth & Development -->
-  <section class="py-16">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Growth & Development</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Flexible Work Hours</h3>
+            <p class="text-gray-300">We believe in work-life balance and offer flexible schedules to accommodate different lifestyles.</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Remote Work Options</h3>
+            <p class="text-gray-300">Our team can work from anywhere, enabling global collaboration and diverse perspectives.</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 5.477 5.754 5 7.5 5s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.523 18.246 19 16.5 19c-1.746 0-3.332-.477-4.5-1.253"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Continuous Learning</h3>
-            <p class="text-gray-600 mb-4">
-              We encourage continuous learning through various programs and resources.
-            </p>
-            <ul class="space-y-2 text-gray-600 text-sm">
-              <li>• Conference attendance</li>
-              <li>• Online course subscriptions</li>
-              <li>• Internal knowledge sharing</li>
-              <li>• Mentorship programs</li>
-            </ul>
+            <h3 class="text-xl font-semibold text-white mb-3">Continuous Learning</h3>
+            <p class="text-gray-300">We invest in our team's growth with training, conferences, and learning resources.</p>
           </div>
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <div class="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Career Advancement</h3>
-            <p class="text-gray-600 mb-4">
-              Clear growth paths and opportunities for advancement within the company.
-            </p>
-            <ul class="space-y-2 text-gray-600 text-sm">
-              <li>• Regular performance reviews</li>
-              <li>• Skill development plans</li>
-              <li>• Leadership opportunities</li>
-              <li>• Project ownership</li>
-            </ul>
-          </div>
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Team Building</h3>
-            <p class="text-gray-600 mb-4">
-              Regular team activities and events to build strong relationships.
-            </p>
-            <ul class="space-y-2 text-gray-600 text-sm">
-              <li>• Virtual team events</li>
-              <li>• Hackathons</li>
-              <li>• Knowledge sharing sessions</li>
-              <li>• Social activities</li>
-            </ul>
+            <h3 class="text-xl font-semibold text-white mb-3">Team Collaboration</h3>
+            <p class="text-gray-300">We foster open communication and collaborative problem-solving across all projects.</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1000ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Innovation Time</h3>
+            <p class="text-gray-300">Dedicated time for exploring new technologies and creative problem-solving.</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1200ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Supportive Culture</h3>
+            <p class="text-gray-300">A caring environment where everyone feels valued and supported in their growth.</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Innovation Culture -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">Fostering Innovation</h2>
-        <div class="prose prose-lg mx-auto">
-          <p class="text-lg text-gray-600 mb-6">
-            Innovation is at the heart of our culture. We encourage our team members to think creatively, experiment with new technologies, and push the boundaries of what's possible.
-          </p>
-          <p class="text-lg text-gray-600 mb-6">
-            Our innovation initiatives include regular hackathons, dedicated time for personal projects, and a culture that celebrates both successes and learning from failures.
-          </p>
-          <p class="text-lg text-gray-600">
-            We believe that the best ideas come from a diverse team working together in an environment that encourages curiosity and experimentation.
-          </p>
+    <!-- Team Activities -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Team Activities & Events</h2>
+          <p class="text-lg text-gray-300">Building connections beyond work</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Team Activities -->
-  <section class="py-16">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Team Activities & Events</h2>
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Learning & Development</h3>
-            <ul class="space-y-3 text-gray-600">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Weekly tech talks
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Monthly hackathons
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Book clubs
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-blue-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Conference sharing sessions
-              </li>
-            </ul>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <h3 class="text-xl font-semibold text-white mb-3">Hackathons</h3>
+            <p class="text-gray-300">Regular innovation challenges where teams collaborate on creative solutions.</p>
           </div>
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Social & Fun</h3>
-            <ul class="space-y-3 text-gray-600">
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Virtual coffee chats
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Game nights
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Team celebrations
-              </li>
-              <li class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                Wellness challenges
-              </li>
-            </ul>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <h3 class="text-xl font-semibold text-white mb-3">Knowledge Sharing</h3>
+            <p class="text-gray-300">Regular tech talks and workshops to share expertise and learn from each other.</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <h3 class="text-xl font-semibold text-white mb-3">Team Building</h3>
+            <p class="text-gray-300">Fun activities and events to strengthen team bonds and foster friendships.</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CTA Section -->
-  <section class="py-16 bg-blue-600 text-white">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-6">Join Our Culture</h2>
-      <p class="text-xl mb-8">Be part of a team that values innovation, collaboration, and growth.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/about/careers" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
-          View Open Positions
-        </a>
-        <a href="/contact" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
-          Get in Touch
-        </a>
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Join Our Culture</h2>
+          <p class="text-xl text-gray-300 mb-8">Be part of a team that values innovation, collaboration, and growth.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/about/careers" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25">
+              View Careers
+            </a>
+            <a href="/contact" class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+              Get in Touch
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </Layout> 

@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import Service from '../../components/structured-data/Service.astro';
 
-const title = "SaaS Platform - Enterprise Software Solution | EA Soft Lab";
-const description = "Discover EA Soft Lab's comprehensive SaaS platform solution. Scalable, secure, and customizable enterprise software for modern businesses.";
+// SEO metadata
+const title = 'SaaS Platform | EA Soft Lab - Cloud-Based Software Solutions';
+const description = 'Our flagship SaaS platform provides scalable, secure, and user-friendly software-as-a-service solutions for businesses.';
 const structuredData = {
   type: 'service',
   data: {
@@ -22,149 +24,248 @@ const structuredData = {
 };
 ---
 
-<Layout title={title} description={description} structuredData={structuredData}>
-  <Service data={structuredData.data} />
+<Layout title={title} description={description}>
+  <!-- Breadcrumb Navigation -->
+  <Breadcrumb 
+    items={[
+      { name: "Home", url: "https://easoftlab.com", position: 1 },
+      { name: "Products", url: "https://easoftlab.com/products", position: 2 },
+      { name: "SaaS Platform", url: "https://easoftlab.com/products/saas-platform", position: 3 }
+    ]} 
+  />
   
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl font-bold mb-6">SaaS Platform</h1>
-        <p class="text-xl mb-8">Enterprise-grade software solution for modern businesses</p>
-        <p class="text-lg mb-8">Scalable, secure, and customizable SaaS platform designed to streamline your business operations.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#features" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
-            Explore Features
-          </a>
-          <a href="/contact" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
-            Get Demo
-          </a>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+                  <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          SaaS Platform
+        </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            Enterprise-grade software solution for modern businesses
+          </p>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            Scalable, secure, and customizable SaaS platform designed to streamline your business operations.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-800" data-lazy-animate>
+            <a href="#features" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25">
+              Explore Features
+            </a>
+            <a href="/contact" class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+              Get Demo
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Key Features -->
-  <section id="features" class="py-16">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Platform Features</h2>
+    <!-- Key Features -->
+    <div id="features" class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Platform Features</h2>
+          <p class="text-lg text-gray-300">Enterprise-grade capabilities for modern businesses</p>
+        </div>
+        
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-16 h-16 bg-primary-500/20 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Scalable Architecture</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Scalable Architecture</h3>
+            <p class="text-gray-300">
               Built with microservices architecture that scales with your business growth. Handle thousands of concurrent users.
             </p>
           </div>
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <div class="w-16 h-16 bg-green-600 rounded-lg flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-16 h-16 bg-primary-500/20 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Enterprise Security</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Enterprise Security</h3>
+            <p class="text-gray-300">
               Bank-level security with encryption, multi-factor authentication, and compliance with industry standards.
             </p>
           </div>
-          <div class="bg-white p-8 rounded-lg shadow-md">
-            <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mb-6">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-16 h-16 bg-primary-500/20 rounded-lg flex items-center justify-center mb-6">
+              <svg class="w-8 h-8 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Customizable Dashboard</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Customizable Dashboard</h3>
+            <p class="text-gray-300">
               Personalized dashboards with drag-and-drop widgets, real-time analytics, and customizable reports.
             </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Platform Overview -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Platform Overview</h2>
+    <!-- Platform Overview -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Platform Overview</h2>
+          <p class="text-lg text-gray-300">Comprehensive solution for enterprise needs</p>
+        </div>
+        
         <div class="grid md:grid-cols-2 gap-12">
-          <div>
-            <h3 class="text-2xl font-bold mb-6 text-gray-800">Core Modules</h3>
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <h3 class="text-2xl font-bold mb-6 text-white">Core Modules</h3>
             <div class="space-y-4">
               <div class="flex items-start">
-                <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <span class="text-white font-bold text-sm">1</span>
+                <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                 </div>
                 <div>
-                  <h4 class="font-bold text-gray-800 mb-2">User Management</h4>
-                  <p class="text-gray-600">Comprehensive user authentication, role-based access control, and team management.</p>
+                  <h4 class="text-lg font-semibold text-white mb-2">User Management</h4>
+                  <p class="text-gray-300">Comprehensive user authentication, authorization, and role-based access control.</p>
                 </div>
               </div>
               <div class="flex items-start">
-                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <span class="text-white font-bold text-sm">2</span>
+                <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                 </div>
                 <div>
-                  <h4 class="font-bold text-gray-800 mb-2">Data Analytics</h4>
-                  <p class="text-gray-600">Advanced analytics and reporting tools with customizable dashboards.</p>
+                  <h4 class="text-lg font-semibold text-white mb-2">Analytics & Reporting</h4>
+                  <p class="text-gray-300">Advanced analytics, custom reports, and real-time data visualization.</p>
                 </div>
               </div>
               <div class="flex items-start">
-                <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mr-4 mt-1">
-                  <span class="text-white font-bold text-sm">3</span>
+                <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
                 </div>
                 <div>
-                  <h4 class="font-bold text-gray-800 mb-2">API Integration</h4>
-                  <p class="text-gray-600">RESTful APIs and webhook support for seamless integration.</p>
+                  <h4 class="text-lg font-semibold text-white mb-2">API Integration</h4>
+                  <p class="text-gray-300">RESTful APIs with comprehensive documentation and SDK support.</p>
                 </div>
               </div>
             </div>
           </div>
-          <div>
-            <h3 class="text-2xl font-bold mb-6 text-gray-800">Technical Stack</h3>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h4 class="font-bold text-gray-800 mb-2">Frontend</h4>
-                <ul class="text-sm text-gray-600 space-y-1">
-                  <li>• React.js</li>
-                  <li>• TypeScript</li>
-                  <li>• Tailwind CSS</li>
-                </ul>
+          
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <h3 class="text-2xl font-bold mb-6 text-white">Advanced Features</h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-2">Multi-tenancy</h4>
+                  <p class="text-gray-300">Isolated tenant environments with customizable branding and configurations.</p>
+                </div>
               </div>
-              <div class="bg-white p-4 rounded-lg shadow-sm">
-                <h4 class="font-bold text-gray-800 mb-2">Backend</h4>
-                <ul class="text-sm text-gray-600 space-y-1">
-                  <li>• Node.js</li>
-                  <li>• Express.js</li>
-                  <li>• PostgreSQL</li>
-                </ul>
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-2">Workflow Automation</h4>
+                  <p class="text-gray-300">Custom workflow builder with conditional logic and approval processes.</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-primary-500/20 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="text-lg font-semibold text-white mb-2">Real-time Collaboration</h4>
+                  <p class="text-gray-300">Live collaboration features with real-time updates and team communication.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CTA Section -->
-  <section class="py-16 bg-blue-600 text-white">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
-      <p class="text-xl mb-8">Start your SaaS platform journey with EA Soft Lab today.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
-          Get Started
-        </a>
-        <a href="/contact" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
-          Request Demo
-        </a>
+    <!-- Technology Stack -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Technology Stack</h2>
+          <p class="text-lg text-gray-300">Built with modern, scalable technologies</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2">Frontend</h3>
+            <p class="text-gray-300 text-sm">React, Next.js, TypeScript</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2">Backend</h3>
+            <p class="text-gray-300 text-sm">Node.js, Express, GraphQL</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2">Database</h3>
+            <p class="text-gray-300 text-sm">PostgreSQL, Redis, MongoDB</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-white mb-2">Cloud</h3>
+            <p class="text-gray-300 text-sm">AWS, Docker, Kubernetes</p>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
+          <p class="text-xl text-gray-300 mb-8">Get started with our enterprise SaaS platform and streamline your operations.</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25">
+              Get Started
+            </a>
+            <a href="/contact" class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+              Request Demo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout> 

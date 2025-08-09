@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import HowToGuide from '../../components/HowToGuide.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 const pageData = {
   title: "How to Optimize Your Website for SEO in 2025",
@@ -105,70 +106,85 @@ const howToData = {
   structuredData={pageData.structuredData}
   type="article"
 >
-  <div class="min-h-screen bg-gray-50">
+  <!-- Breadcrumb Navigation -->
+  <Breadcrumb 
+    items={[
+      { name: "Home", url: "https://easoftlab.com", position: 1 },
+      { name: "Blog", url: "https://easoftlab.com/blog", position: 2 },
+      { name: "SEO Guide", url: "https://easoftlab.com/blog/how-to-optimize-website-seo", position: 3 }
+    ]} 
+  />
+  
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-          <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full text-sm font-medium mb-4 inline-block">
-            How-To Guide
-          </span>
-          <h1 class="text-4xl font-bold mb-6">How to Optimize Your Website for SEO in 2025</h1>
-          <p class="text-xl mb-8 max-w-3xl mx-auto">
+          <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8 shadow-lg opacity-0 transition-all duration-1000 ease-out" data-lazy-animate>
+            <span class="text-white/80 text-sm font-medium">How-To Guide</span>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            How to Optimize Your Website for SEO in 2025
+          </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
             Complete step-by-step guide to optimize your website for search engines and improve your rankings in 2025.
           </p>
-          <div class="flex flex-wrap justify-center gap-4">
-            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Technical SEO</span>
-            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Content Optimization</span>
-            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Mobile SEO</span>
-            <span class="bg-white bg-opacity-20 px-4 py-2 rounded-full">Performance</span>
+          <div class="flex flex-wrap justify-center gap-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            <span class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white">Technical SEO</span>
+            <span class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white">Content Optimization</span>
+            <span class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white">Mobile SEO</span>
+            <span class="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full text-white">Performance</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- Breadcrumb -->
-    <nav class="bg-white border-b">
+    <div class="relative z-10" data-lazy-load>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center space-x-2 py-4 text-sm">
-          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
-          <span class="text-gray-400">/</span>
-          <a href="/blog" class="text-gray-500 hover:text-gray-700">Blog</a>
-          <span class="text-gray-400">/</span>
-          <a href="/blog/seo" class="text-gray-500 hover:text-gray-700">SEO</a>
-          <span class="text-gray-400">/</span>
-          <span class="text-gray-900 font-medium">How to Optimize Website SEO</span>
-        </div>
+        <nav class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <div class="flex items-center space-x-2 text-sm">
+            <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+            <span class="text-gray-400">/</span>
+            <a href="/blog" class="text-gray-300 hover:text-white transition-colors">Blog</a>
+            <span class="text-gray-400">/</span>
+            <a href="/blog/seo" class="text-gray-300 hover:text-white transition-colors">SEO</a>
+            <span class="text-gray-400">/</span>
+            <span class="text-white font-medium">How to Optimize Website SEO</span>
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
 
     <!-- Main Content -->
-    <section class="py-16">
+    <div class="py-16 relative z-10" data-lazy-load>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <!-- Main Content -->
-          <div class="lg:col-span-2">
+          <div class="lg:col-span-2 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
             <HowToGuide {...howToData} />
             
             <!-- Additional Resources -->
-            <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
-              <h2 class="text-2xl font-bold text-gray-900 mb-6">Additional Resources</h2>
+            <div class="mt-12 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 shadow-lg">
+              <h2 class="text-2xl font-bold text-white mb-6">Additional Resources</h2>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-gray-50 p-6 rounded-lg">
-                  <h3 class="text-lg font-semibold text-gray-900 mb-3">Related Articles</h3>
+                <div class="bg-white/10 p-6 rounded-lg">
+                  <h3 class="text-lg font-semibold text-white mb-3">Related Articles</h3>
                   <ul class="space-y-2">
-                    <li><a href="/blog/technical-seo-guide" class="text-blue-600 hover:text-blue-700">Technical SEO Complete Guide</a></li>
-                    <li><a href="/blog/content-marketing-strategy" class="text-blue-600 hover:text-blue-700">Content Marketing Strategy</a></li>
-                    <li><a href="/blog/mobile-seo-optimization" class="text-blue-600 hover:text-blue-700">Mobile SEO Optimization</a></li>
+                    <li><a href="/blog/technical-seo-guide" class="text-primary-400 hover:text-primary-300 transition-colors">Technical SEO Complete Guide</a></li>
+                    <li><a href="/blog/content-marketing-strategy" class="text-primary-400 hover:text-primary-300 transition-colors">Content Marketing Strategy</a></li>
+                    <li><a href="/blog/mobile-seo-optimization" class="text-primary-400 hover:text-primary-300 transition-colors">Mobile SEO Optimization</a></li>
                   </ul>
                 </div>
                 
-                <div class="bg-gray-50 p-6 rounded-lg">
-                  <h3 class="text-lg font-semibold text-gray-900 mb-3">SEO Services</h3>
+                <div class="bg-white/10 p-6 rounded-lg">
+                  <h3 class="text-lg font-semibold text-white mb-3">SEO Services</h3>
                   <ul class="space-y-2">
-                    <li><a href="/services/web-development" class="text-blue-600 hover:text-blue-700">Web Development</a></li>
-                    <li><a href="/services/mobile-development" class="text-blue-600 hover:text-blue-700">Mobile Development</a></li>
-                    <li><a href="/contact" class="text-blue-600 hover:text-blue-700">SEO Consultation</a></li>
+                    <li><a href="/services/web-development" class="text-primary-400 hover:text-primary-300 transition-colors">Web Development</a></li>
+                    <li><a href="/services/mobile-development" class="text-primary-400 hover:text-primary-300 transition-colors">Mobile Development</a></li>
+                    <li><a href="/contact" class="text-primary-400 hover:text-primary-300 transition-colors">SEO Consultation</a></li>
                   </ul>
                 </div>
               </div>
@@ -176,66 +192,49 @@ const howToData = {
           </div>
 
           <!-- Sidebar -->
-          <div class="lg:col-span-1">
-            <!-- Table of Contents -->
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8 sticky top-4">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Table of Contents</h3>
-              <nav class="space-y-2">
-                {howToData.steps.map((step, index) => (
-                  <a 
-                    href={`#step-${index + 1}`}
-                    class="block text-blue-600 hover:text-blue-700 py-2 text-sm"
-                  >
-                    {index + 1}. {step.name}
-                  </a>
-                ))}
-              </nav>
-            </div>
-
-            <!-- Quick Stats -->
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h3>
-              <div class="space-y-3">
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Time Required:</span>
-                  <span class="font-medium">{howToData.totalTime}</span>
+          <div class="lg:col-span-1 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 shadow-lg sticky top-24">
+              <h3 class="text-lg font-semibold text-white mb-4">Article Info</h3>
+              <div class="space-y-4 text-sm">
+                <div>
+                  <span class="text-gray-400">Reading Time:</span>
+                  <span class="text-white ml-2">{howToData.totalTime}</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Difficulty:</span>
-                  <span class="font-medium">{howToData.difficulty}</span>
+                <div>
+                  <span class="text-gray-400">Difficulty:</span>
+                  <span class="text-white ml-2">{howToData.difficulty}</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Tools Needed:</span>
-                  <span class="font-medium">{howToData.tools.length}</span>
+                <div>
+                  <span class="text-gray-400">Category:</span>
+                  <span class="text-white ml-2">{howToData.category}</span>
                 </div>
-                <div class="flex justify-between">
-                  <span class="text-gray-600">Steps:</span>
-                  <span class="font-medium">{howToData.steps.length}</span>
+                <div>
+                  <span class="text-gray-400">Published:</span>
+                  <span class="text-white ml-2">{new Date(howToData.datePublished).toLocaleDateString()}</span>
                 </div>
               </div>
-            </div>
-
-            <!-- Related Topics -->
-            <div class="bg-white rounded-lg shadow-md p-6">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Related Topics</h3>
-              <div class="space-y-2">
-                <a href="/blog/web-development" class="block text-blue-600 hover:text-blue-700 py-2">
-                  Web Development
-                </a>
-                <a href="/blog/digital-marketing" class="block text-blue-600 hover:text-blue-700 py-2">
-                  Digital Marketing
-                </a>
-                <a href="/blog/content-strategy" class="block text-blue-600 hover:text-blue-700 py-2">
-                  Content Strategy
-                </a>
-                <a href="/blog/analytics" class="block text-blue-600 hover:text-blue-700 py-2">
-                  Analytics & Tracking
-                </a>
+              
+              <div class="mt-6 pt-6 border-t border-white/10">
+                <h4 class="text-white font-semibold mb-3">Tools Needed</h4>
+                <ul class="space-y-2">
+                  {howToData.tools.map(tool => (
+                    <li class="text-gray-300 text-sm">• {tool}</li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div class="mt-6 pt-6 border-t border-white/10">
+                <h4 class="text-white font-semibold mb-3">Materials</h4>
+                <ul class="space-y-2">
+                  {howToData.materials.map(material => (
+                    <li class="text-gray-300 text-sm">• {material}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </div>
 </Layout> 

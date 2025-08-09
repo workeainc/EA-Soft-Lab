@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import { getPosts, getLatestPosts } from '../lib/queries.js';
 
 // Fetch CMS data
@@ -85,157 +86,170 @@ const description = "Expert insights on software development, digital transforma
   type="website"
   keywords={["software development blog", "technology insights", "digital transformation", "web development tips", "mobile app development", "AI software development"]}
 >
-  <!-- Hero Section -->
-  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Software Development
-          <span class="text-primary-600">Insights & Trends</span>
-        </h1>
-        <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-          Expert analysis, best practices, and industry insights from our team of software development professionals. 
-          Stay ahead of the curve with our comprehensive guides and real-world case studies.
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb 
+      items={[
+        { name: "Home", url: "https://easoftlab.com", position: 1 },
+        { name: "Blog", url: "https://easoftlab.com/blog", position: 2 }
+      ]} 
+    />
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            Software Development
+            <span class="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient">Insights & Trends</span>
+          </h1>
+          <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            Expert analysis, best practices, and industry insights from our team of software development professionals. 
+            Stay ahead of the curve with our comprehensive guides and real-world case studies.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            <a href="#featured-posts" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow">
+              Read Latest Posts
+            </a>
+            <a href="/contact" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg animate-bounce-slow animation-delay-200">
+              Get Expert Consultation
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Posts -->
+    <div id="featured-posts" class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">Featured Articles</h2>
+          <p class="text-lg text-gray-300">Expert insights and industry analysis</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredPosts.map((post, index) => (
+            <article class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style={`animation-delay: ${index * 100}ms`}>
+              <div class="aspect-w-16 aspect-h-9 bg-gray-700 rounded-lg overflow-hidden">
+                <img 
+                  src={post.featuredImage || "/images/blog/placeholder.jpg"} 
+                  alt={post.title}
+                  class="w-full h-48 object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <div class="flex items-center mb-3">
+                  <span class="text-sm text-primary-400 font-medium">
+                    {post.categories?.[0]?.title || "Technology"}
+                  </span>
+                  <span class="mx-2 text-gray-500">•</span>
+                  <span class="text-sm text-gray-400">
+                    {new Date(post.publishedAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-3 line-clamp-2">
+                  {post.title}
+                </h3>
+                <p class="text-gray-300 mb-4 line-clamp-3">
+                  {post.excerpt}
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center">
+                      <span class="text-white font-semibold text-sm">
+                        {post.author?.name?.charAt(0) || "E"}
+                      </span>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-sm font-medium text-white">{post.author?.name || "EA Soft Lab Team"}</p>
+                      <p class="text-xs text-gray-400">{post.author?.role || "Software Development Expert"}</p>
+                    </div>
+                  </div>
+                  <span class="text-sm text-gray-400">{post.readingTime} min read</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- All Posts -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">All Articles</h2>
+          <p class="text-lg text-gray-300">Comprehensive insights and guides</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogPosts.map((post, index) => (
+            <article class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style={`animation-delay: ${index * 100}ms`}>
+              <div class="aspect-w-16 aspect-h-9 bg-gray-700 rounded-lg overflow-hidden">
+                <img 
+                  src={post.featuredImage || "/images/blog/placeholder.jpg"} 
+                  alt={post.title}
+                  class="w-full h-48 object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <div class="flex items-center mb-3">
+                  <span class="text-sm text-primary-400 font-medium">
+                    {post.categories?.[0]?.title || "Technology"}
+                  </span>
+                  <span class="mx-2 text-gray-500">•</span>
+                  <span class="text-sm text-gray-400">
+                    {new Date(post.publishedAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-3 line-clamp-2">
+                  {post.title}
+                </h3>
+                <p class="text-gray-300 mb-4 line-clamp-3">
+                  {post.excerpt}
+                </p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center">
+                      <span class="text-white font-semibold text-sm">
+                        {post.author?.name?.charAt(0) || "E"}
+                      </span>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-sm font-medium text-white">{post.author?.name || "EA Soft Lab Team"}</p>
+                      <p class="text-xs text-gray-400">{post.author?.role || "Software Development Expert"}</p>
+                    </div>
+                  </div>
+                  <span class="text-sm text-gray-400">{post.readingTime} min read</span>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>Ready to Transform Your Business?</h2>
+        <p class="text-xl text-gray-300 mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          Get expert consultation and start your digital transformation journey today.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#featured-posts" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200">
-            Read Latest Posts
+        <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+          <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow">
+            Get Free Consultation
           </a>
-          <a href="/contact" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200">
-            Get Expert Consultation
+          <a href="/services" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg animate-bounce-slow animation-delay-200">
+            View Our Services
           </a>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Featured Posts -->
-  <section id="featured-posts" class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Featured Articles</h2>
-        <p class="text-lg text-gray-600">Expert insights and industry analysis</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {featuredPosts.map((post) => (
-          <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-              <img 
-                src={post.featuredImage || "/images/blog/placeholder.jpg"} 
-                alt={post.title}
-                class="w-full h-48 object-cover"
-              />
-            </div>
-            <div class="p-6">
-              <div class="flex items-center mb-3">
-                <span class="text-sm text-primary-600 font-medium">
-                  {post.categories?.[0]?.title || "Technology"}
-                </span>
-                <span class="mx-2 text-gray-400">•</span>
-                <span class="text-sm text-gray-500">
-                  {new Date(post.publishedAt).toLocaleDateString()}
-                </span>
-              </div>
-              <h3 class="text-xl font-semibold text-gray-900 mb-3 line-clamp-2">
-                {post.title}
-              </h3>
-              <p class="text-gray-600 mb-4 line-clamp-3">
-                {post.excerpt}
-              </p>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                  <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-                    <span class="text-primary-600 font-semibold text-sm">
-                      {post.author?.name?.charAt(0) || "E"}
-                    </span>
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-sm font-medium text-gray-900">{post.author?.name || "EA Soft Lab Team"}</p>
-                    <p class="text-xs text-gray-500">{post.author?.role || "Software Development Expert"}</p>
-                  </div>
-                </div>
-                <span class="text-sm text-gray-500">{post.readingTime} min read</span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- All Posts -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">All Articles</h2>
-        <p class="text-lg text-gray-600">Comprehensive insights and guides</p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogPosts.map((post) => (
-          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div class="aspect-w-16 aspect-h-9 bg-gray-200">
-              <img 
-                src={post.featuredImage || "/images/blog/placeholder.jpg"} 
-                alt={post.title}
-                class="w-full h-48 object-cover"
-              />
-            </div>
-            <div class="p-6">
-              <div class="flex items-center mb-3">
-                <span class="text-sm text-primary-600 font-medium">
-                  {post.categories?.[0]?.title || "Technology"}
-                </span>
-                <span class="mx-2 text-gray-400">•</span>
-                <span class="text-sm text-gray-500">
-                  {new Date(post.publishedAt).toLocaleDateString()}
-                </span>
-              </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-3 line-clamp-2">
-                {post.title}
-              </h3>
-              <p class="text-gray-600 mb-4 line-clamp-3">
-                {post.excerpt}
-              </p>
-              <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                  <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-                    <span class="text-primary-600 font-semibold text-sm">
-                      {post.author?.name?.charAt(0) || "E"}
-                    </span>
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-sm font-medium text-gray-900">{post.author?.name || "EA Soft Lab Team"}</p>
-                    <p class="text-xs text-gray-500">{post.author?.role || "Software Development Expert"}</p>
-                  </div>
-                </div>
-                <span class="text-sm text-gray-500">{post.readingTime} min read</span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-16 bg-primary-600">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-white mb-4">Ready to Transform Your Business?</h2>
-      <p class="text-xl text-primary-100 mb-8">
-        Get expert consultation and start your digital transformation journey today.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors duration-200">
-          Get Free Consultation
-        </a>
-        <a href="/services" class="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-3 rounded-lg font-medium transition-colors duration-200">
-          View Our Services
-        </a>
-      </div>
-    </div>
-  </section>
+  </div>
 </Layout>
 
 <!-- Blog Schema -->

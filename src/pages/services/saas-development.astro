@@ -1,165 +1,405 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCompanyInfo } from '../../lib/queries.js';
-import SanityImage from '../../components/SanityImage.astro';
-
-// Fetch company info for dynamic content
-const companyInfo = await getCompanyInfo();
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 // SEO metadata
-const title = 'SaaS Development | EA Soft Lab - Software as a Service Solutions';
-const description = 'Professional SaaS development services. We build scalable, cloud-based software solutions with subscription models, multi-tenancy, and enterprise features.';
-
-// Structured data for this service
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "SaaS Development",
-  "description": "Professional SaaS development services. We build scalable, cloud-based software solutions with subscription models, multi-tenancy, and enterprise features.",
-  "url": "https://easoftlab.com/services/saas-development",
-  "provider": {
-    "@type": "Organization",
-    "name": "EA Soft Lab",
-    "url": "https://easoftlab.com"
-  },
-  "areaServed": ["Worldwide"],
-  "serviceType": ["SaaS Development", "Cloud Software"],
-  "offers": {
-    "@type": "Offer",
-    "availability": "https://schema.org/InStock"
-  }
-};
+const title = 'SaaS Development Services | EA Soft Lab - Cloud-Based Solutions';
+const description = 'Professional SaaS development services. Create scalable, secure, and user-friendly software-as-a-service applications.';
 ---
 
-<Layout 
-  title={title} 
-  description={description}
-  structuredData={{
-    type: 'service',
-    data: structuredData
-  }}
->
-  <!-- Hero Section -->
-  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Professional 
-            <span class="text-primary-600">SaaS Development</span>
-            Services
+<Layout title={title} description={description}>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb 
+      items={[
+        { name: "Home", url: "https://easoftlab.com", position: 1 },
+        { name: "Services", url: "https://easoftlab.com/services", position: 2 },
+        { name: "SaaS Development", url: "https://easoftlab.com/services/saas-development", position: 3 }
+      ]} 
+    />
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            SaaS Development
           </h1>
-          <p class="text-xl text-gray-600 mb-8">
-            We build scalable, cloud-based software solutions with subscription models, multi-tenancy, and enterprise features that drive recurring revenue.
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            Build scalable, subscription-based software solutions that generate recurring revenue and drive business growth
           </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/contact" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
-              Get Started
-            </a>
-            <a href="/portfolio" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 text-center">
-              View Projects
-            </a>
-          </div>
         </div>
-        <div class="relative">
-          <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-8 shadow-2xl">
-            <div class="bg-white rounded-xl p-6 shadow-lg">
-              <div class="flex items-center space-x-3 mb-4">
-                <div class="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <div class="space-y-3">
-                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
-                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
-                <div class="h-4 bg-gray-200 rounded w-5/6"></div>
-                <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+      </div>
+    </div>
+
+    <!-- Services Overview -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <h2 class="text-3xl font-bold text-white mb-6">SaaS Solutions</h2>
+            <p class="text-lg text-gray-300 mb-6">
+              We develop comprehensive SaaS platforms that provide value to users while generating sustainable recurring revenue. Our solutions are built for scale, security, and user experience.
+            </p>
+            <ul class="space-y-3 text-gray-300">
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Multi-tenant Architecture
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Subscription Management
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Payment Integration
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Analytics & Reporting
+              </li>
+            </ul>
+          </div>
+
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8">
+              <h3 class="text-2xl font-bold text-white mb-4">Key Features</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/10 rounded-lg p-4">
+                  <h4 class="text-white font-semibold mb-2">Core Features</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• User Management</li>
+                    <li>• Role-based Access</li>
+                    <li>• API Integration</li>
+                    <li>• Real-time Updates</li>
+                  </ul>
+                </div>
+                <div class="bg-white/10 rounded-lg p-4">
+                  <h4 class="text-white font-semibold mb-2">Business Features</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• Billing & Payments</li>
+                    <li>• Usage Analytics</li>
+                    <li>• Customer Support</li>
+                    <li>• White-label Options</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Services Overview -->
-  <section class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">What We Offer</h2>
-        <p class="text-lg text-gray-600">Comprehensive SaaS development solutions for modern businesses</p>
-      </div>
-
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Multi-Tenant Architecture -->
-        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Multi-Tenant Architecture</h3>
-          <p class="text-gray-600 mb-4">Scalable multi-tenant architecture that efficiently serves multiple customers with data isolation and security.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li>• Tenant Isolation</li>
-            <li>• Data Security</li>
-            <li>• Scalable Infrastructure</li>
-            <li>• Resource Optimization</li>
-          </ul>
+    <!-- Development Services -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">Our Development Services</h2>
+          <p class="text-lg text-gray-300">Comprehensive SaaS solutions</p>
         </div>
 
-        <!-- Subscription Management -->
-        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-            </svg>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Multi-tenant Architecture</h3>
+            <p class="text-gray-300 mb-4">Scalable architecture that supports multiple customers with data isolation and security.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Data Isolation</li>
+              <li>• Resource Sharing</li>
+              <li>• Custom Branding</li>
+              <li>• Scalable Infrastructure</li>
+            </ul>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Subscription Management</h3>
-          <p class="text-gray-600 mb-4">Complete subscription billing and management systems with flexible pricing models and payment processing.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li>• Billing Systems</li>
-            <li>• Payment Processing</li>
-            <li>• Usage Tracking</li>
-            <li>• Revenue Analytics</li>
-          </ul>
-        </div>
 
-        <!-- Cloud Infrastructure -->
-        <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
-          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
-            </svg>
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Subscription Management</h3>
+            <p class="text-gray-300 mb-4">Comprehensive subscription handling with flexible billing models and plan management.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Plan Management</li>
+              <li>• Usage Tracking</li>
+              <li>• Upgrade/Downgrade</li>
+              <li>• Trial Periods</li>
+            </ul>
           </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Cloud Infrastructure</h3>
-          <p class="text-gray-600 mb-4">Robust cloud infrastructure with auto-scaling, monitoring, and high availability for your SaaS application.</p>
-          <ul class="space-y-2 text-sm text-gray-600">
-            <li>• Auto-Scaling</li>
-            <li>• Load Balancing</li>
-            <li>• Monitoring & Alerts</li>
-            <li>• Disaster Recovery</li>
-          </ul>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Payment Integration</h3>
+            <p class="text-gray-300 mb-4">Secure payment processing with multiple payment gateways and automated billing.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Stripe Integration</li>
+              <li>• PayPal Support</li>
+              <li>• Automated Billing</li>
+              <li>• Invoice Generation</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Analytics & Reporting</h3>
+            <p class="text-gray-300 mb-4">Comprehensive analytics and reporting tools for business insights and user behavior.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Usage Analytics</li>
+              <li>• Revenue Reports</li>
+              <li>• User Behavior</li>
+              <li>• Performance Metrics</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1000ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">API Development</h3>
+            <p class="text-gray-300 mb-4">Robust API development for third-party integrations and mobile applications.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• RESTful APIs</li>
+              <li>• GraphQL Support</li>
+              <li>• API Documentation</li>
+              <li>• Rate Limiting</li>
+            </ul>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 1200ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Security & Compliance</h3>
+            <p class="text-gray-300 mb-4">Enterprise-grade security and compliance features for data protection.</p>
+            <ul class="space-y-1 text-sm text-gray-300">
+              <li>• Data Encryption</li>
+              <li>• GDPR Compliance</li>
+              <li>• SOC 2 Certification</li>
+              <li>• Regular Audits</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CTA Section -->
-  <section class="py-16 bg-primary-600">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-white mb-4">Ready to Build Your SaaS Platform?</h2>
-      <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-        Let's create a scalable SaaS solution that generates recurring revenue and serves your customers effectively
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/contact" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200">
-          Get a Quote
-        </a>
-        <a href="/portfolio" class="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-primary-600 transition-colors duration-200">
-          View Our Work
-        </a>
+    <!-- Benefits -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">Why Choose Our SaaS Development?</h2>
+          <p class="text-lg text-gray-300">Scalable solutions that drive recurring revenue</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Recurring Revenue</h3>
+            <p class="text-gray-300">Predictable revenue streams through subscription-based business models</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Scalable Growth</h3>
+            <p class="text-gray-300">Architecture designed to handle growth and increasing user demands</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 109.75 9.75A9.75 9.75 0 0012 2.25z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Global Reach</h3>
+            <p class="text-gray-300">Cloud-based solutions accessible from anywhere in the world</p>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>Ready to Build Your SaaS Platform?</h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          Let's create a scalable SaaS solution that generates recurring revenue and drives business growth
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+          <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow">
+            Start Your Project
+          </a>
+          <a href="/portfolio" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg animate-bounce-slow animation-delay-200">
+            View Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="py-16 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+            Get answers to common questions about our SaaS development services
+          </p>
+        </div>
+        
+        <div class="grid gap-6 max-w-4xl mx-auto">
+          {[
+            {
+              question: "What is the typical timeline for SaaS development?",
+              answer: "SaaS development typically takes 6-12 months depending on complexity. This includes MVP development, testing, launch, and initial iterations. We use agile methodologies to deliver working features incrementally and gather user feedback early."
+            },
+            {
+              question: "How do you handle SaaS scalability and performance?",
+              answer: "We build SaaS applications with scalability in mind using cloud-native architectures, microservices, auto-scaling, and performance optimization. We also implement monitoring and analytics to track performance and user behavior."
+            },
+            {
+              question: "What about SaaS security and compliance?",
+              answer: "We implement enterprise-grade security including data encryption, secure authentication, regular security audits, and compliance with industry standards (SOC 2, GDPR, HIPAA, etc.). We also provide security documentation and certifications."
+            },
+            {
+              question: "Do you help with SaaS pricing and monetization strategies?",
+              answer: "Yes, we help design subscription models, pricing tiers, payment integration, and monetization strategies. We also implement analytics to track user behavior and optimize pricing based on usage patterns."
+            },
+            {
+              question: "How do you handle SaaS updates and maintenance?",
+              answer: "We provide continuous deployment, automated testing, and regular updates. We also offer 24/7 monitoring, backup systems, and disaster recovery to ensure your SaaS platform runs smoothly with minimal downtime."
+            },
+            {
+              question: "Can you integrate with existing business systems?",
+              answer: "Absolutely! We specialize in integrating SaaS platforms with existing business systems including CRM, ERP, accounting software, and third-party APIs. This ensures seamless data flow and operational efficiency."
+            }
+          ].map((faq, index) => (
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+              <button 
+                class="w-full text-left flex justify-between items-center"
+                onclick={`toggleFAQ(${index})`}
+                aria-expanded="false"
+              >
+                <h3 class="text-lg font-semibold text-white pr-4">{faq.question}</h3>
+                <svg class="w-5 h-5 text-primary-400 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div id={`faq-answer-${index}`} class="hidden mt-4">
+                <p class="text-gray-300 leading-relaxed">{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the typical timeline for SaaS development?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SaaS development typically takes 6-12 months depending on complexity. This includes MVP development, testing, launch, and initial iterations. We use agile methodologies to deliver working features incrementally and gather user feedback early."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle SaaS scalability and performance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We build SaaS applications with scalability in mind using cloud-native architectures, microservices, auto-scaling, and performance optimization. We also implement monitoring and analytics to track performance and user behavior."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What about SaaS security and compliance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We implement enterprise-grade security including data encryption, secure authentication, regular security audits, and compliance with industry standards (SOC 2, GDPR, HIPAA, etc.). We also provide security documentation and certifications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you help with SaaS pricing and monetization strategies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we help design subscription models, pricing tiers, payment integration, and monetization strategies. We also implement analytics to track user behavior and optimize pricing based on usage patterns."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you handle SaaS updates and maintenance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide continuous deployment, automated testing, and regular updates. We also offer 24/7 monitoring, backup systems, and disaster recovery to ensure your SaaS platform runs smoothly with minimal downtime."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you integrate with existing business systems?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely! We specialize in integrating SaaS platforms with existing business systems including CRM, ERP, accounting software, and third-party APIs. This ensures seamless data flow and operational efficiency."
+          }
+        }
+      ]
+    })} />
+
+    <script>
+      function toggleFAQ(index) {
+        const button = event.target.closest('button');
+        const answer = document.getElementById(`faq-answer-${index}`);
+        const icon = button.querySelector('svg');
+        
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        
+        // Toggle visibility
+        answer.classList.toggle('hidden');
+        button.setAttribute('aria-expanded', !isExpanded);
+        
+        // Rotate icon
+        icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        
+        // Track FAQ interactions
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'faq_interaction', {
+            event_category: 'FAQ',
+            event_label: button.querySelector('h3').textContent,
+            value: isExpanded ? 0 : 1
+          });
+        }
+      }
+    </script>
+
+  </div>
 </Layout> 

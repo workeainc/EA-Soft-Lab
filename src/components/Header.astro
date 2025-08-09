@@ -52,16 +52,16 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+<header class="fixed top-0 left-0 right-0 z-[9999] bg-secondary-950/80 backdrop-blur-md border-b border-secondary-800/50 shadow-lg" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 9999 !important; width: 100% !important; display: block !important; visibility: visible !important; opacity: 1 !important;">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="/" class="flex items-center space-x-2">
-          <div class="w-8 h-8 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
+          <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg flex items-center justify-center shadow-lg">
             <span class="text-white font-bold text-sm">EA</span>
           </div>
-          <span class="text-xl font-bold text-gray-900">EA Soft Lab</span>
+          <span class="text-xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">EA Soft Lab</span>
         </a>
       </div>
 
@@ -71,7 +71,7 @@ const navItems = [
           <div class="relative group">
             <a
               href={item.href}
-              class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
+              class="text-secondary-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
             >
               {item.label}
               {item.dropdown && (
@@ -82,12 +82,12 @@ const navItems = [
             </a>
             
             {item.dropdown && (
-              <div class="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <div class="absolute top-full left-0 mt-1 w-64 bg-secondary-800/95 backdrop-blur-md border border-secondary-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[999999]" style="z-index: 999999 !important; position: absolute !important;">
                 <div class="py-2">
                   {item.dropdown.map((dropdownItem) => (
                     <a
                       href={dropdownItem.href}
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors duration-200"
+                      class="block px-4 py-2 text-sm text-secondary-300 hover:bg-secondary-700/50 hover:text-white transition-colors duration-200"
                     >
                       {dropdownItem.label}
                     </a>
@@ -103,7 +103,7 @@ const navItems = [
       <div class="hidden lg:block">
         <a
           href="/contact"
-          class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
+          class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
         >
           Get Started
         </a>
@@ -113,7 +113,7 @@ const navItems = [
       <div class="lg:hidden">
         <button
           id="mobile-menu-button"
-          class="text-gray-700 hover:text-primary-600 p-2"
+          class="text-secondary-300 hover:text-white p-2"
           aria-label="Toggle mobile menu"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,12 +125,12 @@ const navItems = [
 
     <!-- Mobile Navigation -->
     <div id="mobile-menu" class="hidden lg:hidden">
-      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-secondary-700/50">
         {navItems.map((item) => (
           <div class="space-y-1">
             <a
               href={item.href}
-              class="text-gray-700 hover:text-primary-600 block px-3 py-2 text-base font-medium transition-colors duration-200"
+              class="text-secondary-300 hover:text-white block px-3 py-2 text-base font-medium transition-colors duration-200"
             >
               {item.label}
             </a>
@@ -139,7 +139,7 @@ const navItems = [
                 {item.dropdown.map((dropdownItem) => (
                   <a
                     href={dropdownItem.href}
-                    class="text-gray-600 hover:text-primary-600 block px-3 py-1 text-sm transition-colors duration-200"
+                    class="text-secondary-400 hover:text-white block px-3 py-1 text-sm transition-colors duration-200"
                   >
                     {dropdownItem.label}
                   </a>
@@ -150,7 +150,7 @@ const navItems = [
         ))}
         <a
           href="/contact"
-          class="bg-primary-600 hover:bg-primary-700 text-white block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 mt-4"
+          class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white block px-3 py-2 rounded-lg text-base font-medium transition-all duration-200 mt-4 shadow-lg"
         >
           Get Started
         </a>
@@ -160,21 +160,47 @@ const navItems = [
 </header>
 
 <script>
-  // Mobile menu toggle
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
+  // Ensure header always stays visible
+  function ensureHeaderVisible() {
+    const header = document.querySelector('header');
+    if (header) {
+      header.style.position = 'fixed';
+      header.style.top = '0';
+      header.style.left = '0';
+      header.style.right = '0';
+      header.style.zIndex = '9999';
+      header.style.display = 'block';
+      header.style.visibility = 'visible';
+      header.style.opacity = '1';
+      header.style.width = '100%';
+      header.style.pointerEvents = 'auto';
+    }
+  }
 
-  if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+  // Ensure dropdowns are always on top
+  function ensureDropdownsOnTop() {
+    const dropdowns = document.querySelectorAll('header nav div[class*="absolute"]');
+    dropdowns.forEach(dropdown => {
+      dropdown.style.zIndex = '999999';
+      dropdown.style.position = 'absolute';
+      dropdown.style.pointerEvents = 'auto';
     });
   }
 
-  // Close mobile menu when clicking on a link
-  const mobileLinks = mobileMenu?.querySelectorAll('a');
-  mobileLinks?.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-    });
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    ensureHeaderVisible();
+    ensureDropdownsOnTop();
   });
+
+  // Run on window load
+  window.addEventListener('load', function() {
+    ensureHeaderVisible();
+    ensureDropdownsOnTop();
+  });
+
+  // Run periodically to ensure dropdowns stay on top
+  setInterval(function() {
+    ensureDropdownsOnTop();
+  }, 100);
 </script> 

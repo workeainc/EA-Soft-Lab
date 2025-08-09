@@ -1,5 +1,5 @@
 ---
-// Simple studio access page
+// Simple studio access page with consistent dark theme
 ---
 
 <!DOCTYPE html>
@@ -11,39 +11,92 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f5f5f5;
+            background-color: hsl(230, 30%, 5%);
+            background-image: 
+                radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%),
+                radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            color: white;
         }
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             text-align: center;
             max-width: 500px;
+            transition: all 0.3s ease;
+        }
+        .container:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
         }
         .button {
-            background: #3498db;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             color: white;
             padding: 12px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             margin: 10px;
             text-decoration: none;
             display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
         .button:hover {
-            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+        .button.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+        }
+        .button.secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         .success {
-            color: #27ae60;
+            color: #10b981;
             font-weight: bold;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(12px);
+        }
+        .tip {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+        h1 {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        ol {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        ol li {
+            margin-bottom: 0.5rem;
+        }
+        strong {
+            color: white;
         }
     </style>
 </head>
@@ -51,23 +104,23 @@
     <div class="container">
         <h1>🎨 EA Soft Lab CMS</h1>
         <p class="success">✅ Sanity Studio is ready!</p>
-        <p>Choose how you want to access your content management system:</p>
+        <p style="color: rgba(255, 255, 255, 0.8);">Choose how you want to access your content management system:</p>
         
         <div style="margin: 2rem 0;">
-            <a href="http://localhost:3333" class="button" target="_blank" style="background: #27ae60; font-size: 18px; padding: 15px 30px;">
+            <a href="http://localhost:3333" class="button" target="_blank" style="font-size: 18px; padding: 15px 30px;">
                 🚀 Open Studio (Recommended)
             </a>
         </div>
         
         <div style="margin: 2rem 0;">
-            <a href="https://easoftlab.sanity.studio" class="button" target="_blank" style="background: #95a5a6;">
+            <a href="https://easoftlab.sanity.studio" class="button secondary" target="_blank">
                 🌐 Web Studio (Coming Soon)
             </a>
         </div>
         
-        <div style="margin-top: 2rem; padding: 1rem; background: #f8f9fa; border-radius: 4px;">
-            <h3>📋 Quick Instructions:</h3>
-            <ol style="text-align: left;">
+        <div class="info-box">
+            <h3 style="color: white; margin-bottom: 1rem;">📋 Quick Instructions:</h3>
+            <ol>
                 <li><strong>Recommended Studio:</strong> Click "Open Studio" to access your CMS locally</li>
                 <li><strong>Login:</strong> Use your Sanity account to log in</li>
                 <li><strong>Start Managing:</strong> Create and edit your content!</li>
@@ -75,7 +128,7 @@
             </ol>
         </div>
         
-        <div style="margin-top: 2rem; font-size: 14px; color: #666;">
+        <div class="tip">
             <p>💡 <strong>Tip:</strong> The local studio is running and ready to use. Web studio deployment may take a few minutes.</p>
         </div>
     </div>

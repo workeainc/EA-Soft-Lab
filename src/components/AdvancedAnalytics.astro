@@ -1,0 +1,610 @@
+---
+// Advanced Analytics Component
+// Provides comprehensive analytics dashboard with real-time data
+
+interface AnalyticsData {
+  pageViews: number
+  uniqueVisitors: number
+  bounceRate: number
+  avgSessionDuration: number
+  conversionRate: number
+  topPages: Array<{
+    url: string
+    views: number
+    conversions: number
+    bounceRate: number
+  }>
+  userBehavior: {
+    deviceBreakdown: Array<{device: string, percentage: number}>
+    trafficSources: Array<{source: string, percentage: number}>
+    userJourney: Array<{step: string, dropoff: number}>
+  }
+  conversions: {
+    total: number
+    byType: Array<{type: string, count: number, value: number}>
+    funnel: Array<{stage: string, visitors: number, conversion: number}>
+  }
+  heatmap: {
+    clicks: Array<{x: number, y: number, count: number}>
+    scrollDepth: Array<{depth: number, percentage: number}>
+    mouseMovement: Array<{x: number, y: number, duration: number}>
+  }
+}
+
+// Mock data for demonstration
+const analyticsData: AnalyticsData = {
+  pageViews: 15420,
+  uniqueVisitors: 8920,
+  bounceRate: 32.5,
+  avgSessionDuration: 245,
+  conversionRate: 4.8,
+  topPages: [
+    {url: '/', views: 5420, conversions: 156, bounceRate: 28.5},
+    {url: '/services', views: 3240, conversions: 89, bounceRate: 35.2},
+    {url: '/contact', views: 2890, conversions: 234, bounceRate: 22.1},
+    {url: '/about', views: 1870, conversions: 45, bounceRate: 41.3},
+    {url: '/blog', views: 2000, conversions: 67, bounceRate: 38.7}
+  ],
+  userBehavior: {
+    deviceBreakdown: [
+      {device: 'Desktop', percentage: 45},
+      {device: 'Mobile', percentage: 42},
+      {device: 'Tablet', percentage: 13}
+    ],
+    trafficSources: [
+      {source: 'Organic Search', percentage: 52},
+      {source: 'Direct', percentage: 28},
+      {source: 'Social Media', percentage: 12},
+      {source: 'Referral', percentage: 8}
+    ],
+    userJourney: [
+      {step: 'Homepage', dropoff: 0},
+      {step: 'Services', dropoff: 15},
+      {step: 'Contact', dropoff: 25},
+      {step: 'Conversion', dropoff: 35}
+    ]
+  },
+  conversions: {
+    total: 591,
+    byType: [
+      {type: 'Contact Form', count: 234, value: 46800},
+      {type: 'Phone Call', count: 156, value: 31200},
+      {type: 'Email Signup', count: 89, value: 8900},
+      {type: 'Download', count: 67, value: 6700},
+      {type: 'Appointment', count: 45, value: 9000}
+    ],
+    funnel: [
+      {stage: 'Visitors', visitors: 8920, conversion: 100},
+      {stage: 'Engaged', visitors: 6030, conversion: 67.6},
+      {stage: 'Interested', visitors: 3240, conversion: 36.3},
+      {stage: 'Converted', visitors: 591, conversion: 6.6}
+    ]
+  },
+  heatmap: {
+    clicks: [
+      {x: 150, y: 200, count: 45},
+      {x: 300, y: 250, count: 32},
+      {x: 450, y: 180, count: 28},
+      {x: 200, y: 350, count: 23},
+      {x: 400, y: 400, count: 19}
+    ],
+    scrollDepth: [
+      {depth: 25, percentage: 85},
+      {depth: 50, percentage: 65},
+      {depth: 75, percentage: 45},
+      {depth: 100, percentage: 25}
+    ],
+    mouseMovement: [
+      {x: 200, y: 150, duration: 2.5},
+      {x: 350, y: 200, duration: 1.8},
+      {x: 500, y: 250, duration: 3.2}
+    ]
+  }
+};
+---
+
+<div class="advanced-analytics bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 mb-8">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold text-white flex items-center gap-3">
+      <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+      </svg>
+      Advanced Analytics Dashboard
+    </h2>
+    <div class="flex gap-2">
+      <button class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all duration-300 text-sm">
+        Export Report
+      </button>
+      <button class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all duration-300 text-sm">
+        Refresh Data
+      </button>
+    </div>
+  </div>
+
+  <!-- Key Metrics -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Page Views</p>
+          <p class="text-2xl font-bold text-white">{analyticsData.pageViews.toLocaleString()}</p>
+        </div>
+        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Unique Visitors</p>
+          <p class="text-2xl font-bold text-white">{analyticsData.uniqueVisitors.toLocaleString()}</p>
+        </div>
+        <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Bounce Rate</p>
+          <p class="text-2xl font-bold text-white">{analyticsData.bounceRate}%</p>
+        </div>
+        <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Avg Session</p>
+          <p class="text-2xl font-bold text-white">{Math.floor(analyticsData.avgSessionDuration / 60)}m {analyticsData.avgSessionDuration % 60}s</p>
+        </div>
+        <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Conversion Rate</p>
+          <p class="text-2xl font-bold text-white">{analyticsData.conversionRate}%</p>
+        </div>
+        <div class="w-12 h-12 bg-red-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Pages Performance -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-white mb-4">Top Performing Pages</h3>
+      <div class="space-y-3">
+        {analyticsData.topPages.map((page, index) => (
+          <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-400 w-6">#{index + 1}</span>
+              <div>
+                <p class="text-white font-medium">{page.url}</p>
+                <p class="text-sm text-gray-400">{page.views.toLocaleString()} views</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-white font-medium">{page.conversions}</p>
+              <p class="text-sm text-gray-400">{page.bounceRate}% bounce</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Conversion Funnel -->
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-white mb-4">Conversion Funnel</h3>
+      <div class="space-y-3">
+        {analyticsData.conversions.funnel.map((stage, index) => (
+          <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+            <div class="flex items-center gap-3">
+              <span class="text-sm text-gray-400 w-6">#{index + 1}</span>
+              <div>
+                <p class="text-white font-medium">{stage.stage}</p>
+                <p class="text-sm text-gray-400">{stage.visitors.toLocaleString()} visitors</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-white font-medium">{stage.conversion}%</p>
+              <div class="w-20 h-2 bg-gray-700 rounded-full overflow-hidden">
+                <div class="h-full bg-primary-500 rounded-full" style={`width: ${stage.conversion}%`}></div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- User Behavior Analysis -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <!-- Device Breakdown -->
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-white mb-4">Device Breakdown</h3>
+      <div class="space-y-3">
+        {analyticsData.userBehavior.deviceBreakdown.map((device) => (
+          <div class="flex items-center justify-between">
+            <span class="text-white">{device.device}</span>
+            <div class="flex items-center gap-2">
+              <div class="w-20 h-2 bg-gray-700 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-500 rounded-full" style={`width: ${device.percentage}%`}></div>
+              </div>
+              <span class="text-sm text-gray-400 w-8">{device.percentage}%</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Traffic Sources -->
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-white mb-4">Traffic Sources</h3>
+      <div class="space-y-3">
+        {analyticsData.userBehavior.trafficSources.map((source) => (
+          <div class="flex items-center justify-between">
+            <span class="text-white">{source.source}</span>
+            <div class="flex items-center gap-2">
+              <div class="w-20 h-2 bg-gray-700 rounded-full overflow-hidden">
+                <div class="h-full bg-green-500 rounded-full" style={`width: ${source.percentage}%`}></div>
+              </div>
+              <span class="text-sm text-gray-400 w-8">{source.percentage}%</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- User Journey -->
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+      <h3 class="text-lg font-semibold text-white mb-4">User Journey</h3>
+      <div class="space-y-3">
+        {analyticsData.userBehavior.userJourney.map((step) => (
+          <div class="flex items-center justify-between">
+            <span class="text-white">{step.step}</span>
+            <div class="flex items-center gap-2">
+              <div class="w-20 h-2 bg-gray-700 rounded-full overflow-hidden">
+                <div class="h-full bg-purple-500 rounded-full" style={`width: ${100 - step.dropoff}%`}></div>
+              </div>
+              <span class="text-sm text-gray-400 w-8">{step.dropoff}%</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Conversion Types -->
+  <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 mb-8">
+    <h3 class="text-lg font-semibold text-white mb-4">Conversion Types</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      {analyticsData.conversions.byType.map((conversion) => (
+        <div class="bg-white/5 rounded-lg p-4 text-center">
+          <p class="text-2xl font-bold text-white">{conversion.count}</p>
+          <p class="text-sm text-gray-400 mb-2">{conversion.type}</p>
+          <p class="text-sm text-primary-400">${conversion.value.toLocaleString()}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Heatmap Preview -->
+  <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+    <h3 class="text-lg font-semibold text-white mb-4">Heatmap Analysis</h3>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Click Heatmap -->
+      <div>
+        <h4 class="text-white font-medium mb-3">Click Distribution</h4>
+        <div class="relative w-full h-32 bg-gray-800 rounded-lg overflow-hidden">
+          {analyticsData.heatmap.clicks.map((click) => (
+            <div 
+              class="absolute w-3 h-3 bg-red-500 rounded-full opacity-75"
+              style={`left: ${click.x}px; top: ${click.y}px; transform: scale(${click.count / 10})`}
+              title={`${click.count} clicks`}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Scroll Depth -->
+      <div>
+        <h4 class="text-white font-medium mb-3">Scroll Depth</h4>
+        <div class="space-y-2">
+          {analyticsData.heatmap.scrollDepth.map((depth) => (
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-gray-400">{depth.depth}%</span>
+              <div class="flex-1 mx-2">
+                <div class="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-500 rounded-full" style={`width: ${depth.percentage}%`}></div>
+                </div>
+              </div>
+              <span class="text-sm text-white">{depth.percentage}%</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Mouse Movement -->
+      <div>
+        <h4 class="text-white font-medium mb-3">Mouse Movement</h4>
+        <div class="relative w-full h-32 bg-gray-800 rounded-lg overflow-hidden">
+          {analyticsData.heatmap.mouseMovement.map((movement, index) => (
+            <div 
+              class="absolute w-2 h-2 bg-yellow-400 rounded-full"
+              style={`left: ${movement.x}px; top: ${movement.y}px; animation: pulse ${movement.duration}s infinite`}
+              title={`${movement.duration}s duration`}
+            ></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+</style>
+
+<script>
+  // Advanced Analytics JavaScript
+  class AdvancedAnalytics {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      this.setupRealTimeTracking();
+      this.setupConversionTracking();
+      this.setupHeatmapTracking();
+      this.setupABTesting();
+    }
+
+    setupRealTimeTracking() {
+      // Real-time page view tracking
+      this.trackPageView();
+      
+      // User behavior tracking
+      this.trackUserBehavior();
+      
+      // Performance monitoring
+      this.trackPerformance();
+    }
+
+    trackPageView() {
+      const pageData = {
+        url: window.location.href,
+        title: document.title,
+        timestamp: new Date().toISOString(),
+        referrer: document.referrer,
+        userAgent: navigator.userAgent
+      };
+
+      // Send to analytics API
+      this.sendAnalyticsData('pageview', pageData);
+    }
+
+    trackUserBehavior() {
+      // Track clicks
+      document.addEventListener('click', (e) => {
+        const clickData = {
+          x: e.clientX,
+          y: e.clientY,
+          element: e.target.tagName,
+          text: e.target.textContent?.substring(0, 50),
+          timestamp: new Date().toISOString()
+        };
+        this.sendAnalyticsData('click', clickData);
+      });
+
+      // Track scroll depth
+      let maxScroll = 0;
+      window.addEventListener('scroll', () => {
+        const scrollDepth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        if (scrollDepth > maxScroll) {
+          maxScroll = scrollDepth;
+          this.sendAnalyticsData('scroll', { depth: maxScroll });
+        }
+      });
+
+      // Track mouse movement
+      let mouseData = [];
+      document.addEventListener('mousemove', (e) => {
+        mouseData.push({ x: e.clientX, y: e.clientY, timestamp: Date.now() });
+        
+        if (mouseData.length > 10) {
+          this.sendAnalyticsData('mousemove', { movements: mouseData });
+          mouseData = [];
+        }
+      });
+    }
+
+    trackPerformance() {
+      // Core Web Vitals
+      if ('PerformanceObserver' in window) {
+        const observer = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            this.sendAnalyticsData('performance', {
+              name: entry.name,
+              value: entry.value,
+              type: entry.entryType
+            });
+          }
+        });
+        observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+      }
+    }
+
+    setupConversionTracking() {
+      // Track form submissions
+      document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', (e) => {
+          this.sendAnalyticsData('conversion', {
+            type: 'form_submission',
+            form: form.action,
+            timestamp: new Date().toISOString()
+          });
+        });
+      });
+
+      // Track phone clicks
+      document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', () => {
+          this.sendAnalyticsData('conversion', {
+            type: 'phone_call',
+            number: link.href,
+            timestamp: new Date().toISOString()
+          });
+        });
+      });
+
+      // Track email clicks
+      document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+        link.addEventListener('click', () => {
+          this.sendAnalyticsData('conversion', {
+            type: 'email_click',
+            email: link.href,
+            timestamp: new Date().toISOString()
+          });
+        });
+      });
+    }
+
+    setupHeatmapTracking() {
+      // Heatmap data collection
+      this.collectHeatmapData();
+    }
+
+    setupABTesting() {
+      // A/B testing framework
+      this.initABTesting();
+    }
+
+    collectHeatmapData() {
+      // Collect click heatmap data
+      document.addEventListener('click', (e) => {
+        const heatmapData = {
+          x: e.clientX,
+          y: e.clientY,
+          element: e.target.tagName,
+          page: window.location.pathname,
+          timestamp: new Date().toISOString()
+        };
+        
+        // Store in localStorage for batch processing
+        this.storeHeatmapData(heatmapData);
+      });
+    }
+
+    storeHeatmapData(data) {
+      let heatmapData = JSON.parse(localStorage.getItem('heatmapData') || '[]');
+      heatmapData.push(data);
+      
+      // Keep only last 100 entries
+      if (heatmapData.length > 100) {
+        heatmapData = heatmapData.slice(-100);
+      }
+      
+      localStorage.setItem('heatmapData', JSON.stringify(heatmapData));
+    }
+
+    initABTesting() {
+      // Simple A/B testing implementation
+      const testVariants = {
+        'hero-button': ['primary', 'secondary'],
+        'cta-text': ['Get Started', 'Learn More', 'Contact Us']
+      };
+
+      // Assign variant based on user ID
+      const userId = this.getUserId();
+      Object.keys(testVariants).forEach(testName => {
+        const variantIndex = userId % testVariants[testName].length;
+        const variant = testVariants[testName][variantIndex];
+        
+        // Apply variant
+        this.applyABTestVariant(testName, variant);
+      });
+    }
+
+    getUserId() {
+      let userId = localStorage.getItem('analytics_user_id');
+      if (!userId) {
+        userId = Math.floor(Math.random() * 1000000);
+        localStorage.setItem('analytics_user_id', userId);
+      }
+      return parseInt(userId);
+    }
+
+    applyABTestVariant(testName, variant) {
+      // Apply A/B test variant to DOM
+      const elements = document.querySelectorAll(`[data-ab-test="${testName}"]`);
+      elements.forEach(element => {
+        if (testName === 'hero-button') {
+          element.className = `btn btn-${variant}`;
+        } else if (testName === 'cta-text') {
+          element.textContent = variant;
+        }
+      });
+    }
+
+    sendAnalyticsData(type, data) {
+      // Send analytics data to API
+      fetch('/api/analytics', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type,
+          data,
+          timestamp: new Date().toISOString(),
+          sessionId: this.getSessionId()
+        })
+      }).catch(error => {
+        console.log('Analytics data sent:', { type, data });
+      });
+    }
+
+    getSessionId() {
+      let sessionId = sessionStorage.getItem('analytics_session_id');
+      if (!sessionId) {
+        sessionId = Math.random().toString(36).substring(2, 15);
+        sessionStorage.setItem('analytics_session_id', sessionId);
+      }
+      return sessionId;
+    }
+  }
+
+  // Initialize Advanced Analytics
+  document.addEventListener('DOMContentLoaded', () => {
+    new AdvancedAnalytics();
+  });
+</script>

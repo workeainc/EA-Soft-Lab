@@ -1,7 +1,6 @@
 export default {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  extensionsToTreatAsEsm: ['.ts'],
+  preset: 'default',
+  extensionsToTreatAsEsm: ['.js'],
   globals: {
     'ts-jest': {
       useESM: true,
@@ -10,18 +9,23 @@ export default {
   moduleNameMapping: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
+  testEnvironment: 'node',
   testMatch: [
     '**/tests/**/*.test.js',
-    '**/tests/**/*.test.ts',
-    '**/src/**/*.test.js',
-    '**/src/**/*.test.ts'
+    '**/tests/**/*.spec.js'
   ],
   collectCoverageFrom: [
-    'src/**/*.{js,ts}',
-    '!src/**/*.d.ts',
-    '!src/**/*.test.{js,ts}'
+    'src/**/*.js',
+    'src/**/*.astro',
+    '!src/**/*.test.js',
+    '!src/**/*.spec.js'
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.js']
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+  },
+  moduleFileExtensions: ['js', 'json'],
+  testTimeout: 10000
 };

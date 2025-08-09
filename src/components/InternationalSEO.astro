@@ -1,0 +1,301 @@
+---
+// International SEO Component
+// Implements localized versions with region-specific schema
+
+export interface Props {
+  currentLocale: string;
+  availableLocales: string[];
+  region: string;
+  currency: string;
+  timezone: string;
+  phoneNumber: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    country: string;
+  };
+  businessHours?: string;
+  socialMedia?: {
+    facebook?: string;
+    twitter?: string;
+    linkedin?: string;
+    instagram?: string;
+  };
+}
+
+const {
+  currentLocale = 'en',
+  availableLocales = ['en', 'es', 'fr', 'de'],
+  region = 'US',
+  currency = 'USD',
+  timezone = 'America/New_York',
+  phoneNumber = '+1-555-123-4567',
+  address = {
+    street: '123 Tech Street',
+    city: 'San Francisco',
+    state: 'CA',
+    postalCode: '94105',
+    country: 'US'
+  },
+  businessHours = 'Monday-Friday: 9:00 AM - 6:00 PM PST',
+  socialMedia = {}
+} = Astro.props;
+
+// Generate hreflang links
+const hreflangLinks = availableLocales.map(locale => {
+  const url = new URL(Astro.url);
+  url.pathname = locale === 'en' ? '/' : `/${locale}${url.pathname}`;
+  return { locale, url: url.toString() };
+});
+
+// Generate region-specific schema
+const regionSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "EA Soft Lab",
+  "url": "https://easoftlab.com",
+  "logo": "https://easoftlab.com/logo.png",
+  "description": "Leading software development company specializing in custom solutions, web development, mobile apps, and AI-powered applications.",
+  "telephone": phoneNumber,
+  "email": "contact@easoftlab.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": address.street,
+    "addressLocality": address.city,
+    "addressRegion": address.state,
+    "postalCode": address.postalCode,
+    "addressCountry": address.country
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "37.7749",
+    "longitude": "-122.4194"
+  },
+  "openingHours": businessHours,
+  "priceRange": "$$",
+  "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
+  "currenciesAccepted": currency,
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Software Development Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Software Development",
+          "description": "Tailored software solutions for businesses"
+        },
+        "priceCurrency": currency,
+        "price": "Contact for quote"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Web Development",
+          "description": "Modern web applications and responsive websites"
+        },
+        "priceCurrency": currency,
+        "price": "Contact for quote"
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Mobile App Development",
+          "description": "iOS and Android mobile applications"
+        },
+        "priceCurrency": currency,
+        "price": "Contact for quote"
+      }
+    ]
+  },
+  "sameAs": Object.values(socialMedia).filter(Boolean)
+};
+
+// Generate language-specific content
+const languageContent = {
+  en: {
+    title: "EA Soft Lab - Software Development Services",
+    description: "Leading software development company specializing in custom solutions, web development, mobile apps, and AI-powered applications.",
+    cta: "Get Started",
+    contact: "Contact Us"
+  },
+  es: {
+    title: "EA Soft Lab - Servicios de Desarrollo de Software",
+    description: "Empresa líder en desarrollo de software especializada en soluciones personalizadas, desarrollo web, aplicaciones móviles y aplicaciones impulsadas por IA.",
+    cta: "Comenzar",
+    contact: "Contáctenos"
+  },
+  fr: {
+    title: "EA Soft Lab - Services de Développement Logiciel",
+    description: "Entreprise leader de développement logiciel spécialisée dans les solutions personnalisées, le développement web, les applications mobiles et les applications alimentées par l'IA.",
+    cta: "Commencer",
+    contact: "Contactez-nous"
+  },
+  de: {
+    title: "EA Soft Lab - Softwareentwicklungsdienstleistungen",
+    description: "Führendes Softwareentwicklungsunternehmen, spezialisiert auf maßgeschneiderte Lösungen, Webentwicklung, mobile Apps und KI-gestützte Anwendungen.",
+    cta: "Loslegen",
+    contact: "Kontaktieren Sie uns"
+  }
+};
+
+const content = languageContent[currentLocale] || languageContent.en;
+---
+
+<!-- International SEO Implementation -->
+
+<!-- Hreflang tags for language targeting -->
+{availableLocales.map(({ locale, url }) => (
+  <link rel="alternate" hreflang={locale} href={url} />
+))}
+<link rel="alternate" hreflang="x-default" href={hreflangLinks.find(l => l.locale === 'en')?.url || Astro.url.href} />
+
+<!-- Language-specific meta tags -->
+<meta name="language" content={currentLocale} />
+<meta name="geo.region" content={region} />
+<meta name="geo.placename" content={address.city} />
+<meta name="geo.position" content="37.7749;-122.4194" />
+<meta name="ICBM" content="37.7749, -122.4194" />
+
+<!-- Currency and timezone information -->
+<meta name="currency" content={currency} />
+<meta name="timezone" content={timezone} />
+
+<!-- Region-specific Open Graph tags -->
+<meta property="og:locale" content={currentLocale} />
+<meta property="og:locale:alternate" content={availableLocales.filter(l => l !== currentLocale).join(', ')} />
+
+<!-- Region-specific structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(regionSchema)}></script>
+
+<!-- Additional region-specific schema -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "EA Soft Lab",
+  "url": "https://easoftlab.com",
+  "logo": "https://easoftlab.com/logo.png",
+  "description": content.description,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": address.street,
+    "addressLocality": address.city,
+    "addressRegion": address.state,
+    "postalCode": address.postalCode,
+    "addressCountry": address.country
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": phoneNumber,
+    "contactType": "customer service",
+    "email": "contact@easoftlab.com",
+    "availableLanguage": availableLocales.map(locale => ({
+      "@type": "Language",
+      "name": locale === 'en' ? 'English' : 
+              locale === 'es' ? 'Spanish' : 
+              locale === 'fr' ? 'French' : 'German'
+    }))
+  },
+  "sameAs": Object.values(socialMedia).filter(Boolean)
+})}></script>
+
+<!-- Language switcher component -->
+<div class="language-switcher">
+  <select onchange="window.location.href=this.value" class="lang-select">
+    {availableLocales.map(locale => {
+      const url = new URL(Astro.url);
+      url.pathname = locale === 'en' ? '/' : `/${locale}${url.pathname}`;
+      return (
+        <option value={url.toString()} selected={locale === currentLocale}>
+          {locale === 'en' ? 'English' : 
+           locale === 'es' ? 'Español' : 
+           locale === 'fr' ? 'Français' : 'Deutsch'}
+        </option>
+      );
+    })}
+  </select>
+</div>
+
+<!-- Region-specific content -->
+<div class="region-info">
+  <div class="contact-info">
+    <h3>{content.contact}</h3>
+    <p>📞 {phoneNumber}</p>
+    <p>📍 {address.street}, {address.city}, {address.state} {address.postalCode}</p>
+    <p>🕒 {businessHours}</p>
+    <p>💱 {currency}</p>
+  </div>
+</div>
+
+<style>
+  .language-switcher {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .lang-select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .region-info {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .contact-info h3 {
+    color: var(--primary-400);
+    margin-bottom: 15px;
+  }
+  
+  .contact-info p {
+    margin: 8px 0;
+    color: #e5e7eb;
+  }
+</style>
+
+<script>
+  // Track language switching
+  document.querySelector('.lang-select')?.addEventListener('change', function() {
+    if (window.gtag) {
+      gtag('event', 'language_switch', {
+        event_category: 'International SEO',
+        event_label: this.value,
+        value: 1
+      });
+    }
+  });
+  
+  // Auto-detect user's preferred language
+  const userLanguage = navigator.language || navigator.userLanguage;
+  const preferredLocale = userLanguage.split('-')[0];
+  
+  // Redirect to preferred language if available
+  if (preferredLocale !== '${currentLocale}' && ['en', 'es', 'fr', 'de'].includes(preferredLocale)) {
+    const currentPath = window.location.pathname;
+    const newPath = preferredLocale === 'en' ? currentPath : `/${preferredLocale}${currentPath}`;
+    
+    // Only redirect if not already on the preferred language
+    if (window.location.pathname !== newPath) {
+      window.location.href = newPath;
+    }
+  }
+</script>

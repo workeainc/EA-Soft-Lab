@@ -1,0 +1,65 @@
+---
+import Layout from './Layout.astro';
+import ThemeWrapper from '../components/ThemeWrapper.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL;
+  type?: 'website' | 'article' | 'service' | 'organization';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+  tags?: string[];
+  keywords?: string[];
+  canonical?: string;
+  noindex?: boolean;
+  nofollow?: boolean;
+  structuredData?: {
+    type: 'organization' | 'website' | 'service' | 'contact' | 'article' | 'faq' | 'breadcrumb';
+    data: any;
+  };
+  showThemeBackground?: boolean;
+  showThemeAnimations?: boolean;
+}
+
+const {
+  showThemeBackground = true,
+  showThemeAnimations = true,
+  ...layoutProps
+} = Astro.props;
+---
+
+<Layout {...layoutProps}>
+  <ThemeWrapper 
+    showBackground={showThemeBackground}
+    showAnimations={showThemeAnimations}
+  >
+    <slot />
+  </ThemeWrapper>
+</Layout>
+
+<style>
+  /* Ensure proper spacing for themed pages */
+  :global(body) {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Ensure header stays on top */
+  :global(header) {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9999 !important;
+  }
+  
+  /* Ensure footer stays at bottom */
+  :global(footer) {
+    position: relative;
+    z-index: 10;
+  }
+</style>

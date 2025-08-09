@@ -1,0 +1,241 @@
+---
+// Performance Optimization Component
+// Implements priority hints, preloads, and advanced loading strategies
+
+export interface Props {
+  criticalCSS?: boolean;
+  preloadFonts?: boolean;
+  preloadImages?: string[];
+  preconnectDomains?: string[];
+  dnsPrefetch?: string[];
+  instantPage?: boolean;
+}
+
+const {
+  criticalCSS = true,
+  preloadFonts = true,
+  preloadImages = [],
+  preconnectDomains = [
+    'https://www.google-analytics.com',
+    'https://www.googletagmanager.com',
+    'https://api.sanity.io',
+    'https://fonts.googleapis.com',
+    'https://fonts.gstatic.com'
+  ],
+  dnsPrefetch = [
+    'https://www.google-analytics.com',
+    'https://www.googletagmanager.com',
+    'https://api.sanity.io'
+  ],
+  instantPage = true
+} = Astro.props;
+---
+
+<!-- Performance Optimization Head Tags -->
+
+<!-- DNS Prefetch for faster connections -->
+{dnsPrefetch.map(domain => (
+  <link rel="dns-prefetch" href={domain} />
+))}
+
+<!-- Preconnect to external domains -->
+{preconnectDomains.map(domain => (
+  <link rel="preconnect" href={domain} crossorigin />
+))}
+
+<!-- Preload critical fonts -->
+{preloadFonts && (
+  <>
+    <link 
+      rel="preload" 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
+      as="style" 
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link 
+        rel="stylesheet" 
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
+      />
+    </noscript>
+  </>
+)}
+
+<!-- Preload critical images -->
+{preloadImages.map(image => (
+  <link rel="preload" href={image} as="image" type="image/webp" />
+))}
+
+<!-- Critical CSS inline -->
+{criticalCSS && (
+  <style>
+    /* Critical CSS for above-the-fold content */
+    :root {
+      --primary-500: #3b82f6;
+      --primary-600: #2563eb;
+      --accent-500: #8b5cf6;
+      --accent-600: #7c3aed;
+    }
+    
+    /* Optimize font loading */
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    
+    /* Critical layout styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: hsl(230, 30%, 5%);
+      color: white;
+      line-height: 1.6;
+    }
+    
+    /* Optimize images */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* Optimize animations */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+)}
+
+<!-- Instant.page for predictive preloading -->
+{instantPage && (
+  <script>
+    // Instant.page for predictive preloading
+    (function() {
+      let instant = document.createElement('script');
+      instant.src = 'https://instant.page/5.2.0';
+      instant.type = 'module';
+      document.head.appendChild(instant);
+    })();
+  </script>
+)}
+
+<!-- Resource hints for better performance -->
+<script>
+  // Resource hints for better performance
+  if ('connection' in navigator) {
+    if (navigator.connection.effectiveType === 'slow-2g' || 
+        navigator.connection.effectiveType === '2g') {
+      // Disable non-critical features on slow connections
+      document.documentElement.classList.add('slow-connection');
+    }
+  }
+  
+  // Preload critical resources
+  function preloadCriticalResources() {
+    const criticalResources = [
+      '/css/critical.css',
+      '/js/critical.js'
+    ];
+    
+    criticalResources.forEach(resource => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = resource;
+      link.as = resource.endsWith('.css') ? 'style' : 'script';
+      document.head.appendChild(link);
+    });
+  }
+  
+  // Execute when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', preloadCriticalResources);
+  } else {
+    preloadCriticalResources();
+  }
+  
+  // Optimize loading of non-critical resources
+  function loadNonCriticalResources() {
+    // Load non-critical CSS
+    const nonCriticalCSS = document.createElement('link');
+    nonCriticalCSS.rel = 'stylesheet';
+    nonCriticalCSS.href = '/css/non-critical.css';
+    nonCriticalCSS.media = 'print';
+    nonCriticalCSS.onload = function() {
+      this.media = 'all';
+    };
+    document.head.appendChild(nonCriticalCSS);
+    
+    // Load non-critical JS
+    const nonCriticalJS = document.createElement('script');
+    nonCriticalJS.src = '/js/non-critical.js';
+    nonCriticalJS.async = true;
+    document.head.appendChild(nonCriticalJS);
+  }
+  
+  // Load non-critical resources after page load
+  window.addEventListener('load', loadNonCriticalResources);
+</script>
+
+<!-- Performance monitoring -->
+<script>
+  // Performance monitoring
+  if ('performance' in window) {
+    // Monitor Core Web Vitals
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.entryType === 'largest-contentful-paint') {
+          console.log('LCP:', entry.startTime);
+          if (window.gtag) {
+            gtag('event', 'web_vitals', {
+              event_category: 'Web Vitals',
+              event_label: 'LCP',
+              value: Math.round(entry.startTime)
+            });
+          }
+        }
+        
+        if (entry.entryType === 'first-input') {
+          console.log('FID:', entry.processingStart - entry.startTime);
+          if (window.gtag) {
+            gtag('event', 'web_vitals', {
+              event_category: 'Web Vitals',
+              event_label: 'FID',
+              value: Math.round(entry.processingStart - entry.startTime)
+            });
+          }
+        }
+      }
+    });
+    
+    observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input'] });
+    
+    // Monitor layout shifts
+    let clsValue = 0;
+    const clsObserver = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (!entry.hadRecentInput) {
+          clsValue += entry.value;
+          console.log('CLS:', clsValue);
+          if (window.gtag) {
+            gtag('event', 'web_vitals', {
+              event_category: 'Web Vitals',
+              event_label: 'CLS',
+              value: Math.round(clsValue * 1000) / 1000
+            });
+          }
+        }
+      }
+    });
+    
+    clsObserver.observe({ entryTypes: ['layout-shift'] });
+  }
+</script>

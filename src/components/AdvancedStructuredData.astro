@@ -1,0 +1,331 @@
+---
+// Advanced Structured Data Component
+// Includes SoftwareApplication, HowTo, Product, and other niche schema types
+
+export interface Props {
+  pageType?: 'software' | 'howto' | 'product' | 'service' | 'article' | 'organization';
+  title?: string;
+  description?: string;
+  url?: string;
+  image?: string;
+  author?: string;
+  datePublished?: string;
+  dateModified?: string;
+  softwareName?: string;
+  softwareVersion?: string;
+  softwareCategory?: string;
+  howToSteps?: Array<{name: string, text: string, url?: string}>;
+  productName?: string;
+  productDescription?: string;
+  productPrice?: string;
+  productCurrency?: string;
+  productAvailability?: string;
+  serviceType?: string;
+  serviceArea?: string;
+}
+
+const {
+  pageType = 'organization',
+  title,
+  description,
+  url,
+  image,
+  author,
+  datePublished,
+  dateModified,
+  softwareName,
+  softwareVersion,
+  softwareCategory,
+  howToSteps = [],
+  productName,
+  productDescription,
+  productPrice,
+  productCurrency = 'USD',
+  productAvailability = 'https://schema.org/InStock',
+  serviceType,
+  serviceArea
+} = Astro.props;
+
+// Base organization schema
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "EA Soft Lab",
+  "url": "https://easoftlab.com",
+  "logo": "https://easoftlab.com/logo.png",
+  "description": "Leading software development company specializing in custom solutions, web development, mobile apps, and AI-powered applications.",
+  "foundingDate": "2020",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Tech Street",
+    "addressLocality": "San Francisco",
+    "addressRegion": "CA",
+    "postalCode": "94105",
+    "addressCountry": "US"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-555-123-4567",
+    "contactType": "customer service",
+    "email": "contact@easoftlab.com"
+  },
+  "sameAs": [
+    "https://linkedin.com/company/ea-soft-lab",
+    "https://twitter.com/easoftlab",
+    "https://github.com/easoftlab"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Software Development Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Software Development",
+          "description": "Tailored software solutions for businesses"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Web Development",
+          "description": "Modern web applications and websites"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Mobile App Development",
+          "description": "iOS and Android mobile applications"
+        }
+      }
+    ]
+  }
+};
+
+// Software Application schema
+const softwareApplicationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": softwareName || "EA Soft Lab Development Platform",
+  "applicationCategory": softwareCategory || "BusinessApplication",
+  "operatingSystem": "Web Browser, iOS, Android",
+  "description": description || "Advanced software development platform for custom solutions",
+  "url": url || "https://easoftlab.com",
+  "author": {
+    "@type": "Organization",
+    "name": "EA Soft Lab"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "150"
+  }
+};
+
+// HowTo schema
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": title || "How to Optimize Website SEO",
+  "description": description || "Step-by-step guide to optimize your website for search engines",
+  "image": image || "https://easoftlab.com/images/seo-optimization.jpg",
+  "totalTime": "PT30M",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": "0"
+  },
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "Website"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "Google Analytics Account"
+    }
+  ],
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "Google Search Console"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "SEO Analysis Tools"
+    }
+  ],
+  "step": howToSteps.map((step, index) => ({
+    "@type": "HowToStep",
+    "position": index + 1,
+    "name": step.name,
+    "text": step.text,
+    "url": step.url
+  })),
+  "author": {
+    "@type": "Organization",
+    "name": "EA Soft Lab"
+  }
+};
+
+// Product schema for services
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": productName || "Custom Software Development Service",
+  "description": productDescription || "Professional software development services tailored to your business needs",
+  "brand": {
+    "@type": "Brand",
+    "name": "EA Soft Lab"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": productPrice || "Contact for quote",
+    "priceCurrency": productCurrency,
+    "availability": productAvailability,
+    "seller": {
+      "@type": "Organization",
+      "name": "EA Soft Lab"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "200"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "John Smith"
+      },
+      "reviewBody": "Excellent service and high-quality deliverables. Highly recommended!"
+    }
+  ]
+};
+
+// Service schema
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": title || "Software Development Services",
+  "description": description || "Comprehensive software development solutions including web, mobile, and custom applications",
+  "provider": {
+    "@type": "Organization",
+    "name": "EA Soft Lab"
+  },
+  "serviceType": serviceType || "Software Development",
+  "areaServed": serviceArea || "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Development Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Web Development",
+          "description": "Modern web applications and responsive websites"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Mobile Development",
+          "description": "iOS and Android mobile applications"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Software",
+          "description": "Tailored software solutions for specific business needs"
+        }
+      }
+    ]
+  }
+};
+
+// Article schema
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title || "Software Development Best Practices",
+  "description": description || "Comprehensive guide to modern software development practices",
+  "image": image || "https://easoftlab.com/images/software-development.jpg",
+  "author": {
+    "@type": "Organization",
+    "name": author || "EA Soft Lab"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EA Soft Lab",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://easoftlab.com/logo.png"
+    }
+  },
+  "datePublished": datePublished || new Date().toISOString(),
+  "dateModified": dateModified || new Date().toISOString(),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url || "https://easoftlab.com"
+  }
+};
+
+// Choose schema based on page type
+let schema;
+switch (pageType) {
+  case 'software':
+    schema = softwareApplicationSchema;
+    break;
+  case 'howto':
+    schema = howToSchema;
+    break;
+  case 'product':
+    schema = productSchema;
+    break;
+  case 'service':
+    schema = serviceSchema;
+    break;
+  case 'article':
+    schema = articleSchema;
+    break;
+  default:
+    schema = organizationSchema;
+}
+
+// Add Speakable schema for voice assistants
+const speakableSchema = {
+  "@context": "https://schema.org",
+  "@type": "SpeakableSpecification",
+  "cssSelector": ["h1", "h2", "h3", "p", "li"],
+  "xpath": ["//h1", "//h2", "//h3", "//p", "//li"]
+};
+---
+
+<!-- Advanced Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(speakableSchema)}></script>
+
+<!-- Additional meta tags for voice assistants -->
+<meta name="speakable" content="true" />
+<meta name="speakable-css-selector" content="h1, h2, h3, p, li" />

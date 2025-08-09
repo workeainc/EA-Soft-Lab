@@ -1,0 +1,106 @@
+---
+// ThemeElements Component - Reusable themed UI elements
+export interface Props {
+  type: 'card' | 'button' | 'input' | 'badge' | 'divider';
+  variant?: 'primary' | 'secondary';
+  class?: string;
+  href?: string;
+  target?: string;
+  placeholder?: string;
+  label?: string;
+  text?: string;
+}
+
+const { 
+  type,
+  variant = 'primary',
+  class: className = "",
+  href,
+  target,
+  placeholder,
+  label,
+  text
+} = Astro.props;
+---
+
+{type === 'card' && (
+  <div class:list={["theme-card", className]}>
+    <slot />
+  </div>
+)}
+
+{type === 'button' && variant === 'primary' && (
+  href ? (
+    <a href={href} target={target} class:list={["theme-btn-primary", className]}>
+      <slot />
+    </a>
+  ) : (
+    <button class:list={["theme-btn-primary", className]}>
+      <slot />
+    </button>
+  )
+)}
+
+{type === 'button' && variant === 'secondary' && (
+  href ? (
+    <a href={href} target={target} class:list={["theme-btn-secondary", className]}>
+      <slot />
+    </a>
+  ) : (
+    <button class:list={["theme-btn-secondary", className]}>
+      <slot />
+    </button>
+  )
+)}
+
+{type === 'input' && (
+  <div class="space-y-2">
+    {label && (
+      <label class="theme-text-secondary text-sm font-medium">
+        {label}
+      </label>
+    )}
+    <input 
+      type="text" 
+      placeholder={placeholder}
+      class:list={["theme-input w-full", className]}
+    />
+  </div>
+)}
+
+{type === 'badge' && (
+  <span class:list={["theme-badge", className]}>
+    {text || <slot />}
+  </span>
+)}
+
+{type === 'divider' && (
+  <div class:list={["theme-divider", className]}></div>
+)}
+
+<style>
+  /* Ensure proper spacing for theme elements */
+  .theme-card {
+    padding: 1.5rem;
+  }
+  
+  .theme-card + .theme-card {
+    margin-top: 1rem;
+  }
+  
+  /* Button group spacing */
+  .theme-btn-primary + .theme-btn-primary,
+  .theme-btn-secondary + .theme-btn-secondary {
+    margin-left: 0.5rem;
+  }
+  
+  /* Input group spacing */
+  .theme-input + .theme-input {
+    margin-top: 0.5rem;
+  }
+  
+  /* Badge group spacing */
+  .theme-badge + .theme-badge {
+    margin-left: 0.25rem;
+  }
+</style>

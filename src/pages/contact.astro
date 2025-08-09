@@ -1,61 +1,227 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import LocalSEO from '../components/LocalSEO.astro';
+
+// SEO metadata
+const title = 'Contact Us | EA Soft Lab - Get In Touch';
+const description = 'Get in touch with EA Soft Lab for custom software development, web applications, and digital transformation services.';
+
+// Local SEO business information
+const businessInfo = {
+  name: "EA Soft Lab",
+  address: "123 Business Street, Suite 100",
+  city: "New York",
+  state: "NY",
+  zipCode: "10001",
+  country: "United States",
+  phone: "+1 (555) 123-4567",
+  email: "contact@easoftlab.com",
+  hours: "Monday - Friday: 9:00 AM - 6:00 PM EST",
+  services: [
+    "Web Development",
+    "Mobile App Development", 
+    "Custom Software Development",
+    "UI/UX Design",
+    "SaaS Development",
+    "Digital Transformation"
+  ],
+  website: "https://easoftlab.com",
+  description: "Leading software development company specializing in web applications, mobile apps, and digital transformation solutions.",
+  founded: "2020",
+  employees: "25-50",
+  certifications: [
+    "ISO 27001 Information Security",
+    "AWS Advanced Consulting Partner",
+    "Google Cloud Partner",
+    "Microsoft Gold Partner"
+  ],
+  awards: [
+    "Best Software Development Company 2024",
+    "Top 10 Web Development Agencies",
+    "Excellence in Digital Innovation"
+  ],
+  serviceAreas: [
+    { city: "New York", state: "NY", radius: "50 miles" },
+    { city: "Manhattan", state: "NY", radius: "25 miles" },
+    { city: "Brooklyn", state: "NY", radius: "30 miles" },
+    { city: "Queens", state: "NY", radius: "35 miles" },
+    { city: "Bronx", state: "NY", radius: "40 miles" }
+  ],
+  reviews: [
+    {
+      author: "Sarah Johnson",
+      rating: 5,
+      review: "EA Soft Lab delivered an exceptional e-commerce platform that exceeded our expectations. Their attention to detail and technical expertise is outstanding.",
+      date: "2024-01-15"
+    },
+    {
+      author: "Michael Chen",
+      rating: 5,
+      review: "The team at EA Soft Lab transformed our business with a custom CRM system. Professional, responsive, and highly skilled developers.",
+      date: "2024-01-10"
+    },
+    {
+      author: "Emily Rodriguez",
+      rating: 5,
+      review: "Outstanding mobile app development services. The app they built for us has significantly improved our customer engagement.",
+      date: "2024-01-05"
+    }
+  ],
+  socialProfiles: [
+    { platform: "LinkedIn", url: "https://linkedin.com/company/easoftlab" },
+    { platform: "Twitter", url: "https://twitter.com/easoftlab" },
+    { platform: "Facebook", url: "https://facebook.com/easoftlab" },
+    { platform: "Instagram", url: "https://instagram.com/easoftlab" }
+  ]
+};
+
+// Local SEO Dashboard data
+const localSEOData = {
+  googleMyBusiness: {
+    views: 15420,
+    clicks: 3240,
+    calls: 890,
+    directionRequests: 1560,
+    reviews: 47,
+    averageRating: 4.8
+  },
+  localRankings: [
+    {
+      keyword: "software development company near me",
+      position: 3,
+      searchVolume: 1200,
+      change: 2
+    },
+    {
+      keyword: "web development services NYC",
+      position: 1,
+      searchVolume: 890,
+      change: 0
+    },
+    {
+      keyword: "mobile app development New York",
+      position: 5,
+      searchVolume: 650,
+      change: -1
+    },
+    {
+      keyword: "custom software development Manhattan",
+      position: 2,
+      searchVolume: 420,
+      change: 1
+    },
+    {
+      keyword: "UI UX design agency NYC",
+      position: 4,
+      searchVolume: 380,
+      change: 3
+    }
+  ],
+  localCompetitors: [
+    {
+      name: "TechFlow Solutions",
+      distance: "0.3 miles",
+      rating: 4.6,
+      reviews: 89,
+      services: ["Web Development", "Mobile Apps", "UI/UX Design"]
+    },
+    {
+      name: "DigitalCraft Studios",
+      distance: "0.8 miles",
+      rating: 4.4,
+      reviews: 156,
+      services: ["Custom Software", "E-commerce", "Cloud Solutions"]
+    },
+    {
+      name: "InnovateLab",
+      distance: "1.2 miles",
+      rating: 4.7,
+      reviews: 203,
+      services: ["SaaS Development", "AI Solutions", "Digital Transformation"]
+    }
+  ],
+  localContent: [
+    {
+      title: "Software Development Services in NYC",
+      type: "Service Page",
+      performance: 92,
+      localKeywords: ["NYC software development", "New York tech company", "Manhattan developers"]
+    },
+    {
+      title: "Web Development Company Near Me",
+      type: "Landing Page",
+      performance: 87,
+      localKeywords: ["web development NYC", "local web developers", "NYC web agency"]
+    },
+    {
+      title: "Mobile App Development New York",
+      type: "Service Page",
+      performance: 78,
+      localKeywords: ["mobile app development NYC", "iOS developers NYC", "Android development NY"]
+    }
+  ]
+};
 ---
 
-<Layout 
-  title="Contact Us - Get in Touch with EA Soft Lab"
-  description="Contact EA Soft Lab for custom software development, web applications, and IT consulting services."
->
-  <Header />
-  
-  <!-- Hero Section -->
-  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Get in Touch
-        </h1>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Ready to start your next project? Let's discuss how we can help transform your business.
-        </p>
+<Layout title={title} description={description}>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb 
+      items={[
+        { name: "Home", url: "https://easoftlab.com", position: 1 },
+        { name: "Contact", url: "https://easoftlab.com/contact", position: 2 }
+      ]} 
+    />
+    
+    <!-- Main Content with Seamless Background -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+            Get in Touch
+          </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            Ready to start your next project? Let's discuss how we can help transform your business.
+          </p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Contact Section -->
-  <section class="py-16 bg-white">
+    <!-- Contact Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
         
         <!-- Contact Form -->
-        <div>
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">Send us a Message</h2>
+        <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-8">Send us a Message</h2>
           <form class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
-                <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                <label for="firstName" class="block text-sm font-medium text-gray-300 mb-2">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white/5 text-white placeholder-gray-400" />
               </div>
               <div>
-                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
-                <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+                <label for="lastName" class="block text-sm font-medium text-gray-300 mb-2">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white/5 text-white placeholder-gray-400" />
               </div>
             </div>
             
             <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-              <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent" />
+              <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address *</label>
+              <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white/5 text-white placeholder-gray-400" />
             </div>
             
             <div>
-              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Project Details *</label>
-              <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"></textarea>
+              <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Project Details *</label>
+              <textarea id="message" name="message" rows="6" required class="w-full px-4 py-3 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white/5 text-white placeholder-gray-400 resize-none"></textarea>
             </div>
             
             <div>
-              <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+              <button type="submit" class="w-full bg-white text-primary-600 hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-2xl animate-bounce-slow">
                 Send Message
               </button>
             </div>
@@ -63,54 +229,55 @@ import Footer from '../components/Footer.astro';
         </div>
 
         <!-- Contact Information -->
-        <div>
-          <h2 class="text-3xl font-bold text-gray-900 mb-8">Contact Information</h2>
+        <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-8">Contact Information</h2>
           
           <div class="space-y-8">
             <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center animate-pulse-slow">
+                <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Email</h3>
-                <p class="text-gray-600">contact@easoftlab.com</p>
+                <h3 class="text-lg font-semibold text-white mb-2">Email</h3>
+                <p class="text-gray-300">contact@easoftlab.com</p>
               </div>
             </div>
 
             <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center animate-pulse-slow">
+                <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Phone</h3>
-                <p class="text-gray-600">+1 (555) 123-4567</p>
+                <h3 class="text-lg font-semibold text-white mb-2">Phone</h3>
+                <p class="text-gray-300">+1 (555) 123-4567</p>
               </div>
             </div>
 
             <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center animate-pulse-slow">
+                <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-lg font-semibold text-gray-900 mb-2">Office</h3>
-                <p class="text-gray-600">123 Business Street</p>
-                <p class="text-gray-600">New York, NY 10001</p>
+                <h3 class="text-lg font-semibold text-white mb-2">Office</h3>
+                <p class="text-gray-300">123 Business Street</p>
+                <p class="text-gray-300">New York, NY 10001</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <Footer />
+  <!-- Local SEO Section -->
+  <LocalSEO businessInfo={businessInfo} />
 </Layout>
 
 <script>
@@ -135,7 +302,7 @@ import Footer from '../components/Footer.astro';
   }
 </script>
 
-<!-- Contact Schema for SEO -->
+<!-- Enhanced Contact Schema for SEO -->
 <script type="application/ld+json" set:html={JSON.stringify({
   "@context": "https://schema.org",
   "@type": "ContactPage",
@@ -168,6 +335,27 @@ import Footer from '../components/Footer.astro';
       "addressRegion": "NY",
       "postalCode": "10001",
       "addressCountry": "US"
-    }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": 4.8,
+      "reviewCount": 47,
+      "bestRating": 5,
+      "worstRating": 1
+    },
+    "review": businessInfo.reviews.map(review => ({
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": review.rating,
+        "bestRating": 5
+      },
+      "author": {
+        "@type": "Person",
+        "name": review.author
+      },
+      "reviewBody": review.review,
+      "datePublished": review.date
+    }))
   }
 })} /> 

@@ -1,9 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import Organization from '../../components/structured-data/Organization.astro';
 
-const title = "Careers at EA Soft Lab - Join Our Growing Team";
-const description = "Explore exciting career opportunities at EA Soft Lab. Join our team of passionate developers, designers, and technology professionals. View open positions and apply today.";
+// SEO metadata
+const title = 'Careers | EA Soft Lab - Join Our Development Team';
+const description = 'Join our team of passionate developers and designers. Explore career opportunities at EA Soft Lab and grow your career in software development.';
 const structuredData = {
   type: 'organization',
   data: {
@@ -27,130 +29,188 @@ const structuredData = {
 ---
 
 <Layout title={title} description={description} structuredData={structuredData}>
-  <Organization data={structuredData.data} />
+  <!-- Breadcrumb Navigation -->
+  <Breadcrumb 
+    items={[
+      { name: "Home", url: "https://easoftlab.com", position: 1 },
+      { name: "About", url: "https://easoftlab.com/about", position: 2 },
+      { name: "Careers", url: "https://easoftlab.com/about/careers", position: 3 }
+    ]} 
+  />
   
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
-    <div class="container mx-auto px-4">
-      <div class="max-w-4xl mx-auto text-center">
-        <h1 class="text-5xl font-bold mb-6">Join Our Team</h1>
-        <p class="text-xl mb-8">Build the future with us at EA Soft Lab</p>
-        <p class="text-lg mb-8">We're looking for passionate individuals who are excited about technology and innovation.</p>
-        <a href="#open-positions" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
-          View Open Positions
-        </a>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            Join Our Team
+          </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            Build the future with us at EA Soft Lab
+          </p>
+          <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            We're looking for passionate individuals who are excited about technology and innovation.
+          </p>
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-800" data-lazy-animate>
+            <a href="#open-positions" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25">
+              View Open Positions
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- Why Work With Us -->
-  <section class="py-16">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Why Work With Us?</h2>
+    <!-- Why Work With Us -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Why Work With Us?</h2>
+          <p class="text-lg text-gray-300">Discover what makes EA Soft Lab a great place to grow your career</p>
+        </div>
+        
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Flexible Work Environment</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Flexible Work Environment</h3>
+            <p class="text-gray-300">
               Enjoy flexible work hours, remote work options, and a healthy work-life balance.
             </p>
           </div>
-          <div class="text-center">
-            <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Innovation & Growth</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Innovation & Growth</h3>
+            <p class="text-gray-300">
               Work on cutting-edge technologies and challenging projects that push boundaries.
             </p>
           </div>
-          <div class="text-center">
-            <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
               </svg>
             </div>
-            <h3 class="text-xl font-bold mb-4 text-gray-800">Collaborative Culture</h3>
-            <p class="text-gray-600">
+            <h3 class="text-xl font-bold mb-4 text-white">Collaborative Culture</h3>
+            <p class="text-gray-300">
               Join a team that values collaboration, knowledge sharing, and mutual support.
             </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Open Positions -->
-  <section id="open-positions" class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Open Positions</h2>
+    <!-- Open Positions -->
+    <div id="open-positions" class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Open Positions</h2>
+          <p class="text-lg text-gray-300">Join our growing team of technology professionals</p>
+        </div>
+        
         <div class="space-y-6">
           <!-- Position 1 -->
-          <div class="bg-white rounded-lg shadow-md p-8 border-l-4 border-blue-600">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
               <div class="mb-4 md:mb-0">
-                <h3 class="text-2xl font-bold text-gray-800 mb-2">Senior Full-Stack Developer</h3>
-                <p class="text-gray-600 mb-4">Join our development team to build scalable web applications.</p>
+                <h3 class="text-2xl font-bold text-white mb-2">Senior Full-Stack Developer</h3>
+                <p class="text-gray-300 mb-4">Join our development team to build innovative web applications and scalable solutions.</p>
                 <div class="flex flex-wrap gap-2">
-                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">React</span>
-                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Node.js</span>
-                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">TypeScript</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">React</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Node.js</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">TypeScript</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">PostgreSQL</span>
                 </div>
               </div>
-              <div class="text-right">
-                <p class="text-gray-600 mb-2">Full-time • Remote</p>
-                <a href="mailto:careers@easoftlab.com?subject=Application for Senior Full-Stack Developer" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+              <div class="flex flex-col sm:flex-row gap-3">
+                <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary-500/25">
                   Apply Now
+                </a>
+                <a href="/contact" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+                  Learn More
                 </a>
               </div>
             </div>
           </div>
 
           <!-- Position 2 -->
-          <div class="bg-white rounded-lg shadow-md p-8 border-l-4 border-green-600">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
               <div class="mb-4 md:mb-0">
-                <h3 class="text-2xl font-bold text-gray-800 mb-2">Mobile App Developer</h3>
-                <p class="text-gray-600 mb-4">Create cutting-edge mobile applications for iOS and Android.</p>
+                <h3 class="text-2xl font-bold text-white mb-2">UI/UX Designer</h3>
+                <p class="text-gray-300 mb-4">Create beautiful and intuitive user experiences that delight our clients and users.</p>
                 <div class="flex flex-wrap gap-2">
-                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">React Native</span>
-                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Flutter</span>
-                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Swift</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Figma</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Adobe Creative Suite</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Prototyping</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">User Research</span>
                 </div>
               </div>
-              <div class="text-right">
-                <p class="text-gray-600 mb-2">Full-time • Remote</p>
-                <a href="mailto:careers@easoftlab.com?subject=Application for Mobile App Developer" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+              <div class="flex flex-col sm:flex-row gap-3">
+                <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary-500/25">
                   Apply Now
+                </a>
+                <a href="/contact" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+                  Learn More
                 </a>
               </div>
             </div>
           </div>
 
           <!-- Position 3 -->
-          <div class="bg-white rounded-lg shadow-md p-8 border-l-4 border-purple-600">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
               <div class="mb-4 md:mb-0">
-                <h3 class="text-2xl font-bold text-gray-800 mb-2">UI/UX Designer</h3>
-                <p class="text-gray-600 mb-4">Design beautiful and intuitive user experiences.</p>
+                <h3 class="text-2xl font-bold text-white mb-2">DevOps Engineer</h3>
+                <p class="text-gray-300 mb-4">Help us build and maintain robust infrastructure and deployment pipelines.</p>
                 <div class="flex flex-wrap gap-2">
-                  <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Figma</span>
-                  <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Adobe XD</span>
-                  <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Prototyping</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">AWS</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Docker</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Kubernetes</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">CI/CD</span>
                 </div>
               </div>
-              <div class="text-right">
-                <p class="text-gray-600 mb-2">Full-time • Remote</p>
-                <a href="mailto:careers@easoftlab.com?subject=Application for UI/UX Designer" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition duration-300">
+              <div class="flex flex-col sm:flex-row gap-3">
+                <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary-500/25">
                   Apply Now
+                </a>
+                <a href="/contact" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+                  Learn More
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Position 4 -->
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+              <div class="mb-4 md:mb-0">
+                <h3 class="text-2xl font-bold text-white mb-2">Project Manager</h3>
+                <p class="text-gray-300 mb-4">Lead exciting projects and ensure successful delivery of client solutions.</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Agile</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Scrum</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Client Management</span>
+                  <span class="bg-primary-500/20 text-primary-400 px-3 py-1 rounded-full text-sm">Risk Management</span>
+                </div>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-primary-500/25">
+                  Apply Now
+                </a>
+                <a href="/contact" class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+                  Learn More
                 </a>
               </div>
             </div>
@@ -158,21 +218,75 @@ const structuredData = {
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CTA Section -->
-  <section class="py-16 bg-blue-600 text-white">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-6">Ready to Join Our Team?</h2>
-      <p class="text-xl mb-8">Take the first step towards an exciting career at EA Soft Lab.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#open-positions" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
-          View Positions
-        </a>
-        <a href="mailto:careers@easoftlab.com" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
-          Contact Us
-        </a>
+    <!-- Benefits Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Benefits & Perks</h2>
+          <p class="text-lg text-gray-300">We take care of our team with comprehensive benefits</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Competitive Salary</h3>
+            <p class="text-gray-300">Attractive compensation packages with regular reviews and growth opportunities.</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 5.477 5.754 5 7.5 5s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.523 18.246 19 16.5 19c-1.746 0-3.332-.477-4.5-1.253"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Learning Budget</h3>
+            <p class="text-gray-300">Annual budget for courses, conferences, and professional development.</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Flexible Hours</h3>
+            <p class="text-gray-300">Work when you're most productive with flexible scheduling options.</p>
+          </div>
+          
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-12 h-12 bg-primary-500/20 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Health Benefits</h3>
+            <p class="text-gray-300">Comprehensive health, dental, and vision insurance coverage.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-6">Ready to Join Our Team?</h2>
+          <p class="text-xl text-gray-300 mb-8">Take the next step in your career with EA Soft Lab</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25">
+              Apply Now
+            </a>
+            <a href="/contact" class="border-2 border-white text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300 transform hover:scale-105">
+              Get in Touch
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout> 

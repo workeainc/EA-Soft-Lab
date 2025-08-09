@@ -1,0 +1,204 @@
+---
+import ThemeLayout from '../layouts/ThemeLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ThemeElements from '../components/ThemeElements.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  author?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  featuredImage?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}
+
+const {
+  title,
+  description,
+  author = "EA Soft Lab",
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  featuredImage,
+  showHeader = true,
+  showFooter = true
+} = Astro.props;
+
+const formattedDate = publishedTime ? new Date(publishedTime).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}) : '';
+---
+
+<ThemeLayout 
+  title={title}
+  description={description}
+  type="article"
+  author={author}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  tags={tags}
+>
+  {showHeader && <Header />}
+  
+  <!-- Blog Hero Section -->
+  <div class="theme-section pt-24 pb-16" data-lazy-load>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <!-- Tags -->
+        {tags.length > 0 && (
+          <div class="flex flex-wrap justify-center gap-2 mb-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+            {tags.map(tag => (
+              <ThemeElements type="badge" text={tag} />
+            ))}
+          </div>
+        )}
+        
+        <!-- Title -->
+        <h1 class="text-4xl md:text-5xl font-bold theme-text-primary mb-6 leading-tight opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          {title}
+        </h1>
+        
+        <!-- Meta Information -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm theme-text-muted mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+          {author && (
+            <div class="flex items-center gap-2">
+              <span>By {author}</span>
+            </div>
+          )}
+          {formattedDate && (
+            <div class="flex items-center gap-2">
+              <span>{formattedDate}</span>
+            </div>
+          )}
+          {modifiedTime && modifiedTime !== publishedTime && (
+            <div class="flex items-center gap-2">
+              <span>Updated {new Date(modifiedTime).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}</span>
+            </div>
+          )}
+        </div>
+        
+        <!-- Description -->
+        {description && (
+          <p class="text-xl theme-text-secondary max-w-3xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+            {description}
+          </p>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Image -->
+  {featuredImage && (
+    <div class="theme-section pb-16" data-lazy-load>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="theme-card p-0 overflow-hidden opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <img 
+            src={featuredImage} 
+            alt={title}
+            class="w-full h-64 md:h-96 object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Blog Content -->
+  <div class="theme-section py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <article class="prose prose-lg prose-invert max-w-none opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+        <slot />
+      </article>
+    </div>
+  </div>
+
+  <!-- Related Posts Section -->
+  <div class="theme-section py-16" data-lazy-load>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold theme-text-primary mb-8 text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+        Related Posts
+      </h2>
+      <div class="grid md:grid-cols-2 gap-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+        <ThemeElements type="card" class="p-6">
+          <h3 class="text-xl font-semibold theme-text-primary mb-4">Related Post 1</h3>
+          <p class="theme-text-secondary mb-4">Brief description of the related post...</p>
+          <ThemeElements type="button" variant="secondary" href="/blog/related-post-1">
+            Read More
+          </ThemeElements>
+        </ThemeElements>
+        <ThemeElements type="card" class="p-6">
+          <h3 class="text-xl font-semibold theme-text-primary mb-4">Related Post 2</h3>
+          <p class="theme-text-secondary mb-4">Brief description of the related post...</p>
+          <ThemeElements type="button" variant="secondary" href="/blog/related-post-2">
+            Read More
+          </ThemeElements>
+        </ThemeElements>
+      </div>
+    </div>
+  </div>
+
+  {showFooter && <Footer />}
+</ThemeLayout>
+
+<style>
+  /* Blog-specific styles */
+  .prose-invert {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .prose-invert h1,
+  .prose-invert h2,
+  .prose-invert h3,
+  .prose-invert h4,
+  .prose-invert h5,
+  .prose-invert h6 {
+    color: #ffffff;
+  }
+  
+  .prose-invert p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .prose-invert a {
+    color: #6366f1;
+  }
+  
+  .prose-invert a:hover {
+    color: #8b5cf6;
+  }
+  
+  .prose-invert blockquote {
+    border-left-color: #6366f1;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .prose-invert code {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+  }
+  
+  .prose-invert pre {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .prose-invert pre code {
+    background: transparent;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .prose-invert {
+      font-size: 0.875rem;
+    }
+  }
+</style>

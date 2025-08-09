@@ -9,13 +9,19 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "seed-local-seo": "node scripts/seed-local-seo.js",
+    "seed-advanced-analytics": "node scripts/seed-advanced-analytics.js",
+    "seed-ab-testing": "node scripts/seed-ab-testing.js",
+    "seed-all": "npm run seed-local-seo && npm run seed-advanced-analytics && npm run seed-ab-testing"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
+    "@sanity/client": "^6.12.0",
     "@sanity/vision": "^4.3.0",
+    "lucide-react": "^0.263.1",
     "react": "^19.1",
     "react-dom": "^19.1",
     "sanity": "^4.3.0",

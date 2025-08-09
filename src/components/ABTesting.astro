@@ -1,0 +1,613 @@
+---
+// A/B Testing Component
+// Provides framework for running experiments and tracking performance
+
+interface ABTest {
+  id: string
+  name: string
+  description: string
+  status: 'active' | 'paused' | 'completed'
+  variants: Array<{
+    id: string
+    name: string
+    traffic: number
+    conversions: number
+    conversionRate: number
+  }>
+  metrics: {
+    totalVisitors: number
+    totalConversions: number
+    confidence: number
+    winner: string | null
+  }
+  startDate: string
+  endDate?: string
+}
+
+// Mock A/B test data
+const abTests: ABTest[] = [
+  {
+    id: 'hero-button-test',
+    name: 'Hero Button Test',
+    description: 'Testing different CTA button styles and text',
+    status: 'active',
+    variants: [
+      {
+        id: 'control',
+        name: 'Control (Primary Blue)',
+        traffic: 1250,
+        conversions: 89,
+        conversionRate: 7.12
+      },
+      {
+        id: 'variant-a',
+        name: 'Variant A (Green)',
+        traffic: 1230,
+        conversions: 95,
+        conversionRate: 7.72
+      },
+      {
+        id: 'variant-b',
+        name: 'Variant B (Orange)',
+        traffic: 1240,
+        conversions: 78,
+        conversionRate: 6.29
+      }
+    ],
+    metrics: {
+      totalVisitors: 3720,
+      totalConversions: 262,
+      confidence: 85.2,
+      winner: 'variant-a'
+    },
+    startDate: '2024-01-15'
+  },
+  {
+    id: 'cta-text-test',
+    name: 'CTA Text Test',
+    description: 'Testing different call-to-action text variations',
+    status: 'active',
+    variants: [
+      {
+        id: 'control',
+        name: 'Control (Get Started)',
+        traffic: 980,
+        conversions: 67,
+        conversionRate: 6.84
+      },
+      {
+        id: 'variant-a',
+        name: 'Variant A (Learn More)',
+        traffic: 975,
+        conversions: 72,
+        conversionRate: 7.38
+      },
+      {
+        id: 'variant-b',
+        name: 'Variant B (Contact Us)',
+        traffic: 970,
+        conversions: 81,
+        conversionRate: 8.35
+      }
+    ],
+    metrics: {
+      totalVisitors: 2925,
+      totalConversions: 220,
+      confidence: 92.1,
+      winner: 'variant-b'
+    },
+    startDate: '2024-01-20'
+  },
+  {
+    id: 'pricing-test',
+    name: 'Pricing Display Test',
+    description: 'Testing different pricing table layouts',
+    status: 'completed',
+    variants: [
+      {
+        id: 'control',
+        name: 'Control (Grid Layout)',
+        traffic: 850,
+        conversions: 45,
+        conversionRate: 5.29
+      },
+      {
+        id: 'variant-a',
+        name: 'Variant A (List Layout)',
+        traffic: 845,
+        conversions: 52,
+        conversionRate: 6.15
+      }
+    ],
+    metrics: {
+      totalVisitors: 1695,
+      totalConversions: 97,
+      confidence: 88.7,
+      winner: 'variant-a'
+    },
+    startDate: '2024-01-10',
+    endDate: '2024-01-25'
+  }
+];
+---
+
+<div class="ab-testing bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 mb-8">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-2xl font-bold text-white flex items-center gap-3">
+      <svg class="w-6 h-6 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      A/B Testing Dashboard
+    </h2>
+    <div class="flex gap-2">
+      <button class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all duration-300 text-sm">
+        Create New Test
+      </button>
+      <button class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all duration-300 text-sm">
+        Export Results
+      </button>
+    </div>
+  </div>
+
+  <!-- Test Overview -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Active Tests</p>
+          <p class="text-2xl font-bold text-white">{abTests.filter(test => test.status === 'active').length}</p>
+        </div>
+        <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Total Visitors</p>
+          <p class="text-2xl font-bold text-white">{abTests.reduce((sum, test) => sum + test.metrics.totalVisitors, 0).toLocaleString()}</p>
+        </div>
+        <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Total Conversions</p>
+          <p class="text-2xl font-bold text-white">{abTests.reduce((sum, test) => sum + test.metrics.totalConversions, 0).toLocaleString()}</p>
+        </div>
+        <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-gray-400 text-sm">Avg Confidence</p>
+          <p class="text-2xl font-bold text-white">{Math.round(abTests.reduce((sum, test) => sum + test.metrics.confidence, 0) / abTests.length)}%</p>
+        </div>
+        <div class="w-12 h-12 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- A/B Tests List -->
+  <div class="space-y-6">
+    {abTests.map((test) => (
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-lg font-semibold text-white">{test.name}</h3>
+            <p class="text-gray-400 text-sm">{test.description}</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class={`px-3 py-1 rounded-full text-xs font-medium ${
+              test.status === 'active' ? 'bg-green-500/20 text-green-400' :
+              test.status === 'paused' ? 'bg-yellow-500/20 text-yellow-400' :
+              'bg-gray-500/20 text-gray-400'
+            }`}>
+              {test.status.charAt(0).toUpperCase() + test.status.slice(1)}
+            </span>
+            {test.metrics.winner && (
+              <span class="px-3 py-1 bg-primary-500/20 text-primary-400 rounded-full text-xs font-medium">
+                Winner: {test.variants.find(v => v.id === test.metrics.winner)?.name}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <!-- Test Variants -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+          {test.variants.map((variant) => (
+            <div class={`bg-white/5 rounded-lg p-4 ${
+              variant.id === test.metrics.winner ? 'border-2 border-primary-500' : 'border border-white/10'
+            }`}>
+              <div class="flex items-center justify-between mb-3">
+                <h4 class="text-white font-medium">{variant.name}</h4>
+                {variant.id === test.metrics.winner && (
+                  <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                )}
+              </div>
+              
+              <div class="space-y-2">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-400">Traffic</span>
+                  <span class="text-white">{variant.traffic.toLocaleString()}</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-400">Conversions</span>
+                  <span class="text-white">{variant.conversions}</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-400">Rate</span>
+                  <span class="text-white">{variant.conversionRate}%</span>
+                </div>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="mt-3">
+                <div class="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
+                  <div 
+                    class="h-full bg-primary-500 rounded-full transition-all duration-300"
+                    style={`width: ${(variant.conversions / variant.traffic) * 100}%`}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Test Metrics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="bg-white/5 rounded-lg p-3">
+            <p class="text-gray-400 text-xs">Total Visitors</p>
+            <p class="text-white font-semibold">{test.metrics.totalVisitors.toLocaleString()}</p>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3">
+            <p class="text-gray-400 text-xs">Total Conversions</p>
+            <p class="text-white font-semibold">{test.metrics.totalConversions}</p>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3">
+            <p class="text-gray-400 text-xs">Confidence</p>
+            <p class="text-white font-semibold">{test.metrics.confidence}%</p>
+          </div>
+          <div class="bg-white/5 rounded-lg p-3">
+            <p class="text-gray-400 text-xs">Duration</p>
+            <p class="text-white font-semibold">
+              {Math.ceil((new Date().getTime() - new Date(test.startDate).getTime()) / (1000 * 60 * 60 * 24))} days
+            </p>
+          </div>
+        </div>
+
+        <!-- Test Actions -->
+        <div class="flex gap-2 mt-4">
+          <button class="px-3 py-1 bg-primary-600 hover:bg-primary-700 text-white rounded text-sm transition-all duration-300">
+            View Details
+          </button>
+          {test.status === 'active' && (
+            <button class="px-3 py-1 bg-yellow-600 hover:bg-yellow-700 text-white rounded text-sm transition-all duration-300">
+              Pause Test
+            </button>
+          )}
+          <button class="px-3 py-1 bg-white/10 hover:bg-white/20 text-white rounded text-sm transition-all duration-300">
+            Export Results
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Create New Test Form -->
+  <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 mt-8">
+    <h3 class="text-lg font-semibold text-white mb-4">Create New A/B Test</h3>
+    <form class="space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Test Name</label>
+          <input type="text" class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500" placeholder="Enter test name">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Test Type</label>
+          <select class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-primary-500">
+            <option>Button Style</option>
+            <option>Text Content</option>
+            <option>Layout</option>
+            <option>Pricing</option>
+            <option>Custom</option>
+          </select>
+        </div>
+      </div>
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-2">Description</label>
+        <textarea class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500" rows="3" placeholder="Describe what you're testing"></textarea>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Traffic Split</label>
+          <select class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-primary-500">
+            <option>50/50</option>
+            <option>60/40</option>
+            <option>70/30</option>
+            <option>Custom</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Duration (days)</label>
+          <input type="number" class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary-500" placeholder="14" min="1" max="90">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-2">Confidence Level</label>
+          <select class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:border-primary-500">
+            <option>95%</option>
+            <option>90%</option>
+            <option>85%</option>
+            <option>80%</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex gap-3">
+        <button type="submit" class="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-all duration-300">
+          Create Test
+        </button>
+        <button type="button" class="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all duration-300">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  // A/B Testing JavaScript
+  class ABTesting {
+    constructor() {
+      this.init();
+    }
+
+    init() {
+      this.setupTestTracking();
+      this.setupVariantAssignment();
+      this.setupConversionTracking();
+    }
+
+    setupTestTracking() {
+      // Track test impressions
+      this.trackTestImpression();
+      
+      // Track variant views
+      this.trackVariantViews();
+    }
+
+    trackTestImpression() {
+      // Track when a user sees an A/B test
+      const testElements = document.querySelectorAll('[data-ab-test]');
+      testElements.forEach(element => {
+        const testId = element.getAttribute('data-ab-test');
+        if (testId) {
+          this.sendTestData('impression', {
+            testId,
+            element: element.tagName,
+            page: window.location.pathname
+          });
+        }
+      });
+    }
+
+    trackVariantViews() {
+      // Track which variant a user sees
+      const variantElements = document.querySelectorAll('[data-ab-variant]');
+      variantElements.forEach(element => {
+        const testId = element.getAttribute('data-ab-test');
+        const variantId = element.getAttribute('data-ab-variant');
+        
+        if (testId && variantId) {
+          this.sendTestData('variant_view', {
+            testId,
+            variantId,
+            element: element.tagName,
+            page: window.location.pathname
+          });
+        }
+      });
+    }
+
+    setupVariantAssignment() {
+      // Assign variants to users
+      this.assignVariants();
+    }
+
+    assignVariants() {
+      const testElements = document.querySelectorAll('[data-ab-test]');
+      testElements.forEach(element => {
+        const testId = element.getAttribute('data-ab-test');
+        if (testId) {
+          const variant = this.getVariant(testId);
+          this.applyVariant(element, variant);
+        }
+      });
+    }
+
+    getVariant(testId) {
+      // Get or assign variant for this test
+      let variant = localStorage.getItem(`ab_test_${testId}`);
+      
+      if (!variant) {
+        // Assign new variant based on user ID
+        const userId = this.getUserId();
+        const variants = this.getTestVariants(testId);
+        const variantIndex = userId % variants.length;
+        variant = variants[variantIndex];
+        
+        localStorage.setItem(`ab_test_${testId}`, variant);
+      }
+      
+      return variant;
+    }
+
+    getTestVariants(testId) {
+      // Define variants for each test
+      const testVariants = {
+        'hero-button-test': ['control', 'variant-a', 'variant-b'],
+        'cta-text-test': ['control', 'variant-a', 'variant-b'],
+        'pricing-test': ['control', 'variant-a']
+      };
+      
+      return testVariants[testId] || ['control'];
+    }
+
+    applyVariant(element, variant) {
+      // Apply variant styling/content
+      const testId = element.getAttribute('data-ab-test');
+      
+      if (testId === 'hero-button-test') {
+        this.applyButtonVariant(element, variant);
+      } else if (testId === 'cta-text-test') {
+        this.applyTextVariant(element, variant);
+      } else if (testId === 'pricing-test') {
+        this.applyPricingVariant(element, variant);
+      }
+      
+      // Mark element with variant
+      element.setAttribute('data-ab-variant', variant);
+    }
+
+    applyButtonVariant(element, variant) {
+      const buttonStyles = {
+        'control': 'bg-primary-600 hover:bg-primary-700',
+        'variant-a': 'bg-green-600 hover:bg-green-700',
+        'variant-b': 'bg-orange-600 hover:bg-orange-700'
+      };
+      
+      element.className = `btn ${buttonStyles[variant] || buttonStyles.control} text-white px-6 py-3 rounded-lg transition-all duration-300`;
+    }
+
+    applyTextVariant(element, variant) {
+      const textVariants = {
+        'control': 'Get Started',
+        'variant-a': 'Learn More',
+        'variant-b': 'Contact Us'
+      };
+      
+      element.textContent = textVariants[variant] || textVariants.control;
+    }
+
+    applyPricingVariant(element, variant) {
+      if (variant === 'variant-a') {
+        element.classList.add('pricing-list-layout');
+      } else {
+        element.classList.add('pricing-grid-layout');
+      }
+    }
+
+    setupConversionTracking() {
+      // Track conversions for A/B tests
+      this.trackTestConversions();
+    }
+
+    trackTestConversions() {
+      // Track clicks on test elements
+      document.addEventListener('click', (e) => {
+        const testElement = e.target.closest('[data-ab-test]');
+        if (testElement) {
+          const testId = testElement.getAttribute('data-ab-test');
+          const variantId = testElement.getAttribute('data-ab-variant');
+          
+          if (testId && variantId) {
+            this.sendTestData('conversion', {
+              testId,
+              variantId,
+              element: testElement.tagName,
+              action: 'click',
+              page: window.location.pathname
+            });
+          }
+        }
+      });
+
+      // Track form submissions
+      document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', (e) => {
+          const testElements = document.querySelectorAll('[data-ab-test]');
+          testElements.forEach(element => {
+            const testId = element.getAttribute('data-ab-test');
+            const variantId = element.getAttribute('data-ab-variant');
+            
+            if (testId && variantId) {
+              this.sendTestData('conversion', {
+                testId,
+                variantId,
+                element: 'form',
+                action: 'submit',
+                page: window.location.pathname
+              });
+            }
+          });
+        });
+      });
+    }
+
+    getUserId() {
+      let userId = localStorage.getItem('ab_testing_user_id');
+      if (!userId) {
+        userId = Math.floor(Math.random() * 1000000);
+        localStorage.setItem('ab_testing_user_id', userId);
+      }
+      return parseInt(userId);
+    }
+
+    sendTestData(type, data) {
+      // Send A/B test data to API
+      fetch('/api/ab-testing', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type,
+          data,
+          timestamp: new Date().toISOString(),
+          sessionId: this.getSessionId()
+        })
+      }).catch(error => {
+        console.log('A/B test data sent:', { type, data });
+      });
+    }
+
+    getSessionId() {
+      let sessionId = sessionStorage.getItem('ab_testing_session_id');
+      if (!sessionId) {
+        sessionId = Math.random().toString(36).substring(2, 15);
+        sessionStorage.setItem('ab_testing_session_id', sessionId);
+      }
+      return sessionId;
+    }
+  }
+
+  // Initialize A/B Testing
+  document.addEventListener('DOMContentLoaded', () => {
+    new ABTesting();
+  });
+</script>

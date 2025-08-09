@@ -1,60 +1,102 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+
+// SEO metadata
+const title = 'Offline | EA Soft Lab - You are currently offline';
+const description = 'You are currently offline. Please check your internet connection and try again.';
 ---
 
-<Layout 
-  title="Offline - EA Soft Lab" 
-  description="You're currently offline. Some features may not be available."
-  noindex={true}
->
-  <div class="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-    <div class="max-w-md w-full text-center">
-      <div class="mb-8">
-        <svg class="mx-auto h-24 w-24 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z"></path>
-        </svg>
-      </div>
-      
-      <h1 class="text-3xl font-bold text-gray-900 mb-4">You're Offline</h1>
-      <p class="text-lg text-gray-600 mb-8">
-        It looks like you've lost your internet connection. Don't worry, you can still access some of our content that's been cached.
-      </p>
-      
-      <div class="space-y-4">
-        <a 
-          href="/" 
-          class="block w-full bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors duration-200"
-        >
-          Go to Homepage
-        </a>
-        
-        <a 
-          href="/about" 
-          class="block w-full border border-primary-600 text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors duration-200"
-        >
-          About Us
-        </a>
-        
-        <a 
-          href="/services" 
-          class="block w-full border border-primary-600 text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors duration-200"
-        >
-          Our Services
-        </a>
-        
-        <a 
-          href="/contact" 
-          class="block w-full border border-primary-600 text-primary-600 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors duration-200"
-        >
-          Contact Us
-        </a>
-      </div>
-      
-      <div class="mt-8 pt-8 border-t border-gray-200">
-        <p class="text-sm text-gray-500">
-          Once you're back online, you'll have access to all our features and content.
-        </p>
+<Layout title={title} description={description}>
+  <!-- Breadcrumb Navigation -->
+  <Breadcrumb 
+    items={[
+      { name: "Home", url: "https://easoftlab.com", position: 1 },
+      { name: "Offline", url: "https://easoftlab.com/offline", position: 2 }
+    ]} 
+  />
+  
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Offline Content -->
+    <div class="min-h-screen flex items-center justify-center relative z-10" data-lazy-load>
+      <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          <div class="w-24 h-24 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 109.75 9.75A9.75 9.75 0 0012 2.25z"></path>
+            </svg>
+          </div>
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 mt-8 pt-4">
+            You're Offline
+          </h1>
+          <p class="text-xl text-gray-300 mb-8">
+            It looks like you've lost your internet connection. Please check your network settings and try again.
+          </p>
+        </div>
+
+        <div class="space-y-6 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+            <h2 class="text-xl font-semibold text-white mb-4">What you can do:</h2>
+            <ul class="space-y-3 text-left text-gray-300">
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Check your internet connection
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Try refreshing the page
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Check if other websites are working
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Try again in a few minutes
+              </li>
+            </ul>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onclick="window.location.reload()" 
+              class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow"
+            >
+              Try Again
+            </button>
+            <a 
+              href="/" 
+              class="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg animate-bounce-slow animation-delay-200"
+            >
+              Go Home
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-600" data-lazy-animate>
+          <p class="text-sm text-gray-400">
+            Need help? Contact us at{' '}
+            <a href="mailto:support@easoftlab.com" class="text-primary-400 hover:text-primary-300">
+              support@easoftlab.com
+            </a>
+          </p>
+        </div>
       </div>
     </div>
+
   </div>
-</Layout> 
+</Layout>
+
+<script>
+  // Check for online status
+  window.addEventListener('online', function() {
+    window.location.reload();
+  });
+
+  // Show offline message when page loads offline
+  if (!navigator.onLine) {
+    console.log('User is offline');
+  }
+</script> 

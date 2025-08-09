@@ -1,204 +1,237 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { getCompanyInfo } from '../lib/queries.js';
+
+// Fetch company info for dynamic content
+const companyInfo = await getCompanyInfo();
+
+// SEO metadata
+const title = 'About Us | EA Soft Lab - Software Development Company';
+const description = 'Learn about EA Soft Lab, a leading software development company specializing in custom solutions, web development, and digital transformation services.';
 ---
 
-<Layout 
-  title="About Us - EA Soft Lab"
-  description="Learn about EA Soft Lab, our mission, values, and the team behind innovative software solutions for modern businesses."
->
-  <Header />
-
-  <!-- Hero Section -->
-  <section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-        About <span class="text-primary-600">EA Soft Lab</span>
-      </h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        We are a team of passionate developers and designers dedicated to creating innovative software solutions that drive business growth and digital transformation.
-      </p>
-    </div>
-  </section>
-
-  <!-- Mission & Vision -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
-          <p class="text-lg text-gray-600 mb-6">
-            To empower businesses with cutting-edge software solutions that streamline operations, enhance productivity, and drive sustainable growth in the digital age.
-          </p>
-          <p class="text-lg text-gray-600">
-            We believe that technology should be an enabler, not a barrier. Our approach focuses on creating intuitive, scalable, and maintainable solutions that adapt to your business needs.
-          </p>
-        </div>
-        <div class="bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl p-8">
-          <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
-          <p class="text-gray-700">
-            To be the leading software development partner for businesses seeking innovative, reliable, and scalable technology solutions that transform their digital presence and operational efficiency.
+<Layout title={title} description={description}>
+  <!-- Main Content with Continuous Dark Background -->
+  <div class="relative overflow-hidden" style="background-color: hsl(230, 30%, 5%); background-image: radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%), radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);">
+    
+    <!-- Breadcrumb Navigation -->
+    <Breadcrumb 
+      items={[
+        { name: "Home", url: "https://easoftlab.com", position: 1 },
+        { name: "About", url: "https://easoftlab.com/about", position: 2 }
+      ]} 
+    />
+    
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 mt-8 pt-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+            About EA Soft Lab
+          </h1>
+          <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+            We are a team of passionate developers, designers, and innovators dedicated to transforming businesses through cutting-edge software solutions
           </p>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Values -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Our Core Values
-        </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          These principles guide everything we do and shape our relationships with clients
+    <!-- Mission & Vision -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12">
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <h2 class="text-3xl font-bold text-white mb-6">Our Mission</h2>
+            <p class="text-lg text-gray-300 mb-6">
+              To empower businesses with innovative software solutions that drive growth, efficiency, and digital transformation. We believe in creating technology that makes a real difference.
+            </p>
+            <ul class="space-y-3 text-gray-300">
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Deliver exceptional value through quality software
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Foster long-term partnerships with our clients
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Stay ahead of technology trends and innovations
+              </li>
+            </ul>
+          </div>
+
+          <div class="opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <h2 class="text-3xl font-bold text-white mb-6">Our Vision</h2>
+            <p class="text-lg text-gray-300 mb-6">
+              To be the leading software development partner for businesses worldwide, known for our technical excellence, innovative solutions, and unwavering commitment to client success.
+            </p>
+            <ul class="space-y-3 text-gray-300">
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Global recognition for technical excellence
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Pioneer in emerging technologies
+              </li>
+              <li class="flex items-start">
+                <span class="w-2 h-2 bg-primary-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Trusted partner for digital transformation
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Values -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">Our Core Values</h2>
+          <p class="text-lg text-gray-300">The principles that guide everything we do</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Excellence</h3>
+            <p class="text-gray-300">We strive for excellence in every project, delivering the highest quality solutions</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Collaboration</h3>
+            <p class="text-gray-300">We work closely with our clients to understand their needs and deliver solutions</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Innovation</h3>
+            <p class="text-gray-300">We embrace new technologies and creative solutions to solve complex problems</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 800ms">
+            <div class="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Integrity</h3>
+            <p class="text-gray-300">We maintain the highest standards of honesty and transparency in all our dealings</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">Our Impact in Numbers</h2>
+          <p class="text-lg text-gray-300">The results speak for themselves</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 200ms">
+            <div class="text-4xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient mb-2">50+</div>
+            <p class="text-gray-300">Projects Completed</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 400ms">
+            <div class="text-4xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient mb-2">30+</div>
+            <p class="text-gray-300">Happy Clients</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 600ms">
+            <div class="text-4xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient mb-2">95%</div>
+            <p class="text-gray-300">Client Satisfaction</p>
+          </div>
+
+          <div class="text-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate style="animation-delay: 800ms">
+            <div class="text-4xl font-bold bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent animate-gradient mb-2">24/7</div>
+            <p class="text-gray-300">Support Available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Preview -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+          <h2 class="text-3xl font-bold text-white mb-4">Meet Our Team</h2>
+          <p class="text-lg text-gray-300">The talented individuals behind our success</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 200ms">
+            <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-semibold text-xl">JD</span>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">John Doe</h3>
+            <p class="text-primary-400 mb-3">CEO & Founder</p>
+            <p class="text-gray-300 text-sm">Visionary leader with 15+ years of experience in software development and business strategy.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 400ms">
+            <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-semibold text-xl">JS</span>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Jane Smith</h3>
+            <p class="text-primary-400 mb-3">CTO</p>
+            <p class="text-gray-300 text-sm">Technical expert specializing in scalable architectures and emerging technologies.</p>
+          </div>
+
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-300 group shadow-lg opacity-0 transform translate-y-8 transition-all duration-1000 ease-out hover:scale-105 hover:shadow-2xl" data-lazy-animate style="animation-delay: 600ms">
+            <div class="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-white font-semibold text-xl">MJ</span>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">Mike Johnson</h3>
+            <p class="text-primary-400 mb-3">Lead Developer</p>
+            <p class="text-gray-300 text-sm">Full-stack developer with expertise in modern frameworks and cloud technologies.</p>
+          </div>
+        </div>
+
+        <div class="text-center mt-8 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-800" data-lazy-animate>
+          <a href="/about/team" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg animate-bounce-slow">
+            Meet the Full Team
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="py-16 relative z-10" data-lazy-load>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>Ready to Work Together?</h2>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-200" data-lazy-animate>
+          Let's discuss how we can help bring your software vision to life
         </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white p-8 rounded-xl shadow-lg">
-          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Excellence</h3>
-          <p class="text-gray-600">
-            We strive for excellence in every project, delivering high-quality solutions that exceed expectations.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-lg">
-          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Collaboration</h3>
-          <p class="text-gray-600">
-            We believe in the power of collaboration, working closely with clients to understand their unique needs.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-lg">
-          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Innovation</h3>
-          <p class="text-gray-600">
-            We embrace innovation and stay ahead of technology trends to deliver cutting-edge solutions.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-lg">
-          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Reliability</h3>
-          <p class="text-gray-600">
-            We deliver on our promises, meeting deadlines and providing reliable, long-term support.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-lg">
-          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Passion</h3>
-          <p class="text-gray-600">
-            We are passionate about technology and committed to creating solutions that make a difference.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-lg">
-          <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-6">
-            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">Quality</h3>
-          <p class="text-gray-600">
-            Quality is at the heart of everything we do, from code to customer service.
-          </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0 transform translate-y-8 transition-all duration-1000 ease-out delay-400" data-lazy-animate>
+          <a href="/contact" class="bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-primary-500/25 animate-bounce-slow">
+            Get Started
+          </a>
+          <a href="/portfolio" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 shadow-lg animate-bounce-slow animation-delay-200">
+            View Our Work
+          </a>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Team Section -->
-  <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Meet Our Team
-        </h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-          Our talented team of developers, designers, and consultants work together to deliver exceptional results
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="text-center">
-          <div class="w-32 h-32 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full mx-auto mb-6 flex items-center justify-center">
-            <span class="text-white text-3xl font-bold">JD</span>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">John Doe</h3>
-          <p class="text-primary-600 font-medium mb-4">Founder & CEO</p>
-          <p class="text-gray-600">
-            Visionary leader with 10+ years of experience in software development and business strategy.
-          </p>
-        </div>
-
-        <div class="text-center">
-          <div class="w-32 h-32 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full mx-auto mb-6 flex items-center justify-center">
-            <span class="text-white text-3xl font-bold">JS</span>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Jane Smith</h3>
-          <p class="text-primary-600 font-medium mb-4">Lead Developer</p>
-          <p class="text-gray-600">
-            Full-stack developer specializing in modern web technologies and cloud architecture.
-          </p>
-        </div>
-
-        <div class="text-center">
-          <div class="w-32 h-32 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full mx-auto mb-6 flex items-center justify-center">
-            <span class="text-white text-3xl font-bold">MJ</span>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Mike Johnson</h3>
-          <p class="text-primary-600 font-medium mb-4">UX/UI Designer</p>
-          <p class="text-gray-600">
-            Creative designer focused on creating intuitive and beautiful user experiences.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-16 bg-primary-600">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-        Ready to Work With Us?
-      </h2>
-      <p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
-        Let's discuss how our team can help bring your software vision to life.
-      </p>
-      <a
-        href="/contact"
-        class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200 inline-block"
-      >
-        Get Started Today
-      </a>
-    </div>
-  </section>
-
-  <Footer />
+  </div>
 </Layout> 

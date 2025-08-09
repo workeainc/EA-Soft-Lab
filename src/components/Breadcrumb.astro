@@ -1,0 +1,96 @@
+---
+export interface Props {
+  items: Array<{
+    name: string;
+    url: string;
+    position: number;
+  }>;
+  showVisual?: boolean;
+}
+
+const { items, showVisual = true } = Astro.props;
+---
+
+<!-- Visual Breadcrumb Navigation - Completely Hidden -->
+{showVisual && items.length > 1 && (
+  <nav class="absolute -top-9999 left-0 w-0 h-0 overflow-hidden opacity-0 pointer-events-none" aria-label="Breadcrumb" data-lazy-load>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="py-4 opacity-0 transform translate-y-8 transition-all duration-1000 ease-out" data-lazy-animate>
+        <ol class="flex items-center space-x-2 text-sm">
+          {items.map((item, index) => (
+            <li class="flex items-center">
+              {index > 0 && (
+                <svg class="w-4 h-4 text-gray-400 mx-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+              )}
+              {index === items.length - 1 ? (
+                <span class="text-white font-medium">{item.name}</span>
+              ) : (
+                <a 
+                  href={item.url} 
+                  class="text-gray-400 hover:text-primary-400 transition-colors breadcrumb-link"
+                  data-breadcrumb-name={item.name}
+                  data-breadcrumb-url={item.url}
+                  data-breadcrumb-position={item.position}
+                >
+                  {item.name}
+                </a>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </nav>
+)}
+
+<!-- BreadcrumbList Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map(item => ({
+    "@type": "ListItem",
+    "position": item.position,
+    "name": item.name,
+    "item": item.url
+  }))
+})} />
+
+<!-- Breadcrumb Analytics Tracking -->
+<script>
+  // Track breadcrumb view
+  if (typeof window !== 'undefined' && window.gtag) {
+    const currentPath = window.location.pathname;
+    const breadcrumbItems = {items};
+    
+    window.gtag('event', 'breadcrumb_view', {
+      'event_category': 'navigation',
+      'event_label': currentPath,
+      'breadcrumb_depth': breadcrumbItems.length,
+      'breadcrumb_path': breadcrumbItems.map(item => item.name).join(' > ')
+    });
+  }
+
+  // Track breadcrumb clicks
+  document.addEventListener('DOMContentLoaded', function() {
+    const breadcrumbLinks = document.querySelectorAll('.breadcrumb-link');
+    
+    breadcrumbLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const breadcrumbName = this.getAttribute('data-breadcrumb-name');
+        const breadcrumbUrl = this.getAttribute('data-breadcrumb-url');
+        const breadcrumbPosition = this.getAttribute('data-breadcrumb-position');
+        
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'breadcrumb_click', {
+            'event_category': 'navigation',
+            'event_label': breadcrumbName,
+            'breadcrumb_url': breadcrumbUrl,
+            'breadcrumb_position': breadcrumbPosition
+          });
+        }
+      });
+    });
+  });
+</script>

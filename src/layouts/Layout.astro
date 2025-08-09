@@ -4,6 +4,9 @@ import PerformanceMonitor from '../components/PerformanceMonitor.astro';
 import EngagementTracker from '../components/EngagementTracker.astro';
 import PrivacyCompliance from '../components/PrivacyCompliance.astro';
 import SanityErrorHandler from '../components/SanityErrorHandler.astro';
+import CoreWebVitalsMonitor from '../components/CoreWebVitalsMonitor.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 
 export interface Props {
@@ -56,6 +59,51 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- Ensure header always stays on top -->
+    <style>
+      /* Force header to always stay on top */
+      header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 9999 !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+      }
+      
+      /* Ensure dropdown menus stay above everything */
+      header nav div[class*="absolute"] {
+        z-index: 10000 !important;
+      }
+      
+      /* Prevent any element from covering the header */
+      * {
+        z-index: auto !important;
+      }
+      
+      /* Ensure background elements don't interfere */
+      div[class*="absolute"][class*="inset-0"] {
+        z-index: 0 !important;
+      }
+      
+      /* Force body to have proper spacing for fixed header */
+      body {
+        padding-top: 64px !important;
+      }
+      
+      /* Ensure all pages have proper spacing */
+      main, .main-content, [data-lazy-load] {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+    </style>
+    
     <!-- SEO Component -->
     <SEO 
       title={fullTitle}
@@ -72,105 +120,388 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
       nofollow={nofollow}
     />
     
+    <!-- International SEO - Hreflang Tags -->
+    <link rel="alternate" hreflang="en" href="https://easoftlab.com" />
+    <link rel="alternate" hreflang="en-us" href="https://easoftlab.com" />
+    <link rel="alternate" hreflang="x-default" href="https://easoftlab.com" />
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    
+    <!-- Global Styles -->
+    <style is:global>
+      /* Global Header Styles - Ensures header always stays on top */
+      
+      /* Force header to always stay on top */
+      header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 9999 !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        background-color: rgba(15, 23, 42, 0.8) !important;
+        backdrop-filter: blur(12px) !important;
+        border-bottom: 1px solid rgba(51, 65, 85, 0.5) !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+      }
+      
+      /* Ensure dropdown menus stay above everything */
+      header nav div[class*="absolute"] {
+        z-index: 10000 !important;
+      }
+      
+      /* Prevent any element from covering the header */
+      * {
+        z-index: auto !important;
+      }
+      
+      /* Ensure background elements don't interfere */
+      div[class*="absolute"][class*="inset-0"] {
+        z-index: 0 !important;
+      }
+      
+      /* Force body to have proper spacing for fixed header */
+      body {
+        padding-top: 64px !important;
+      }
+      
+      /* Ensure all pages have proper spacing */
+      main, .main-content, [data-lazy-load] {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      /* Additional safety rules for any new pages */
+      .hero-section, .main-hero, .page-hero {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      
+      /* Ensure mobile menu stays on top */
+      #mobile-menu {
+        z-index: 10000 !important;
+      }
+      
+      /* Force all navigation elements to stay visible */
+      nav, .navigation, .navbar {
+        z-index: 9999 !important;
+      }
+      
+      /* Prevent any JavaScript from hiding the header */
+      header.hidden, header[style*="display: none"], header[style*="visibility: hidden"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+    </style>
     
     <!-- Structured Data -->
     {structuredData ? (
       <script type="application/ld+json" set:html={JSON.stringify(structuredData.data)} />
     ) : (
-      <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "EA Soft Lab",
-        "url": "https://easoftlab.com",
-        "logo": "https://easoftlab.com/logo.png",
-        "description": "Innovative software solutions for modern businesses",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "US"
-        },
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "customer service",
-          "email": "contact@easoftlab.com"
-        },
-        "sameAs": [
-          "https://linkedin.com/company/easoftlab",
-          "https://twitter.com/easoftlab",
-          "https://github.com/easoftlab",
-          "https://www.facebook.com/easoftlab",
-          "https://www.instagram.com/easoftlab",
-          "https://www.youtube.com/channel/easoftlab",
-          "https://medium.com/@easoftlab",
-          "https://dev.to/easoftlab",
-          "https://stackoverflow.com/users/easoftlab",
-          "https://www.behance.net/easoftlab",
-          "https://dribbble.com/easoftlab"
-        ],
-        "@id": "https://easoftlab.com/#organization",
-        "foundingDate": "2020",
-        "foundingLocation": {
-          "@type": "Place",
-          "name": "United States"
-        },
-        "numberOfEmployees": "10-50",
-        "industry": "Software Development",
-        "knowsAbout": [
-          "Software Development",
-          "Web Applications",
-          "Mobile Applications",
-          "UI/UX Design",
-          "Digital Transformation",
-          "Cloud Computing",
-          "Artificial Intelligence",
-          "Machine Learning",
-          "DevOps",
-          "Agile Development"
-        ],
-        "award": [
-          "Top Software Development Company 2024",
-          "Excellence in Digital Transformation"
-        ],
-        "hasOfferCatalog": {
-          "@type": "OfferCatalog",
-          "name": "Software Development Services",
-          "itemListElement": [
+      <>
+        <!-- Organization Schema -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "EA Soft Lab",
+          "url": "https://easoftlab.com",
+          "logo": "https://easoftlab.com/logo.png",
+          "description": "Innovative software solutions for modern businesses",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "contact@easoftlab.com"
+          },
+          "sameAs": [
+            "https://linkedin.com/company/easoftlab",
+            "https://twitter.com/easoftlab",
+            "https://github.com/easoftlab",
+            "https://www.facebook.com/easoftlab",
+            "https://www.instagram.com/easoftlab",
+            "https://www.youtube.com/channel/easoftlab",
+            "https://medium.com/@easoftlab",
+            "https://dev.to/easoftlab",
+            "https://stackoverflow.com/users/easoftlab",
+            "https://www.behance.net/easoftlab",
+            "https://dribbble.com/easoftlab"
+          ],
+          "@id": "https://easoftlab.com/#organization",
+          "foundingDate": "2020",
+          "foundingLocation": {
+            "@type": "Place",
+            "name": "United States"
+          },
+          "numberOfEmployees": "10-50",
+          "industry": "Software Development",
+          "knowsAbout": [
+            "Software Development",
+            "Web Applications",
+            "Mobile Applications",
+            "UI/UX Design",
+            "Digital Transformation",
+            "Cloud Computing",
+            "Artificial Intelligence",
+            "Machine Learning",
+            "DevOps",
+            "Agile Development"
+          ],
+          "award": [
+            "Top Software Development Company 2024",
+            "Excellence in Digital Transformation"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Software Development Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Custom Software Development"
+                }
+              },
+              {
+                "@type": "Offer", 
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Web Application Development"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service", 
+                  "name": "Mobile Application Development"
+                }
+              }
+            ]
+          }
+        })} />
+        
+        <!-- LocalBusiness Schema -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "EA Soft Lab",
+          "url": "https://easoftlab.com",
+          "description": "Leading software development company specializing in custom solutions, web development, and digital transformation services",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US",
+            "addressRegion": "United States"
+          },
+          "telephone": "+1-555-0123",
+          "email": "contact@easoftlab.com",
+          "openingHours": "Mo-Fr 09:00-18:00",
+          "priceRange": "$$",
+          "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
+          "currenciesAccepted": "USD",
+          "areaServed": {
+            "@type": "Country",
+            "name": "United States"
+          },
+          "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": 40.7128,
+              "longitude": -74.0060
+            },
+            "geoRadius": "50000"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Software Development Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Custom Software Development",
+                  "description": "Tailored software solutions for your business needs"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Web Development",
+                  "description": "Modern web applications and websites"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Mobile App Development",
+                  "description": "iOS and Android mobile applications"
+                }
+              }
+            ]
+          }
+        })} />
+        
+        <!-- WebSite Schema -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "EA Soft Lab",
+          "url": "https://easoftlab.com",
+          "description": "Leading software development company specializing in custom solutions, web development, and digital transformation services",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://easoftlab.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "EA Soft Lab"
+          }
+        })} />
+        
+        <!-- BreadcrumbList Schema - Will be handled by individual pages -->
+        
+        <!-- FAQPage Schema -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
             {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Custom Software Development"
+              "@type": "Question",
+              "name": "What services does EA Soft Lab offer?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "EA Soft Lab offers comprehensive software development services including custom software development, web application development, mobile app development, UI/UX design, and digital transformation solutions."
               }
             },
             {
-              "@type": "Offer", 
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Web Application Development"
+              "@type": "Question",
+              "name": "How much does custom software development cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Custom software development costs vary based on project complexity, features, and timeline. We provide detailed quotes after understanding your specific requirements and business goals."
               }
             },
             {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service", 
-                "name": "Mobile Application Development"
+              "@type": "Question",
+              "name": "What technologies do you use for development?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We use modern technologies including React, Angular, Node.js, Python, .NET, and cloud platforms like AWS and Azure. Our tech stack is chosen based on project requirements and scalability needs."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you provide ongoing support and maintenance?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, we provide comprehensive ongoing support and maintenance services including bug fixes, updates, security patches, and feature enhancements to ensure your software remains optimal."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does it take to develop a custom software solution?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Development timelines vary from 4-12 weeks depending on project complexity. We follow agile methodologies and provide regular updates throughout the development process."
               }
             }
           ]
-        }
-      })} />
+        })} />
+        
+        <!-- VideoObject Schema (for demo videos) -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "VideoObject",
+          "name": "EA Soft Lab - Software Development Services",
+          "description": "Overview of our software development services and capabilities",
+          "thumbnailUrl": "https://easoftlab.com/images/video-thumbnail.jpg",
+          "uploadDate": "2024-01-01",
+          "duration": "PT2M30S",
+          "contentUrl": "https://easoftlab.com/videos/services-overview.mp4",
+          "embedUrl": "https://easoftlab.com/videos/services-overview",
+          "publisher": {
+            "@type": "Organization",
+            "name": "EA Soft Lab",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://easoftlab.com/logo.png"
+            }
+          }
+        })} />
+        
+        <!-- Event Schema (for company events/webinars) -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Event",
+          "name": "Software Development Best Practices Webinar",
+          "description": "Join us for an informative webinar on modern software development practices and trends",
+          "startDate": "2024-12-15T14:00:00-05:00",
+          "endDate": "2024-12-15T15:30:00-05:00",
+          "location": {
+            "@type": "VirtualLocation",
+            "url": "https://easoftlab.com/webinar"
+          },
+          "organizer": {
+            "@type": "Organization",
+            "name": "EA Soft Lab",
+            "url": "https://easoftlab.com"
+          },
+          "performer": {
+            "@type": "Person",
+            "name": "EA Soft Lab Team",
+            "jobTitle": "Software Development Experts"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          }
+        })} />
+      </>
     )}
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        page_title: document.title,
+        page_location: window.location.href,
+        send_page_view: true
+      });
+    </script>
     
     <!-- Performance Monitoring -->
     <PerformanceMonitor />
+    
+    <!-- Core Web Vitals Monitoring -->
+    <CoreWebVitalsMonitor />
     
     <!-- Error Handling -->
     <SanityErrorHandler />
     
 
   </head>
-  <body class="bg-white text-gray-900 antialiased">
+  <body class="bg-gradient-to-br from-zenith-light via-white to-primary-50 text-secondary-900 antialiased">
+    <!-- Header -->
+    <Header />
+    
     <!-- Engagement Tracking -->
     <EngagementTracker />
     
@@ -180,6 +511,9 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
     <!-- Main Content -->
     <slot />
     
+    <!-- Footer -->
+    <Footer />
+    
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
@@ -187,6 +521,105 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <!-- Header Safety Script -->
+    <script>
+      // Ensure header always stays visible
+      function ensureHeaderVisible() {
+        const header = document.querySelector('header');
+        if (header) {
+          header.style.position = 'fixed';
+          header.style.top = '0';
+          header.style.left = '0';
+          header.style.right = '0';
+          header.style.zIndex = '9999';
+          header.style.display = 'block';
+          header.style.visibility = 'visible';
+          header.style.opacity = '1';
+          header.style.transform = 'none';
+          header.style.pointerEvents = 'auto';
+        }
+      }
+      
+      // Run on page load
+      document.addEventListener('DOMContentLoaded', ensureHeaderVisible);
+      
+      // Run periodically to prevent any scripts from hiding the header
+      setInterval(ensureHeaderVisible, 1000);
+      
+      // Run on any DOM changes
+      const observer = new MutationObserver(ensureHeaderVisible);
+      observer.observe(document.body, { 
+        childList: true, 
+        subtree: true, 
+        attributes: true,
+        attributeFilter: ['style', 'class']
+      });
+    </script>
+
+    <!-- Lazy Loading Script -->
+    <script>
+      // Intersection Observer for lazy loading animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            
+            // Add visible class to trigger animations
+            element.classList.add('animate-in');
+            
+            // Find all child elements with data-lazy-animate
+            const animatedElements = element.querySelectorAll('[data-lazy-animate]');
+            animatedElements.forEach((el, index) => {
+              setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+              }, index * 100); // Stagger the animations
+            });
+            
+            // Unobserve after animation
+            observer.unobserve(element);
+          }
+        });
+      }, observerOptions);
+
+      // Observe all elements with data-lazy-load
+      document.addEventListener('DOMContentLoaded', () => {
+        const lazyElements = document.querySelectorAll('[data-lazy-load]');
+        lazyElements.forEach(element => {
+          observer.observe(element);
+        });
+      });
+
+      // Performance optimization: Preload critical resources
+      const preloadCriticalResources = () => {
+        const criticalImages = [
+          '/images/logo.svg',
+          '/images/hero-illustration.svg'
+        ];
+        
+        criticalImages.forEach(src => {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'image';
+          link.href = src;
+          document.head.appendChild(link);
+        });
+      };
+
+      // Initialize preloading
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', preloadCriticalResources);
+      } else {
+        preloadCriticalResources();
+      }
     </script>
   </body>
 </html> 

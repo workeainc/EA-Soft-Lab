@@ -18,11 +18,11 @@ const {
 } = Astro.props;
 ---
 
-<section class="pt-24 pb-16 bg-gradient-to-br from-primary-50 to-white">
+<section class="pt-40 pb-16 bg-gradient-to-br from-zenith-light via-white to-primary-50 relative overflow-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div class="animate-fade-in">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold bg-zenith-gradient bg-clip-text text-transparent leading-tight mb-6">
           {title}
         </h1>
         {subtitle && (
@@ -31,20 +31,20 @@ const {
           </h2>
         )}
         {description && (
-          <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+          <p class="text-xl text-secondary-600 mb-8 leading-relaxed">
             {description}
           </p>
         )}
         <div class="flex flex-col sm:flex-row gap-4">
           <a
             href={ctaLink}
-            class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200 text-center"
+            class="bg-zenith-gradient hover:from-primary-700 hover:to-accent-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 text-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             {ctaText}
           </a>
           <a
             href="/portfolio"
-            class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors duration-200 text-center"
+            class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 text-center hover:shadow-lg transform hover:-translate-y-1"
           >
             View Our Work
           </a>

@@ -1,0 +1,387 @@
+/* Global Header Styles - Ensures header always stays on top */
+
+/* Force header to always stay on top */
+header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 9999 !important;
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.5) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure dropdown menus stay above everything */
+header nav div[class*="absolute"] {
+  z-index: 999999 !important;
+  position: absolute !important;
+}
+
+/* Prevent page elements from covering the header */
+main *, .main-content * {
+  z-index: auto !important;
+}
+
+/* Ensure background elements don't interfere */
+div[class*="absolute"][class*="inset-0"] {
+  z-index: 0 !important;
+}
+
+/* Force body to have proper spacing for fixed header */
+body {
+  padding-top: 64px !important;
+}
+
+/* Ensure consistent hero section spacing from header */
+.hero-section, 
+div[class*="pt-24"], 
+div[class*="pt-16"],
+div[class*="pt-32"],
+.theme-section {
+  padding-top: 10rem !important; /* 160px - more generous spacing from fixed header */
+}
+
+/* Ensure main content sections have proper spacing */
+main > div:first-child,
+.main-content > div:first-child {
+  padding-top: 10rem !important;
+}
+
+/* Force all hero sections to have proper spacing */
+div[class*="pt-24"] {
+  padding-top: 10rem !important;
+}
+
+/* Ensure all pages have consistent spacing from header */
+div[class*="relative"][class*="z-10"]:first-child {
+  padding-top: 10rem !important;
+}
+
+/* Additional rule for any div with relative positioning and z-10 */
+div[class*="relative"][class*="z-10"] {
+  padding-top: 10rem !important;
+}
+
+/* Comprehensive rule for all hero sections and main content areas */
+div[class*="pt-"] {
+  padding-top: 10rem !important;
+}
+
+/* Ensure all first content sections have proper spacing */
+div[class*="relative"]:first-child {
+  padding-top: 10rem !important;
+}
+
+/* Ensure all h1 headings have proper top padding */
+h1[class*="text-4xl"][class*="font-bold"][class*="text-white"],
+h1[class*="text-5xl"][class*="font-bold"][class*="text-white"],
+h1[class*="text-6xl"][class*="font-bold"][class*="text-white"] {
+  margin-top: 2rem !important;
+  padding-top: 1rem !important;
+}
+
+/* Ensure all main headings in hero sections have proper spacing */
+h1[class*="opacity-0"][class*="transform"] {
+  margin-top: 2rem !important;
+  padding-top: 1rem !important;
+}
+
+/* Ensure breadcrumb stays below navigation */
+nav[aria-label="Breadcrumb"],
+nav[aria-label="Breadcrumb"] *,
+[data-lazy-load] nav[aria-label="Breadcrumb"],
+[data-lazy-load] nav[aria-label="Breadcrumb"] *,
+.breadcrumb-link,
+.breadcrumb-link * {
+  z-index: -9999 !important;
+  position: relative !important;
+}
+
+/* Force breadcrumb to be completely hidden and non-intrusive */
+[data-astro-source-file*="Breadcrumb.astro"],
+nav[aria-label="Breadcrumb"] {
+  z-index: -999999 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* Ensure all pages have proper spacing */
+main, .main-content, [data-lazy-load] {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Additional safety rules for any new pages */
+.hero-section, .main-hero, .page-hero {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Ensure mobile menu stays on top */
+#mobile-menu {
+  z-index: 10000 !important;
+}
+
+/* Force all navigation elements to stay visible */
+nav, .navigation, .navbar {
+  z-index: 9999 !important;
+}
+
+/* Ensure dropdown is ALWAYS on top of everything */
+header nav div[class*="absolute"] {
+  z-index: 999999 !important;
+  position: absolute !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Ensure dropdown is always clickable */
+header nav div[class*="absolute"] a {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Prevent any JavaScript from hiding the header */
+header.hidden, header[style*="display: none"], header[style*="visibility: hidden"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ===== GLOBAL THEME SYSTEM ===== */
+
+/* Dark Theme Background - Applied to all pages */
+.theme-dark-bg {
+  background-color: hsl(230, 30%, 5%);
+  background-image: 
+    radial-gradient(at 20% 20%, hsl(210, 60%, 20%) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, hsl(240, 50%, 15%) 0px, transparent 50%);
+}
+
+/* Seamless Background Container */
+.theme-seamless-container {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Theme Section Styles */
+.theme-section {
+  position: relative;
+  z-index: 10;
+}
+
+/* Theme Card Styles */
+.theme-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.theme-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Theme Text Styles */
+.theme-text-primary {
+  color: #ffffff;
+}
+
+.theme-text-secondary {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.theme-text-muted {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Theme Button Styles */
+.theme-btn-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.theme-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+.theme-btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.theme-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Theme Form Styles */
+.theme-input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.theme-input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.theme-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Theme Gradient Text */
+.theme-gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Theme Badge Styles */
+.theme-badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  backdrop-filter: blur(12px);
+}
+
+/* Theme Divider */
+.theme-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+  margin: 2rem 0;
+}
+
+/* ===== ANIMATION UTILITIES ===== */
+
+/* Lazy Loading Animation */
+[data-lazy-load] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+[data-lazy-load].loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Animation Delays */
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+.animate-delay-600 { animation-delay: 0.6s; }
+.animate-delay-700 { animation-delay: 0.7s; }
+.animate-delay-800 { animation-delay: 0.8s; }
+
+/* ===== RESPONSIVE THEME UTILITIES ===== */
+
+/* Mobile Theme Adjustments */
+@media (max-width: 768px) {
+  .theme-card {
+    margin: 1rem 0;
+  }
+  
+  .theme-btn-primary,
+  .theme-btn-secondary {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+  }
+  
+  .theme-input {
+    padding: 10px 14px;
+  }
+}
+
+/* ===== ACCESSIBILITY ENHANCEMENTS ===== */
+
+/* Focus indicators for better accessibility */
+.theme-btn-primary:focus,
+.theme-btn-secondary:focus,
+.theme-input:focus {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  [data-lazy-load] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  .theme-dark-bg {
+    background: white !important;
+  }
+  
+  .theme-text-primary,
+  .theme-text-secondary,
+  .theme-text-muted {
+    color: black !important;
+  }
+  
+  .theme-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}
