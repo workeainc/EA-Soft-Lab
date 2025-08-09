@@ -1,26 +1,5 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "astro",
-  "installCommand": "npm ci --legacy-peer-deps",
-  "devCommand": "npm run dev",
-
-  "redirects": [
-    {
-      "source": "/admin",
-      "destination": "/studio",
-      "permanent": false
-    },
-    {
-      "source": "/cms",
-      "destination": "/studio",
-      "permanent": false
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    }
-  ]
+  "framework": "astro"
 }
