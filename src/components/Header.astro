@@ -52,7 +52,7 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-[9999] bg-secondary-950/80 backdrop-blur-md border-b border-secondary-800/50 shadow-lg" style="position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; z-index: 9999 !important; width: 100% !important; display: block !important; visibility: visible !important; opacity: 1 !important;">
+<header class="fixed top-0 left-0 right-0 z-[9999] bg-secondary-950/80 backdrop-blur-md border-b border-secondary-800/50 shadow-lg">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
@@ -82,7 +82,7 @@ const navItems = [
             </a>
             
             {item.dropdown && (
-              <div class="absolute top-full left-0 mt-1 w-64 bg-secondary-800/95 backdrop-blur-md border border-secondary-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[999999]" style="z-index: 999999 !important; position: absolute !important;">
+              <div class="absolute top-full left-0 mt-1 w-64 bg-secondary-800/95 backdrop-blur-md border border-secondary-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-[999999]">
                 <div class="py-2">
                   {item.dropdown.map((dropdownItem) => (
                     <a
@@ -114,7 +114,7 @@ const navItems = [
         <button
           id="mobile-menu-button"
           type="button"
-          class="text-secondary-300 hover:text-white p-2 rounded-lg hover:bg-secondary-800/50 transition-colors duration-200 touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary-500"
+          class="mobile-menu-btn text-secondary-300 hover:text-white p-2 rounded-lg hover:bg-secondary-800/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500"
           aria-label="Toggle mobile menu"
           aria-expanded="false"
         >
@@ -129,7 +129,7 @@ const navItems = [
     </div>
 
     <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-secondary-900/95 backdrop-blur-md border-t border-secondary-700/50 shadow-lg">
+    <div id="mobile-menu" class="mobile-menu hidden lg:hidden bg-secondary-900/95 backdrop-blur-md border-t border-secondary-700/50 shadow-lg">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         {navItems.map((item) => (
           <div class="space-y-1">
@@ -164,152 +164,252 @@ const navItems = [
   </div>
 </header>
 
+<style>
+  /* Ensure mobile menu button is always clickable */
+  .mobile-menu-btn {
+    position: relative;
+    z-index: 10000;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Ensure mobile menu is properly positioned */
+  .mobile-menu {
+    position: relative;
+    z-index: 9998;
+    max-height: calc(100vh - 4rem);
+    overflow-y: auto;
+  }
+  
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+  }
+</style>
+
 <script>
-  // Mobile menu functionality with improved error handling
-  function initMobileMenu() {
-    console.log('Initializing mobile menu...');
+  // Enhanced mobile menu functionality
+  (function() {
+    'use strict';
     
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const hamburgerIcon = document.getElementById('hamburger-icon');
-    const closeIcon = document.getElementById('close-icon');
-    
-    if (!mobileMenuButton) {
-      console.error('Mobile menu button not found');
-      return;
-    }
-    
-    if (!mobileMenu) {
-      console.error('Mobile menu not found');
-      return;
-    }
-    
+    // Global variables
     let isMenuOpen = false;
-
-    function toggleMenu() {
-      console.log('Toggling menu, current state:', isMenuOpen);
+    let mobileMenuButton = null;
+    let mobileMenu = null;
+    let hamburgerIcon = null;
+    let closeIcon = null;
+    
+    // Initialize mobile menu
+    function initMobileMenu() {
+      console.log('🔧 Initializing mobile menu...');
       
-      isMenuOpen = !isMenuOpen;
+      // Get elements
+      mobileMenuButton = document.getElementById('mobile-menu-button');
+      mobileMenu = document.getElementById('mobile-menu');
+      hamburgerIcon = document.getElementById('hamburger-icon');
+      closeIcon = document.getElementById('close-icon');
       
-      if (isMenuOpen) {
-        // Open menu
-        mobileMenu.classList.remove('hidden');
-        mobileMenu.classList.add('block');
-        hamburgerIcon.classList.add('hidden');
-        closeIcon.classList.remove('hidden');
-        mobileMenuButton.setAttribute('aria-expanded', 'true');
-        console.log('Menu opened');
-      } else {
-        // Close menu
-        mobileMenu.classList.remove('block');
-        mobileMenu.classList.add('hidden');
-        hamburgerIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-        mobileMenuButton.setAttribute('aria-expanded', 'false');
-        console.log('Menu closed');
+      // Validate elements exist
+      if (!mobileMenuButton) {
+        console.error('❌ Mobile menu button not found');
+        return false;
       }
-    }
-
-    function closeMenu() {
-      if (isMenuOpen) {
-        isMenuOpen = false;
-        mobileMenu.classList.remove('block');
-        mobileMenu.classList.add('hidden');
-        hamburgerIcon.classList.remove('hidden');
-        closeIcon.classList.add('hidden');
-        mobileMenuButton.setAttribute('aria-expanded', 'false');
-        console.log('Menu closed by outside click or resize');
+      
+      if (!mobileMenu) {
+        console.error('❌ Mobile menu not found');
+        return false;
       }
+      
+      if (!hamburgerIcon || !closeIcon) {
+        console.error('❌ Menu icons not found');
+        return false;
+      }
+      
+      console.log('✅ All mobile menu elements found');
+      
+      // Add event listeners
+      setupEventListeners();
+      
+      return true;
     }
-
-    // Add click event listener
-    mobileMenuButton.addEventListener('click', function(e) {
+    
+    // Setup all event listeners
+    function setupEventListeners() {
+      // Main button click
+      mobileMenuButton.addEventListener('click', handleMenuClick, { passive: false });
+      
+      // Touch events for mobile
+      mobileMenuButton.addEventListener('touchstart', handleTouchStart, { passive: false });
+      mobileMenuButton.addEventListener('touchend', handleTouchEnd, { passive: false });
+      
+      // Keyboard events
+      document.addEventListener('keydown', handleKeydown);
+      
+      // Click outside to close
+      document.addEventListener('click', handleOutsideClick);
+      
+      // Window resize
+      window.addEventListener('resize', handleResize);
+      
+      // Prevent menu button from being affected by other clicks
+      mobileMenuButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+      
+      console.log('✅ Event listeners attached');
+    }
+    
+    // Handle menu button click
+    function handleMenuClick(e) {
       e.preventDefault();
       e.stopPropagation();
+      
+      console.log('🖱️ Menu button clicked');
       toggleMenu();
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-      if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
-        closeMenu();
-      }
-    });
-
-    // Close menu when window is resized to desktop
-    window.addEventListener('resize', function() {
-      if (window.innerWidth >= 1024) {
-        closeMenu();
-      }
-    });
-
-    // Close menu when pressing Escape key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape' && isMenuOpen) {
-        closeMenu();
-      }
-    });
-
-    // Add touch event listeners for better mobile support
-    mobileMenuButton.addEventListener('touchstart', function(e) {
-      e.preventDefault();
-    }, { passive: false });
-
-    console.log('Mobile menu initialized successfully');
-  }
-
-  // Ensure header always stays visible
-  function ensureHeaderVisible() {
-    const header = document.querySelector('header');
-    if (header) {
-      header.style.position = 'fixed';
-      header.style.top = '0';
-      header.style.left = '0';
-      header.style.right = '0';
-      header.style.zIndex = '9999';
-      header.style.display = 'block';
-      header.style.visibility = 'visible';
-      header.style.opacity = '1';
-      header.style.width = '100%';
-      header.style.pointerEvents = 'auto';
     }
-  }
-
-  // Ensure dropdowns are always on top
-  function ensureDropdownsOnTop() {
-    const dropdowns = document.querySelectorAll('header nav div[class*="absolute"]');
-    dropdowns.forEach(dropdown => {
-      dropdown.style.zIndex = '999999';
-      dropdown.style.position = 'absolute';
-      dropdown.style.pointerEvents = 'auto';
-    });
-  }
-
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('DOM Content Loaded - initializing mobile menu');
-      initMobileMenu();
-      ensureHeaderVisible();
-      ensureDropdownsOnTop();
-    });
-  } else {
-    console.log('DOM already loaded - initializing mobile menu immediately');
-    initMobileMenu();
-    ensureHeaderVisible();
-    ensureDropdownsOnTop();
-  }
-
-  // Also initialize on window load as backup
-  window.addEventListener('load', function() {
-    console.log('Window loaded - ensuring mobile menu is initialized');
-    initMobileMenu();
-    ensureHeaderVisible();
-    ensureDropdownsOnTop();
-  });
-
-  // Run periodically to ensure dropdowns stay on top
-  setInterval(function() {
-    ensureDropdownsOnTop();
-  }, 100);
+    
+    // Handle touch events
+    function handleTouchStart(e) {
+      e.preventDefault();
+      console.log('📱 Touch start on menu button');
+    }
+    
+    function handleTouchEnd(e) {
+      e.preventDefault();
+      console.log('📱 Touch end on menu button');
+      toggleMenu();
+    }
+    
+    // Handle keyboard events
+    function handleKeydown(e) {
+      if (e.key === 'Escape' && isMenuOpen) {
+        console.log('⌨️ Escape key pressed - closing menu');
+        closeMenu();
+      }
+    }
+    
+    // Handle clicks outside menu
+    function handleOutsideClick(e) {
+      if (isMenuOpen && !mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+        console.log('🖱️ Click outside menu - closing');
+        closeMenu();
+      }
+    }
+    
+    // Handle window resize
+    function handleResize() {
+      if (window.innerWidth >= 1024 && isMenuOpen) {
+        console.log('📱 Window resized to desktop - closing menu');
+        closeMenu();
+      }
+    }
+    
+    // Toggle menu state
+    function toggleMenu() {
+      console.log('🔄 Toggling menu, current state:', isMenuOpen);
+      
+      if (isMenuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+    
+    // Open menu
+    function openMenu() {
+      if (isMenuOpen) return;
+      
+      console.log('📂 Opening mobile menu');
+      
+      // Update menu state
+      isMenuOpen = true;
+      
+      // Update button state
+      mobileMenuButton.setAttribute('aria-expanded', 'true');
+      
+      // Show/hide icons
+      hamburgerIcon.classList.add('hidden');
+      closeIcon.classList.remove('hidden');
+      
+      // Show menu
+      mobileMenu.classList.remove('hidden');
+      mobileMenu.classList.add('block');
+      
+      // Prevent body scroll
+      document.body.classList.add('menu-open');
+      
+      console.log('✅ Menu opened successfully');
+    }
+    
+    // Close menu
+    function closeMenu() {
+      if (!isMenuOpen) return;
+      
+      console.log('📂 Closing mobile menu');
+      
+      // Update menu state
+      isMenuOpen = false;
+      
+      // Update button state
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      
+      // Show/hide icons
+      hamburgerIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+      
+      // Hide menu
+      mobileMenu.classList.remove('block');
+      mobileMenu.classList.add('hidden');
+      
+      // Restore body scroll
+      document.body.classList.remove('menu-open');
+      
+      console.log('✅ Menu closed successfully');
+    }
+    
+    // Initialize when DOM is ready
+    function initialize() {
+      console.log('🚀 Starting mobile menu initialization...');
+      
+      // Try multiple initialization strategies
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          console.log('📄 DOM Content Loaded - initializing mobile menu');
+          if (!initMobileMenu()) {
+            // Retry after a short delay
+            setTimeout(initMobileMenu, 100);
+          }
+        });
+      } else {
+        console.log('📄 DOM already loaded - initializing mobile menu immediately');
+        if (!initMobileMenu()) {
+          // Retry after a short delay
+          setTimeout(initMobileMenu, 100);
+        }
+      }
+      
+      // Backup initialization on window load
+      window.addEventListener('load', function() {
+        console.log('🌐 Window loaded - ensuring mobile menu is initialized');
+        if (!initMobileMenu()) {
+          // Final retry
+          setTimeout(initMobileMenu, 500);
+        }
+      });
+    }
+    
+    // Start initialization
+    initialize();
+    
+    // Expose functions for debugging
+    window.mobileMenuDebug = {
+      init: initMobileMenu,
+      open: openMenu,
+      close: closeMenu,
+      toggle: toggleMenu,
+      isOpen: () => isMenuOpen
+    };
+    
+  })();
 </script> 
