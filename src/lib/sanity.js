@@ -3,11 +3,11 @@ import imageUrlBuilder from '@sanity/image-url'
 
 // Create client with better error handling
 export const client = createClient({
-  projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID || 'oxjbgkqf',
-  dataset: import.meta.env.PUBLIC_SANITY_DATASET || 'production',
+  projectId: import.meta.env?.PUBLIC_SANITY_PROJECT_ID || 'oxjbgkqf',
+  dataset: import.meta.env?.PUBLIC_SANITY_DATASET || 'production',
   apiVersion: '2024-01-01',
   useCdn: false, // Set to true for production
-  token: import.meta.env.SANITY_API_TOKEN, // Only needed for write operations
+  token: import.meta.env?.SANITY_API_TOKEN, // Only needed for write operations
 })
 
 // Add error handling wrapper for client operations
