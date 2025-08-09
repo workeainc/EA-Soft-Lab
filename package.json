@@ -53,13 +53,5 @@
     "prettier-plugin-astro": "^0.13.0",
     "sanity": "^4.3.0",
     "typescript": "^5.0.0"
-  },
-  "overrides": {
-    "rollup": {
-      "optionalDependencies": {
-        "@rollup/rollup-linux-x64-gnu": "4.9.5",
-        "@rollup/rollup-android-arm-eabi": "4.46.2"
-      }
-    }
   }
 }

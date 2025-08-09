@@ -60,7 +60,8 @@ jobs:
     - name: 🔧 Install dependencies
       run: |
         npm ci --legacy-peer-deps || npm install --legacy-peer-deps
-        npm install --platform=linux --arch=x64
+        npm install @rollup/rollup-linux-x64-gnu@4.9.5 --platform=linux --arch=x64
+        npm install @rollup/rollup-android-arm-eabi@4.46.2 --platform=linux --arch=x64
         
     - name: 🏗️ Build Astro application
       run: npm run build
@@ -98,6 +99,8 @@ jobs:
     - name: 🔧 Install dependencies
       run: |
         npm ci --legacy-peer-deps || npm install --legacy-peer-deps
+        npm install @rollup/rollup-linux-x64-gnu@4.9.5 --platform=linux --arch=x64
+        npm install @rollup/rollup-android-arm-eabi@4.46.2 --platform=linux --arch=x64
         
     - name: 🔒 Run security audit
       run: npm run security-audit || echo "Security audit completed with warnings"
