@@ -312,7 +312,6 @@ jobs:
       run: |
         echo "🔍 SEO monitoring completed!"
         echo "📊 Reports generated in artifacts"
-        node scripts/update-seo-files.js
         
     - name: 📊 Generate SEO report
       run: |
