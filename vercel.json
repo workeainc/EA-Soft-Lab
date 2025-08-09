@@ -4,11 +4,7 @@
   "framework": "astro",
   "installCommand": "npm ci --legacy-peer-deps",
   "devCommand": "npm run dev",
-  "functions": {
-    "src/pages/api/**/*.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
+
   "redirects": [
     {
       "source": "/admin",
