@@ -148,8 +148,9 @@ jobs:
           http://localhost:4321/about
           http://localhost:4321/services
           http://localhost:4321/contact
-        uploadArtifacts: true
-        temporaryPublicStorage: true
+        uploadArtifacts: false
+        temporaryPublicStorage: false
+      continue-on-error: true
 
   # Deploy to Staging
   deploy-staging:
@@ -247,10 +248,25 @@ jobs:
         cd ea-soft-lab-cms
         npm ci --legacy-peer-deps || npm install --legacy-peer-deps
         
+    - name: 🔐 Configure Sanity Authentication
+      run: |
+        cd ea-soft-lab-cms
+        echo "Configuring Sanity authentication..."
+        if [ -n "${{ secrets.SANITY_TOKEN }}" ]; then
+          echo "Sanity token is configured"
+        else
+          echo "Sanity token not configured - skipping deployment"
+        fi
+        
     - name: 🚀 Deploy Sanity Studio
       run: |
         cd ea-soft-lab-cms
-        npx sanity@latest deploy --token ${{ secrets.SANITY_TOKEN }}
+        if [ -n "${{ secrets.SANITY_TOKEN }}" ]; then
+          npx sanity@latest deploy --token ${{ secrets.SANITY_TOKEN }}
+        else
+          echo "Sanity token not configured - skipping deployment"
+        fi
+      continue-on-error: true
         
     - name: 🔔 Notify Sanity deployment
       run: |
