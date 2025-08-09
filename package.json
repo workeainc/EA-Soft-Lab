@@ -57,7 +57,8 @@
   "overrides": {
     "rollup": {
       "optionalDependencies": {
-        "@rollup/rollup-linux-x64-gnu": "4.9.5"
+        "@rollup/rollup-linux-x64-gnu": "4.9.5",
+        "@rollup/rollup-android-arm-eabi": "4.46.2"
       }
     }
   }

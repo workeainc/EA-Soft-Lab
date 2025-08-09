@@ -8,9 +8,16 @@ updates:
       day: "monday"
       time: "09:00"
     open-pull-requests-limit: 10
+    reviewers:
+      - "easoftlab"
+    assignees:
+      - "easoftlab"
     commit-message:
       prefix: "chore"
       include: "scope"
+    labels:
+      - "dependencies"
+      - "npm"
     ignore:
       # Ignore major version updates for these packages
       - dependency-name: "astro"
@@ -26,6 +33,13 @@ updates:
       day: "monday"
       time: "09:00"
     open-pull-requests-limit: 5
+    reviewers:
+      - "easoftlab"
+    assignees:
+      - "easoftlab"
     commit-message:
       prefix: "ci"
       include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
