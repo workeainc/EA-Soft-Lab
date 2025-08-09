@@ -2,10 +2,13 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "astro",
-  "installCommand": "rm -rf node_modules package-lock.json && npm install",
+  "installCommand": "npm ci",
   "devCommand": "npm run dev",
-  "regions": ["iad1"],
-
+  "functions": {
+    "src/pages/api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
@@ -25,34 +28,62 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     },
     {
-      "source": "/assets/(.*)",
+      "source": "/robots.txt",
       "headers": [
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "key": "Content-Type",
+          "value": "text/plain"
+        }
+      ]
+    },
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
+      ]
+    },
+    {
+      "source": "/image-sitemap.xml",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
         }
       ]
     }
   ],
   "redirects": [
     {
-      "source": "/studio",
-      "destination": "/studio/index.html"
+      "source": "/admin",
+      "destination": "/studio",
+      "permanent": false
+    },
+    {
+      "source": "/cms",
+      "destination": "/studio",
+      "permanent": false
     }
   ],
   "rewrites": [
     {
-      "source": "/sitemap.xml",
-      "destination": "/api/sitemap"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     }
   ],
   "env": {
-    "SANITY_PROJECT_ID": "oxjbgkqf",
-    "SANITY_DATASET": "production",
-    "SANITY_API_VERSION": "2024-01-01"
+    "SANITY_PROJECT_ID": "@sanity-project-id",
+    "SANITY_DATASET": "@sanity-dataset",
+    "SANITY_API_VERSION": "@sanity-api-version"
   }
 }

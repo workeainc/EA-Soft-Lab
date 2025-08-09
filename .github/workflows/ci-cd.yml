@@ -6,141 +6,283 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  NODE_VERSION: '20'
-
 jobs:
-  # Lint and Test
-  lint-and-test:
+  # Test Job
+  test:
     runs-on: ubuntu-latest
+    name: 🧪 Run Tests
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: 🧪 Run Local SEO tests
+      run: node tests/run-local-seo-test.js
+      
+    - name: 🤖 Run AI Workflow demo
+      run: node tests/ai-workflow-demo.js
+      
+    - name: 📊 Run SEO regression tests
+      run: npm run seo-test
+      
+    - name: 🔍 Lint code
+      run: npm run lint
+      
+    - name: 🎨 Check formatting
+      run: npm run format:check
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Clean and reinstall dependencies
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
-
-      - name: Run linting
-        run: npm run lint
-
-      - name: Run tests
-        run: npm run test
-
-      - name: Build application
-        run: npm run build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-files
-          path: dist/
-
-  # Security and Quality Checks
-  security-checks:
+  # Build Job
+  build:
     runs-on: ubuntu-latest
-    needs: lint-and-test
+    name: 🏗️ Build Application
+    needs: test
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: 🏗️ Build Astro application
+      run: npm run build
+      
+    - name: 📦 Build Sanity Studio
+      run: |
+        cd ea-soft-lab-cms
+        npm ci
+        npm run build
+      
+    - name: 📁 Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-files
+        path: |
+          dist/
+          ea-soft-lab-cms/dist/
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+  # Security Audit
+  security:
+    runs-on: ubuntu-latest
+    name: 🔒 Security Audit
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: 🔒 Run security audit
+      run: npm run security-audit
+      
+    - name: 🔍 Run Snyk security scan
+      uses: snyk/actions/node@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --severity-threshold=high
 
-      - name: Clean and reinstall dependencies
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
+  # Performance Testing
+  performance:
+    runs-on: ubuntu-latest
+    name: ⚡ Performance Testing
+    needs: build
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: 📁 Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build-files
+        
+    - name: 🚀 Start preview server
+      run: npm run preview &
+      
+    - name: ⏱️ Wait for server
+      run: sleep 10
+      
+    - name: 📊 Run Lighthouse CI
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        urls: |
+          http://localhost:4321
+          http://localhost:4321/about
+          http://localhost:4321/services
+          http://localhost:4321/contact
+        uploadArtifacts: true
+        temporaryPublicStorage: true
 
-      - name: Run security audit (allow moderate)
-        run: npm audit --audit-level=high || true
+  # Deploy to Staging
+  deploy-staging:
+    runs-on: ubuntu-latest
+    name: 🚀 Deploy to Staging
+    needs: [test, build, security, performance]
+    if: github.ref == 'refs/heads/develop'
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: 📁 Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build-files
+        
+    - name: 🚀 Deploy to Vercel (Staging)
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-args: '--prod'
 
-  # Deploy to Vercel (Production)
+  # Deploy to Production
   deploy-production:
     runs-on: ubuntu-latest
-    needs: [lint-and-test, security-checks]
+    name: 🚀 Deploy to Production
+    needs: [test, build, security, performance]
     if: github.ref == 'refs/heads/main'
-    environment:
-      name: production
-      url: https://easoftlab.com
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: 📁 Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build-files
+        
+    - name: 🚀 Deploy to Vercel (Production)
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-args: '--prod'
+        
+    - name: 🔔 Notify deployment
+      run: |
+        echo "🚀 Production deployment completed!"
+        echo "🌐 Website: https://ea-soft-lab.vercel.app"
+        echo "📊 Analytics: https://vercel.com/analytics"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Clean and reinstall dependencies
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
-
-      - name: Build application
-        run: npm run build
-
-      - name: Deploy to Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          vercel-args: '--prod'
-
-  # Deploy to Vercel (Preview)
-  deploy-preview:
+  # Sanity CMS Deploy
+  deploy-sanity:
     runs-on: ubuntu-latest
-    needs: [lint-and-test, security-checks]
-    if: github.event_name == 'pull_request'
-    environment:
-      name: preview
+    name: 🎨 Deploy Sanity Studio
+    needs: [test, build]
+    if: github.ref == 'refs/heads/main'
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install Sanity dependencies
+      run: |
+        cd ea-soft-lab-cms
+        npm ci
+        
+    - name: 🚀 Deploy Sanity Studio
+      run: |
+        cd ea-soft-lab-cms
+        npx sanity@latest deploy --token ${{ secrets.SANITY_TOKEN }}
+        
+    - name: 🔔 Notify Sanity deployment
+      run: |
+        echo "🎨 Sanity Studio deployed successfully!"
+        echo "📝 CMS: https://ea-soft-lab.sanity.studio"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-
-      - name: Clean and reinstall dependencies
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
-
-      - name: Build application
-        run: npm run build
-
-      - name: Deploy to Vercel (Preview)
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-
-  # Notify on Success/Failure
-  notify:
+  # SEO Monitoring
+  seo-monitoring:
     runs-on: ubuntu-latest
-    needs: [deploy-production, deploy-preview]
-    if: always()
+    name: 🔍 SEO Monitoring
+    needs: deploy-production
+    if: github.ref == 'refs/heads/main'
+    
     steps:
-      - name: Notify deployment status
-        run: |
-          if [ "${{ needs.deploy-production.result }}" == "success" ] || [ "${{ needs.deploy-preview.result }}" == "success" ]; then
-            echo "✅ Deployment successful!"
-          else
-            echo "❌ Deployment failed!"
-          fi
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: 🔍 Run SEO monitoring
+      run: |
+        npm run seo-test
+        node scripts/update-seo-files.js
+        
+    - name: 📊 Generate SEO report
+      run: |
+        echo "🔍 SEO Monitoring Report" > seo-report.md
+        echo "📅 Date: $(date)" >> seo-report.md
+        echo "🌐 URL: https://ea-soft-lab.vercel.app" >> seo-report.md
+        echo "✅ All SEO checks passed" >> seo-report.md
+        
+    - name: 📤 Upload SEO report
+      uses: actions/upload-artifact@v4
+      with:
+        name: seo-report
+        path: seo-report.md
