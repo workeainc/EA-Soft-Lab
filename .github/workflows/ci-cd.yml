@@ -130,7 +130,7 @@ jobs:
         npm ci --legacy-peer-deps || npm install --legacy-peer-deps
         
     - name: 📁 Download build artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: build-files
         
@@ -174,7 +174,7 @@ jobs:
         npm ci --legacy-peer-deps || npm install --legacy-peer-deps
         
     - name: 📁 Download build artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: build-files
         
@@ -208,7 +208,7 @@ jobs:
         npm ci --legacy-peer-deps || npm install --legacy-peer-deps
         
     - name: 📁 Download build artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: build-files
         
