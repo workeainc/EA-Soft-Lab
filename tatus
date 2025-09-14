@@ -1,0 +1,5 @@
+[33mae4247a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m fix: Update CI/CD workflow and deploy hamburger menu fix
+[33m347ff37[m Fix mobile hamburger menu and SEO monitoring: Add JavaScript functionality, improve CI/CD pipeline, and fix deployment issues
+[33m04b0d0a[m Fix mobile hamburger menu: Add JavaScript functionality and improve styling
+[33mfd1b687[m Fix environment variable access: Use optional chaining for import.meta.env to prevent CI errors
+[33mdeb5393[m Minimize Vercel configuration: Use only essential settings for Astro deployment
